@@ -14,11 +14,22 @@ namespace Game
         [SerializeField] 
         private MovementSettings _movementSettings;
 
+        private Game _game;
         private Vector2 _mousePoint;
         private float _lastUsed = float.MinValue;
-        
+
+        private void Awake()
+        {
+            _game = FindObjectOfType<Game>();
+        }
+
         private void Update()
         {
+            if (_game.Paused)
+            {
+                return;
+            }
+            
             Vector3 mousePoint = Input.mousePosition;
             Vector3 worldPoint = _camera.ScreenToWorldPoint(mousePoint);
             Vector3 direction = worldPoint - _character.Transform.position;

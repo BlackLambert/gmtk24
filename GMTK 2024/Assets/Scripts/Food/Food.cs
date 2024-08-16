@@ -17,6 +17,9 @@ namespace Game
         [SerializeField]
         private string _eatenBoolKey = "Eaten";
 
+        [SerializeField] 
+        private Collider2D _collider;
+
         public void Collect()
         {
             StartCoroutine(DoCollect());
@@ -24,6 +27,7 @@ namespace Game
 
         private IEnumerator DoCollect()
         {
+            _collider.enabled = false;
             _animator.SetBool(_eatenBoolKey, true);
             yield return new WaitForSeconds(_eatClip.length);
             Destroy(gameObject);

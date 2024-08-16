@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,13 @@ namespace Game
         [SerializeField] 
         private bool _pause;
 
+        private Game _game;
+
+        private void Awake()
+        {
+            _game = FindObjectOfType<Game>();
+        }
+
         private void Start()
         {
             _button.onClick.AddListener(OnClick);
@@ -23,7 +31,7 @@ namespace Game
 
         private void OnClick()
         {
-            Time.timeScale = _pause ? 0 : 1;
+            _game.Paused = _pause;
         }
     }
 }
