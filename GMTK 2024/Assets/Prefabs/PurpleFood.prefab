@@ -51,15 +51,19 @@ PrefabInstance:
     - target: {fileID: 2573012539478697654, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e955d336dc4d9b5408a2cba0e6efafa0, type: 3}
+      objectReference: {fileID: 21300000, guid: 3cc6c20bde181e14f9bb76a4d586ef8a, type: 3}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <FoodType>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8375888090574712179, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: m_Name
-      value: RedFood
+      value: PurpleFood
       objectReference: {fileID: 0}
     - target: {fileID: 8747251780463152012, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e955d336dc4d9b5408a2cba0e6efafa0, type: 3}
+      objectReference: {fileID: 21300000, guid: 3cc6c20bde181e14f9bb76a4d586ef8a, type: 3}
     - target: {fileID: 8747251780463152012, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1

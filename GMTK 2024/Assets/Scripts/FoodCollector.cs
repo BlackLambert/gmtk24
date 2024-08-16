@@ -23,7 +23,7 @@ namespace Game
 
         private void Collect(Food food)
         {
-            food.Destruct();
+            food.Collect();
             _collectedFood.ChangeBy(food.FoodType, 1);
         }
     }

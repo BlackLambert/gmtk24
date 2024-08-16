@@ -385,7 +385,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8918252666282306387, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: _foodType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -495,7 +495,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8918252666282306387, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: _foodType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -605,7 +605,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8918252666282306387, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: _foodType
-      value: 0
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
