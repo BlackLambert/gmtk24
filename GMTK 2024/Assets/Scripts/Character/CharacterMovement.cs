@@ -5,15 +5,9 @@ namespace Game
 {
     public class CharacterMovement : MonoBehaviour
     {
-        [SerializeField] 
-        private Character _character;
-
-        [SerializeField] 
-        private Camera _camera;
-
-        [SerializeField] 
         private MovementSettings _movementSettings;
-
+        private Camera _camera;
+        private Creature _creature;
         private Game _game;
         private Vector2 _mousePoint;
         private float _lastUsed = float.MinValue;
@@ -23,16 +17,23 @@ namespace Game
             _game = FindObjectOfType<Game>();
         }
 
+        public void Init(Creature creature, Camera camera, MovementSettings movementSettings)
+        {
+            _creature = creature;
+            _camera = camera;
+            _movementSettings = movementSettings;
+        }
+
         private void Update()
         {
-            if (_game.Paused)
+            if (_game.State != GameState.InGame)
             {
                 return;
             }
             
             Vector3 mousePoint = Input.mousePosition;
             Vector3 worldPoint = _camera.ScreenToWorldPoint(mousePoint);
-            Vector3 direction = worldPoint - _character.Transform.position;
+            Vector3 direction = worldPoint - _creature.Transform.position;
             
             LookAt(worldPoint, direction);
             Move(direction);
@@ -41,14 +42,14 @@ namespace Game
 
         private void LookAt(Vector3 worldPoint, Vector3 direction)
         {
-            if (worldPoint == _character.transform.position)
+            if (worldPoint == _creature.transform.position)
             {
                 return;
             }
             
             direction.Normalize(); 
             float rot_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; 
-            _character.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+            _creature.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
         }
 
         private void Move(Vector3 direction)
@@ -72,11 +73,11 @@ namespace Game
 
         private void LimitSpeed()
         {
-            Vector3 velocity = _character.Rigidbody.velocity;
+            Vector3 velocity = _creature.Rigidbody.velocity;
             float velocityMagnitude = velocity.magnitude;
             if (velocityMagnitude > _movementSettings.MaxSpeed)
             {
-                _character.Rigidbody.velocity = velocity.normalized * _movementSettings.MaxSpeed;
+                _creature.Rigidbody.velocity = velocity.normalized * _movementSettings.MaxSpeed;
             }
         }
     }

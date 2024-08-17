@@ -45,5 +45,13 @@ namespace Game
         {
             return _typeToAmount[type];
         }
+
+        public void Add(IReadOnlyList<FoodAmount> costs)
+        {
+            foreach (FoodAmount amount in costs)
+            {
+                ChangeBy(amount.FoodType, amount.Amount);
+            }
+        }
     }
 }

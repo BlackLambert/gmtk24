@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _text: {fileID: 9209180914703732145}
   _foodType: 0
+  <Icon>k__BackingField: {fileID: 1143339630286791276}
 --- !u!114 &1414894498916218920
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -9,6 +9,8 @@ namespace Game
         public event Action OnEvolvedChanged;
         public int StageIndex { get; private set; }
         public StageSettings StageSettings { get; private set; }
+        public Character Character { get; private set; }
+        public Character EvolvedCharacter { get; set; }
 
         public float Progress
         {
@@ -44,11 +46,12 @@ namespace Game
         private bool _finished;
         private bool _evolved;
         
-        public Stage(int stageIndex, StageSettings stageSettings)
+        public Stage(int stageIndex, StageSettings stageSettings, Character character)
         {
             StageIndex = stageIndex;
             Progress = 0;
             StageSettings = stageSettings;
+            Character = character;
         }
     }
 }

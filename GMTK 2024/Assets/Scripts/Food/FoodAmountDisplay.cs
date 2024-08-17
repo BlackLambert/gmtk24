@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -12,6 +13,12 @@ namespace Game
         [SerializeField] 
         private FoodType _foodType;
 
+        [field: SerializeField]
+        public Image Icon { get; private set; }
+        
+        public FoodType FoodType => _foodType;
+        
+        
         private CollectedFood _collectedFood;
 
         private void Awake()

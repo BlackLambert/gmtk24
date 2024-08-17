@@ -1,15 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine.Splines;
 using UnityEngine;
-using UnityEditor;
 
 namespace Game
 {
     public class SplineSampler : MonoBehaviour
     {
-        
         [SerializeField]
         private SplineContainer _splineContainer;
         // Start is called before the first frame update
@@ -29,6 +25,5 @@ namespace Game
             right = position + distance;
             left = position - distance;
         }
-
     }
 }
