@@ -8,5 +8,14 @@ namespace Game
     {
         [field: SerializeField]
         public int FoodToCollect { get; private set; }
+
+        [field: SerializeField] 
+        public float CameraSize { get; private set; } = 10f;
+
+        [field: SerializeField] 
+        public float CharacterSizeFactor { get; private set; } = 3f;
+
+        [field: SerializeField] 
+        public float EditorCameraSize { get; private set; } = 5f;
     }
 }

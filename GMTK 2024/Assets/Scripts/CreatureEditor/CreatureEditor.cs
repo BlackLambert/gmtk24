@@ -17,6 +17,7 @@ namespace Game
         private void Start()
         {
             TryInitEditing();
+            FindObjectOfType<MainCamera>().Camera.orthographicSize = _game.CurrentStage.StageSettings.EditorCameraSize;
         }
 
         private void OnDestroy()

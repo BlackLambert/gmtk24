@@ -30,6 +30,7 @@ namespace Game
             _game.CurrentStage.EvolvedCharacter = _game.CurrentCharacter;
             _game.CurrentCharacter.gameObject.SetActive(false);
             _game.CurrentCharacter = null;
+            _game.CurrentStage.Evolved = true;
             _game.State = GameState.InGame;
         }
     }

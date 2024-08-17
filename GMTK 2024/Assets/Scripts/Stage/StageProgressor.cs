@@ -31,9 +31,8 @@ namespace Game
             Character character = creature.gameObject.AddComponent<Character>();
             character.Init(creature);
             character.gameObject.SetActive(false);
-            _game.CurrentStage = new Stage(_currentStage, settings, character);
+            SetStage(null, new Stage(_currentStage, settings, character));
             _collectedFood.OnFoodCollected += OnFoodCollected;
-            _game.CurrentStage.OnEvolvedChanged += OnEvolved;
         }
 
         private void OnDestroy()
@@ -52,10 +51,10 @@ namespace Game
             Stage stage = _game.CurrentStage;
             int amountToCollect = stage.StageSettings.FoodToCollect;
             float progress = (float)(_collectedFood.TotalCollected - _minFood) / (amountToCollect - _minFood);
-            _game.CurrentStage.Progress = progress;
-            if (progress >= 1 && !_game.CurrentStage.Finished)
+            stage.Progress = progress;
+            if (progress >= 1 && !stage.Finished)
             {
-                _game.CurrentStage.Finished = true;
+                stage.Finished = true;
             }
         }
 
@@ -63,12 +62,21 @@ namespace Game
         {
             _currentStage++;
             _minFood += _game.CurrentStage.StageSettings.FoodToCollect;
-            StageSettings nextStageSettings = _gameStages.Get(_currentStage);
             Stage stage = _game.CurrentStage;
-            _game.FormerStage = stage;
-            stage.EvolvedCharacter.transform.localScale *= 2;
-            _game.CurrentStage = new Stage(_currentStage, nextStageSettings, stage.EvolvedCharacter);
-            _camera.orthographicSize *= 2;
+            SetStage(stage, new Stage(_currentStage, _gameStages.Get(_currentStage), stage.EvolvedCharacter));
+        }
+
+        private void SetStage(Stage currentStage, Stage nextStage)
+        {
+            if (currentStage != null)
+            {
+                currentStage.OnEvolvedChanged -= OnEvolved;
+                _game.FormerStage = currentStage;
+            }
+            
+            _game.CurrentStage = nextStage;
+            _camera.orthographicSize = nextStage.StageSettings.CameraSize;
+            _game.CurrentStage.OnEvolvedChanged += OnEvolved;
             UpdateProgress();
         }
     }

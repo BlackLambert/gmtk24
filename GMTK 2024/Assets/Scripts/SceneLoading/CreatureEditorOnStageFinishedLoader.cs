@@ -55,6 +55,8 @@ namespace Game
         {
             if (_currentStage.Finished && _game.State != GameState.CreatureEditor)
             {
+                FormerCharacterHook hook = FindObjectOfType<FormerCharacterHook>();
+                hook.Clear();
                 _game.CurrentCharacter.gameObject.SetActive(false);
                 _game.CurrentCharacter = null;
                 _game.State = GameState.CreatureEditor;

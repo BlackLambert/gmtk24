@@ -13,3 +13,6 @@ MonoBehaviour:
   m_Name: 1_Stage
   m_EditorClassIdentifier: 
   <FoodToCollect>k__BackingField: 10
+  <CameraSize>k__BackingField: 10
+  <CharacterSizeFactor>k__BackingField: 1
+  <EditorCameraSize>k__BackingField: 5
