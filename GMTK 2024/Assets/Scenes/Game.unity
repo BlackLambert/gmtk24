@@ -350,10 +350,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4523521782737721296, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
-      propertyPath: <FoodType>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9089221092398506941, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
       propertyPath: m_Name
       value: BlueFood (1)
@@ -832,10 +828,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4523521782737721296, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
-      propertyPath: <FoodType>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9089221092398506941, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
       propertyPath: m_Name
       value: BlueFood
@@ -1075,10 +1067,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4523521782737721296, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
-      propertyPath: <FoodType>k__BackingField
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 9089221092398506941, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
       propertyPath: m_Name
       value: BlueFood
@@ -1139,10 +1127,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1945572690946229055, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523521782737721296, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
-      propertyPath: <FoodType>k__BackingField
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9089221092398506941, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
@@ -1711,10 +1695,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1945572690946229055, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4523521782737721296, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}
-      propertyPath: <FoodType>k__BackingField
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9089221092398506941, guid: 6ae41947d4e053a4b8095cc572cc3617, type: 3}

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEditor.SceneManagement;
 
-namespace Game
+namespace Game.Editor
 {
     [InitializeOnLoad]
     public class PlayFromSpecificScene
