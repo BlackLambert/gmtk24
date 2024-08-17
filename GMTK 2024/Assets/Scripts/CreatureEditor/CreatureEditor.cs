@@ -4,6 +4,12 @@ namespace Game
 {
     public class CreatureEditor : MonoBehaviour
     {
+        [SerializeField] 
+        private BodyPartsTabContent[] _tabContent;
+
+        [SerializeField] 
+        private float _snapDistance = 10f;
+        
         private Game _game;
         private Character _character;
         private CollectedFood _collectedFood;
@@ -22,6 +28,11 @@ namespace Game
         {
             TryInitEditing();
             FindObjectOfType<MainCamera>().Camera.orthographicSize = _game.CurrentStage.StageSettings.EditorCameraSize;
+
+            foreach (BodyPartsTabContent tabContent in _tabContent)
+            {
+                tabContent.OnBodyPartButtonDragExit += OnTryCreateBodyPart;
+            }
         }
 
         private void OnDestroy()
@@ -30,10 +41,18 @@ namespace Game
             
             if (_character != null)
             {
-                foreach (BodyPart bodyPart in _character.Creature.BodyParts)
+                foreach (BodyPart bodyPart in _character.Creature.Body.BodyParts)
                 {
                     bodyPart.OnRightClick -= OnBodyPartRightClick;
                 }
+            
+                _character.Creature.Body.OnBodyPartAdded -= OnBodyPartAdded;
+                _character.Creature.Body.OnBodyPartRemoved -= OnBodyPartRemoved;
+            }
+
+            foreach (BodyPartsTabContent tabContent in _tabContent)
+            {
+                tabContent.OnBodyPartButtonDragExit -= OnTryCreateBodyPart;
             }
         }
 
@@ -80,10 +99,43 @@ namespace Game
 
         private void InitEditing()
         {
-            foreach (BodyPart bodyPart in _character.Creature.BodyParts)
+            foreach (BodyPart bodyPart in _character.Creature.Body.BodyParts)
             {
                 bodyPart.OnRightClick += OnBodyPartRightClick;
             }
+
+            _character.Creature.Body.OnBodyPartAdded += OnBodyPartAdded;
+            _character.Creature.Body.OnBodyPartRemoved += OnBodyPartRemoved;
+        }
+
+        private void OnBodyPartRemoved(BodyPart bodyPart)
+        {
+            bodyPart.OnRightClick -= OnBodyPartRightClick;
+        }
+
+        private void OnBodyPartAdded(BodyPart bodyPart)
+        {
+            bodyPart.OnRightClick += OnBodyPartRightClick;
+        }
+
+        private void OnTryCreateBodyPart(BodyPart bodyPart)
+        {
+            bool hasFood = true;
+            foreach (FoodAmount amount in bodyPart.BodyPartSettings.Costs)
+            {
+                hasFood = hasFood && _collectedFood.Has(amount);
+            }
+
+            if (!hasFood)
+            {
+                return;
+            }
+
+            BodyPart bodyPartInstance = Instantiate(bodyPart);
+            FollowCursor followCursor = bodyPartInstance.gameObject.AddComponent<FollowCursor>();
+            BodyPartPlacer placer = bodyPartInstance.gameObject.AddComponent<BodyPartPlacer>();
+            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance);
+            bodyPartInstance.EnableColliders(false);
         }
     }
 }

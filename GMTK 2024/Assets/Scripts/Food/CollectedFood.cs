@@ -53,5 +53,18 @@ namespace Game
                 ChangeBy(amount.FoodType, amount.Amount);
             }
         }
+
+        public bool Has(FoodAmount amount)
+        {
+            return _typeToAmount[amount.FoodType] >= amount.Amount;
+        }
+
+        public void ChangeBy(IReadOnlyList<FoodAmount> costs)
+        {
+            foreach (FoodAmount amount in costs)
+            {
+                ChangeBy(amount.FoodType, -amount.Amount);
+            }
+        }
     }
 }

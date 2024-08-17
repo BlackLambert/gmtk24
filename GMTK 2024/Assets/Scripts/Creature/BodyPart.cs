@@ -25,5 +25,13 @@ namespace Game
         {
             OnDragStart?.Invoke(this);
         }
+
+        public void EnableColliders(bool enable)
+        {
+            foreach (Collider2D collider in GetComponentsInChildren<Collider2D>())
+            {
+                collider.enabled = enable;
+            }
+        }
     }
 }

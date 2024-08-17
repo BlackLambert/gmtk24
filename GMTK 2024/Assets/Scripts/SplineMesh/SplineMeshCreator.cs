@@ -13,9 +13,6 @@ namespace Game
         private int _samplesPerSpline = 10;
 
         [SerializeField]
-        private int _samplesTip = 10;
-
-        [SerializeField]
         MeshFilter _meshFilter;
 
         private List<Vector3> _verticesLeft;

@@ -1287,6 +1287,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 70ca963fd3477e448ad7ac03057f8c66, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _tabContent:
+  - {fileID: 8096247410326224094}
+  - {fileID: 1730658777}
+  - {fileID: 1172435082}
+  - {fileID: 1875078997}
+  _snapDistance: 300
 --- !u!4 &1346958898
 Transform:
   m_ObjectHideFlags: 0

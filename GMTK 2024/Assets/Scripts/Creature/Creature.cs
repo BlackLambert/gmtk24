@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game
 {
@@ -9,38 +9,40 @@ namespace Game
         [field: SerializeField]
         public Rigidbody2D Rigidbody { get; private set; }
         
-        [SerializeField] 
-        private Body _body;
+        [field: SerializeField] 
+        public Body Body { get; private set; }
 
         [SerializeField] 
         private BodyPart[] _startParts;
 
-        public IReadOnlyList<BodyPart> BodyParts => _bodyParts;
-        public Transform Transform { get; private set; }
+        [SerializeField] 
+        private Transform _hook;
 
-        [SerializeField, HideInInspector]
-        private List<BodyPart> _bodyParts = new List<BodyPart>();
+        public Transform Transform { get; private set; }
+        
+        private Dictionary<BodyPartSlot, BodyPart> _slotToBodyParts = new Dictionary<BodyPartSlot, BodyPart>();
 
         private void Awake()
         {
+            Transform = transform;
             foreach (BodyPart bodyPart in _startParts)
             {
-                if (bodyPart != null && !_bodyParts.Contains(bodyPart))
+                if (bodyPart != null && !Body.Contains(bodyPart))
                 {
-                    _bodyParts.Add(bodyPart);
+                    Body.Add(bodyPart);
                 }
             }
-            Transform = transform;
         }
 
-        public void Add(BodyPart bodyPart)
+        public void Add(BodyPart bodyPart, BodyPartSlot slot)
         {
-            _bodyParts.Add(bodyPart);
+            Body.Add(bodyPart, slot);
+            bodyPart.transform.SetParent(_hook);
         }
 
         public void Remove(BodyPart bodyPart)
         {
-            _bodyParts.Remove(bodyPart);
+            Body.Remove(bodyPart);
         }
 
         public void DisableCollider()
@@ -66,6 +68,11 @@ namespace Game
                 Color c = material.color;
                 material.color = new Color(c.r, c.g, c.b, alpha);
             }
+        }
+
+        public BodyPartSlot GetNextEmptySlot(Vector3 position)
+        {
+            return Body.GetNextEmptySlotTo(position);
         }
     }
 }
