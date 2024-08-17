@@ -11,14 +11,14 @@ namespace Game
 
         [SerializeField] OffensiveBodyPartSettings _settings;
         [SerializeField] Collider2D _hitBox;
-        Character _parentCreature;
+        Creature _parentCreature;
         float _lastInterval = 0;
         Transform currentTargetTransform;
 
         void Start()
         {
             _hitBox = GetComponentInChildren<Collider2D>();
-            _parentCreature = GetComponentInParent<Character>();
+            _parentCreature = GetComponentInParent<Creature>();
 
             if(_parentCreature == null)
             {
