@@ -16,5 +16,15 @@ namespace Game
         {
             Transform = transform;
         }
+
+        public void SufferDamage(float damage)
+        {
+            Debug.Log("I suffered " + damage + " damage! :(");
+        }
+
+        public void ApplyStatusEffect(StatusEffect status)
+        {
+
+        }
     }
 }
