@@ -67,7 +67,7 @@ namespace Game
             LegAnimationController legs = GetComponentInChildren<LegAnimationController>();
             legs?.Jump();
 
-            _character.Rigidbody.AddForce(((Vector2)direction).normalized * _movementSettings.Force);
+            _creature.Rigidbody.AddForce(((Vector2)direction).normalized * _movementSettings.Force);
             _lastUsed = Time.realtimeSinceStartup;
         }
 
