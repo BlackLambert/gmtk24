@@ -37,7 +37,10 @@ namespace Game
         public void Add(BodyPart bodyPart, BodyPartSlot slot)
         {
             Body.Add(bodyPart, slot);
-            bodyPart.transform.SetParent(_hook);
+            Transform trans = bodyPart.transform;
+            trans.SetParent(_hook);
+            Vector3 pos = trans.position;
+            trans.localPosition = new Vector3(pos.x, pos.y, 0.1f);
         }
 
         public void Remove(BodyPart bodyPart)

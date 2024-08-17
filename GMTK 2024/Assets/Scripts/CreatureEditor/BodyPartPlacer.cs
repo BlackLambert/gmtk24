@@ -63,12 +63,13 @@ namespace Game
             Vector2 worldMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _currentSlot = _creature.GetNextEmptySlot(worldMousePos);
             Transform bodyPartTransform = _bodyPart.transform;
-            bodyPartTransform.position = (_currentSlot.Position + _creature.Body.transform.position) * _creature.Transform.localScale.x;
+            bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x + _creature.Body.transform.position);
             bodyPartTransform.rotation = _currentSlot.Rotation;
         }
 
         private void Place()
         {
+            _bodyPart.transform.position = _currentSlot.Position + _creature.Body.transform.position;
             _creature.Add(_bodyPart, _currentSlot);
             _bodyPart.EnableColliders(true);
             Destroy(_followCursor);
@@ -77,7 +78,7 @@ namespace Game
             foreach (FoodAmount foodAmount in _bodyPart.BodyPartSettings.Costs)
             {
                 _foodParticleAnimationFactory.Create(foodAmount,
-                    _camera.WorldToScreenPoint(_bodyPart.transform.position));
+                    _camera.WorldToScreenPoint(_bodyPart.transform.position), true);
             }
         }
     }

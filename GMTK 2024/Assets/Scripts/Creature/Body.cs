@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -61,7 +62,7 @@ namespace Game
                 };
             }
 
-            foreach (BodyPart bodyPart in _pendingBodyParts)
+            foreach (BodyPart bodyPart in BodyParts)
             {
                 Add(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position));
             }
@@ -93,6 +94,10 @@ namespace Game
                 throw new ArgumentException();
             }
 
+            if (!_bodyParts.Contains(bodyPart))
+            {
+                _bodyParts.Add(bodyPart);
+            }
             _slotToBodyPart[slot] = bodyPart;
             _bodyPartToSlot[bodyPart] = slot;
         }
@@ -102,6 +107,7 @@ namespace Game
             BodyPartSlot slot = _bodyPartToSlot[bodyPart];
             _slotToBodyPart.Remove(slot);
             _bodyPartToSlot.Remove(bodyPart);
+            _bodyParts.Remove(bodyPart);
             OnBodyPartRemoved?.Invoke(bodyPart);
         }
 
