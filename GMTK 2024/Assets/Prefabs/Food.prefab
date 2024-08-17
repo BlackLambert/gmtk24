@@ -86,6 +86,7 @@ MonoBehaviour:
   _animator: {fileID: 5139519710654193165}
   _eatClip: {fileID: 7400000, guid: e8f8f8895124d11488c583296a3536e6, type: 2}
   _eatenBoolKey: Eaten
+  _collider: {fileID: 6640698634708941576}
 --- !u!95 &5139519710654193165
 Animator:
   serializedVersion: 5
