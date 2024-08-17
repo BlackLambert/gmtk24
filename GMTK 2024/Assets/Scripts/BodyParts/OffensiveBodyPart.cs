@@ -58,23 +58,20 @@ namespace Game
                 case TargetType.None:
                     break;
                 case TargetType.Closest:
-                    Collider2D[] possibleTargets = Physics2D.OverlapCircleAll(_parentCreature.transform.position, _settings.TargetRange);
+                    Collider2D[] possibleTargets = Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange);
                     if (possibleTargets.Length == 0) return;
                     float shortestDistance = Mathf.Infinity;
                     int targetIndex = -1;
                     for (int i=0; i< possibleTargets.Length;i++){ 
                     
                         Collider2D col = possibleTargets[i];
-                        if(col.TryGetComponent<Character>(out Character character))
+                        if(col.TryGetComponent<Enemy>(out Enemy targetEnemy))
                         {
-                            if (character != _parentCreature)
+                            float distance = Vector2.Distance(transform.position, col.transform.position);
+                            if (distance < shortestDistance)
                             {
-                                float distance = Vector2.Distance(_parentCreature.transform.position, col.transform.position);
-                                if (distance < shortestDistance)
-                                {
-                                    targetIndex = i;
-                                    shortestDistance = distance;
-                                }
+                                targetIndex = i;
+                                shortestDistance = distance;
                             }
                         }
                     }
@@ -82,7 +79,7 @@ namespace Game
                     currentTargetTransform = possibleTargets[targetIndex].transform;
                     break;
                 case TargetType.Random:
-                    Collider2D[] possibleTargetsRandom = Physics2D.OverlapCircleAll(_parentCreature.transform.position, _settings.TargetRange);
+                    Collider2D[] possibleTargetsRandom = Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange);
                     if (possibleTargetsRandom.Length == 0) return;
                     int randomIndex = Random.Range(0, possibleTargetsRandom.Length - 1);
                     _hitBox.transform.position = possibleTargetsRandom[randomIndex].transform.position;
@@ -100,7 +97,7 @@ namespace Game
 
             foreach(Collider2D hitObject in hitObjects)
             {
-                if (hitObject.TryGetComponent<Character>(out Character target))
+                if (hitObject.TryGetComponent<Enemy>(out Enemy target))
                 {
                     if(target != _parentCreature)
                     {
@@ -116,7 +113,7 @@ namespace Game
 
 
 
-        private void ApplyDamageToTarget(float damage, Character target)
+        private void ApplyDamageToTarget(float damage, Enemy target)
         {
             target.SufferDamage(damage);
         }
@@ -129,7 +126,7 @@ namespace Game
         {
 
         }
-        private void ApplyStatusToTarget(StatusEffect status, Character target)
+        private void ApplyStatusToTarget(StatusEffect status, Enemy target)
         {
             if(status == StatusEffect.None) return;
             target.ApplyStatusEffect(status);
