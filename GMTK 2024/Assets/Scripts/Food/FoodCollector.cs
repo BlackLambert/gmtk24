@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Game
@@ -6,10 +5,14 @@ namespace Game
     public class FoodCollector : MonoBehaviour
     {
         private CollectedFood _collectedFood;
+        private FoodParticleAnimationFactory _particleAnimationFactory;
+        private Camera _camera;
         
         private void Awake()
         {
             _collectedFood = FindObjectOfType<CollectedFood>();
+            _particleAnimationFactory = FindObjectOfType<FoodParticleAnimationFactory>();
+            _camera = FindObjectOfType<MainCamera>().Camera;
         }
 
         private void OnTriggerEnter2D(Collider2D other)
@@ -25,6 +28,8 @@ namespace Game
         {
             food.Collect();
             _collectedFood.Collect(food.FoodType);
+            Vector2 screenPos = _camera.WorldToScreenPoint(food.transform.position);
+            _particleAnimationFactory.Create(new FoodAmount(){FoodType = food.FoodType, Amount = 1}, screenPos);
         }
     }
 }

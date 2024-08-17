@@ -7,11 +7,15 @@ namespace Game
         private Game _game;
         private Character _character;
         private CollectedFood _collectedFood;
+        private Camera _camera;
+        private FoodParticleAnimationFactory _particleAnimationFactory;
 
         private void Awake()
         {
             _game = FindObjectOfType<Game>();
             _collectedFood = FindObjectOfType<CollectedFood>();
+            _camera = FindObjectOfType<MainCamera>().Camera;
+            _particleAnimationFactory = FindObjectOfType<FoodParticleAnimationFactory>();
         }
 
         private void Start()
@@ -66,6 +70,11 @@ namespace Game
             _character.Creature.Remove(bodyPart);
             BodyPartSettings bodyPartSettings = bodyPart.BodyPartSettings;
             _collectedFood.Add(bodyPartSettings.Costs);
+            Vector2 screenPos = _camera.WorldToScreenPoint(bodyPart.transform.position);
+            foreach (FoodAmount amount in bodyPart.BodyPartSettings.Costs)
+            {
+                _particleAnimationFactory.Create(amount, screenPos);
+            }
             Destroy(bodyPart.gameObject);
         }
 
