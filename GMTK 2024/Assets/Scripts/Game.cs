@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Game
@@ -8,5 +7,17 @@ namespace Game
     {
         [HideInInspector]
         public bool Paused = false;
+
+        private Stage _stage;
+        public event Action OnStageChanged;
+        public Stage CurrentStage
+        {
+            get => _stage;
+            set
+            {
+                _stage = value;
+                OnStageChanged?.Invoke();
+            }
+        }
     }
 }

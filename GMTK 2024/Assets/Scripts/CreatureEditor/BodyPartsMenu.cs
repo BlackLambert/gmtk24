@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -9,6 +6,9 @@ namespace Game
     {
         [SerializeField] 
         private BodyPartsTab[] _tabs;
+
+        [SerializeField] 
+        private BodyPartsTabContent[] _content;
         
         [SerializeField] 
         private BodyPartType _startTab;
@@ -40,6 +40,11 @@ namespace Game
             foreach (BodyPartsTab tab in _tabs)
             {
                 tab.SetInteractable(tab.Type != type);
+            }
+
+            foreach (BodyPartsTabContent content in _content)
+            {
+                content.Show(content.Type == type);
             }
         }
     }

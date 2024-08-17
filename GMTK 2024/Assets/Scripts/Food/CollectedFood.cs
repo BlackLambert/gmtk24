@@ -7,6 +7,8 @@ namespace Game
     public class CollectedFood : MonoBehaviour
     {
         public event Action<FoodType, int> OnAmountChanged;
+        public event Action<FoodType> OnFoodCollected;
+        public int TotalCollected { get; private set; } = 0;
         
         private Dictionary<FoodType, int> _typeToAmount = new();
         
@@ -16,6 +18,14 @@ namespace Game
             {
                 _typeToAmount.Add(foodType, 0);
             }
+        }
+
+        public void Collect(FoodType type)
+        {
+            _typeToAmount[type] += 1;
+            TotalCollected++;
+            OnFoodCollected?.Invoke(type);
+            OnAmountChanged?.Invoke(type, _typeToAmount[type]);
         }
 
         public void ChangeBy(FoodType type, int amount)

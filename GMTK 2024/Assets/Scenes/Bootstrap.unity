@@ -155,13 +155,10 @@ MonoBehaviour:
   _loadSettings:
   - Load: 1
     SceneName: Main
-    Additive: 1
+    Additive: 0
   - Load: 1
     SceneName: Game
     Additive: 1
-  - Load: 0
-    SceneName: Bootstrap
-    Additive: 0
 --- !u!4 &718736235
 Transform:
   m_ObjectHideFlags: 0

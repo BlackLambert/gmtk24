@@ -24,7 +24,7 @@ namespace Game
         private void Collect(Food food)
         {
             food.Collect();
-            _collectedFood.ChangeBy(food.FoodType, 1);
+            _collectedFood.Collect(food.FoodType);
         }
     }
 }
