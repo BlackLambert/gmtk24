@@ -1,16 +1,12 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Game
 {
-    public class PauseGameOnClick : MonoBehaviour
+    public class FinishCreatureEditOnClick : MonoBehaviour
     {
         [SerializeField] 
         private Button _button;
-
-        [SerializeField] 
-        private bool _pause;
 
         private Game _game;
 
@@ -31,7 +27,10 @@ namespace Game
 
         private void OnClick()
         {
-            _game.Paused = _pause;
+            _game.CurrentStage.EvolvedCharacter = _game.CurrentCharacter;
+            _game.CurrentCharacter.gameObject.SetActive(false);
+            _game.CurrentCharacter = null;
+            _game.State = GameState.InGame;
         }
     }
 }

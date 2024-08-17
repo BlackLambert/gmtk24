@@ -779,7 +779,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1195453819
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1397,6 +1397,50 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6038470316046454781, guid: 4064ebc43b26aa84299c329d55cdbe49, type: 3}
   m_PrefabInstance: {fileID: 1336453866}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1346958896
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1346958898}
+  - component: {fileID: 1346958897}
+  m_Layer: 0
+  m_Name: CreatureEditor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1346958897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346958896}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70ca963fd3477e448ad7ac03057f8c66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1346958898
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1346958896}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 300.49997, y: 422, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1361586324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,6 +1499,9 @@ MonoBehaviour:
   - Load: 0
     SceneName: CreatureEditor
     Additive: 0
+  - Load: 1
+    SceneName: Game
+    Additive: 1
   _button: {fileID: 1361586327}
 --- !u!114 &1361586327
 MonoBehaviour:
@@ -1551,7 +1598,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1361586327}
-  _pause: 0
+  _state: 0
 --- !u!114 &1361586331
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2071,6 +2118,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a0418cd1e3f6bc44b89570549554f9e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1926576929
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1926576931}
+  - component: {fileID: 1926576930}
+  m_Layer: 0
+  m_Name: CreatureCreator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1926576930
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926576929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a16452e5ff56774d8aa915f8f3adc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1926576931
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1926576929}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 300.49997, y: 422, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2100782521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2483,3 +2574,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 346043725}
+  - {fileID: 1926576931}
+  - {fileID: 1346958898}

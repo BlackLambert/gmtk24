@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class SceneOnStageFinishedLoader : SceneLoader
+    public class CreatureEditorOnStageFinishedLoader : SceneLoader
     {
         private Game _game;
         private Stage _currentStage;
@@ -53,8 +53,12 @@ namespace Game
 
         private void CheckFinished()
         {
-            if (_currentStage.Finished)
+            if (_currentStage.Finished && _game.State != GameState.CreatureEditor)
             {
+                _game.CurrentCharacter.gameObject.SetActive(false);
+                _game.CurrentCharacter = null;
+                _game.State = GameState.CreatureEditor;
+                _game.Paused = true;
                 DoLoading();
             }
         }
