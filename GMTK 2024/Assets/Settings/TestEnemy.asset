@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91367ee830d9c7d41b44fa40509230ac, type: 3}
+  m_Name: TestEnemy
+  m_EditorClassIdentifier: 
+  <speciesID>k__BackingField: 1
+  <speciesName>k__BackingField: TestCarnivore 1
+  <size>k__BackingField: 0
+  <HitPoints>k__BackingField: 30
+  lootTable:
+  - drop: {fileID: 9089221092398506941, guid: 6386c6bf56ad14f499054945160f11a8, type: 3}
+    propability: 100
+    minAmount: 1
+    maxAmount: 3
+  - drop: {fileID: 9089221092398506941, guid: 1ca09a5cbced75240866ebbea9e77fd9, type: 3}
+    propability: 50
+    minAmount: 1
+    maxAmount: 1

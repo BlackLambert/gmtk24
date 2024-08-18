@@ -1,0 +1,156 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using UnityEngine;
+
+namespace Game
+{
+    public class OffensiveBodyPart : MonoBehaviour
+    {
+        [SerializeField] Animator animator;
+
+        [SerializeField] OffensiveBodyPartSettings _settings;
+        [SerializeField] Collider2D _hitBox;
+        IDamageable _parentCreature;
+        float _lastInterval = 0;
+        Transform currentTargetTransform;
+
+        void Start()
+        {
+            _hitBox = GetComponentInChildren<Collider2D>();
+            _parentCreature = GetComponentInParent<IDamageable>();
+
+            if(_parentCreature == null)
+            {
+                Debug.LogError("Parent Creature is null, body part is detached!");
+            }
+            if(_hitBox == null)
+            {
+                Debug.LogError("No Hitbox detected, ALAAAARM!");
+                return;
+            }
+            if(_settings == null)
+            {
+                Debug.LogError("Bodypart has no settings!");
+                return;
+            }
+            _lastInterval = Time.realtimeSinceStartup + Random.Range(0f, _settings.Cooldown);
+        }
+
+        private void Update()
+        {
+            if (currentTargetTransform != null) 
+            { 
+                _hitBox.transform.position = currentTargetTransform.position;
+            }
+            Activate();
+        }
+
+        private void Activate()
+        {
+            if (Time.realtimeSinceStartup < _lastInterval + _settings.Cooldown)
+            {
+                return;
+            }
+
+
+            List<IDamageable> targets = FindTargets(_settings.TargetType);
+
+
+            foreach (IDamageable damageable in targets)
+            {
+                ApplyDamageToTarget(_settings.Damage, damageable);
+            }
+
+            PlayAnimation();
+            PlaySound();
+            _lastInterval = Time.realtimeSinceStartup;
+        }
+
+        private List<IDamageable> FindTargets(TargettingMode targetType)
+        {
+            List<IDamageable> finalTargets = new List<IDamageable>();
+           
+            List<Collider2D> colliderInRange = new List<Collider2D>();
+            colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange));
+            List<IDamageable> allTargets = CleanUpTargetList(colliderInRange);
+
+            if (allTargets.Count == 0) return finalTargets;
+
+            switch (targetType)
+            {
+                case TargettingMode.None:
+                    break;
+                case TargettingMode.Closest:
+                    float shortestDistance = Mathf.Infinity;
+                    int targetIndex = -1;
+                    for (int i = 0; i < allTargets.Count; i++)
+                    {
+                        IDamageable target = allTargets[i];
+                        float distance = Vector2.Distance(transform.position, target.Transform.position);
+                        if (distance < shortestDistance)
+                        {
+                            targetIndex = i;
+                            shortestDistance = distance;
+                        }
+                    }
+                    _hitBox.transform.position = allTargets[targetIndex].Transform.position;
+                    currentTargetTransform = allTargets[targetIndex].Transform;
+                    break;
+
+                case TargettingMode.Random:
+                    
+                    int randomIndex = Random.Range(0, allTargets.Count - 1);
+                    _hitBox.transform.position = allTargets[randomIndex].Transform.position;
+                    currentTargetTransform = allTargets[randomIndex].Transform;
+                    break;
+                case TargettingMode.Frontal:
+                    _hitBox.transform.position = _parentCreature.Transform.position + _parentCreature.Transform.up;
+                    currentTargetTransform = _parentCreature.Transform;
+                    break;
+            }
+
+            ContactFilter2D filter = new ContactFilter2D().NoFilter();
+            List<Collider2D> hitObjects = new List<Collider2D>();
+            _hitBox.OverlapCollider(filter, hitObjects);
+
+            finalTargets.AddRange(CleanUpTargetList(hitObjects));
+
+            return finalTargets;
+        }
+
+        private List<IDamageable> CleanUpTargetList(List<Collider2D> colliderList)
+        {
+            List<IDamageable> cleansedList = new List<IDamageable>();
+            colliderList.RemoveAll(col => col.attachedRigidbody == null);
+            colliderList.RemoveAll(col => col.attachedRigidbody.GetComponent<IDamageable>() == null);
+            colliderList.RemoveAll(col => col.attachedRigidbody.GetComponent<IDamageable>().GetID() == _parentCreature.GetID());
+            foreach(Collider2D collider in colliderList)
+            {
+                cleansedList.Add(collider.attachedRigidbody.GetComponent<IDamageable>());
+            }
+
+            return cleansedList;
+        }
+
+        private void ApplyDamageToTarget(float damage, IDamageable target)
+        {
+            target.SufferDamage(damage);
+        }
+
+        private void PlayAnimation()
+        {
+            animator?.SetTrigger("Attack");
+        }
+        private void PlaySound()
+        {
+
+        }
+        private void ApplyStatusToTarget(StatusEffect status, Enemy target)
+        {
+            if(status == StatusEffect.None) return;
+            target.ApplyStatusEffect(status);
+        }
+
+    }
+}

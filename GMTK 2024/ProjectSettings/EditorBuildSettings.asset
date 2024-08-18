@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CreatureEditor.unity
     guid: 0ca946306c47f2a45a3a6c0ab7ea1dcb
+  - enabled: 1
+    path: Assets/Scenes/Level_CritterStage.unity
+    guid: b5cd67c4854941e46b3330bf86fb2a0b
   m_configObjects: {}

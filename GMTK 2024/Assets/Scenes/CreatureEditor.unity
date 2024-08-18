@@ -1368,6 +1368,9 @@ MonoBehaviour:
   - Load: 1
     SceneName: Game
     Additive: 1
+  - Load: 1
+    SceneName: Level_CritterStage
+    Additive: 1
   _button: {fileID: 1361586327}
 --- !u!114 &1361586327
 MonoBehaviour:

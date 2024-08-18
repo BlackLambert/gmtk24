@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Creature : MonoBehaviour
+    public class Creature : MonoBehaviour, IDamageable
     {
         [field: SerializeField]
         public Rigidbody2D Rigidbody { get; private set; }
@@ -76,6 +76,22 @@ namespace Game
         public BodyPartSlot GetNextEmptySlot(Vector3 position)
         {
             return Body.GetNextEmptySlotTo(position);
+
+        }
+
+        public void SufferDamage(float damage)
+        {
+            Debug.Log("Ouchie! I suffered " + damage + " damage");
+        }
+
+        public void ApplyStatusEffect(StatusEffect status)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int GetID()
+        {
+            return -1;
         }
     }
 }

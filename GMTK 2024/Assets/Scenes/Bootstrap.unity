@@ -159,6 +159,9 @@ MonoBehaviour:
   - Load: 1
     SceneName: Game
     Additive: 1
+  - Load: 1
+    SceneName: Level_CritterStage
+    Additive: 1
 --- !u!4 &718736235
 Transform:
   m_ObjectHideFlags: 0
