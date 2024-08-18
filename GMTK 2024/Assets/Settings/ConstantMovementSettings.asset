@@ -16,3 +16,4 @@ MonoBehaviour:
   <Force>k__BackingField: 20
   <MaxSpeed>k__BackingField: 10
   <Cooldown>k__BackingField: 0
+  <RotationSpeed>k__BackingField: 400
