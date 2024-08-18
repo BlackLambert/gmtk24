@@ -1,20 +1,24 @@
+using System;
 using UnityEngine;
 
 namespace Game
 {
     public class CreatureEditor : MonoBehaviour
     {
-        [SerializeField] 
-        private BodyPartsTabContent[] _tabContent;
+        [SerializeField] private BodyPartsTabContent[] _tabContent;
 
-        [SerializeField] 
-        private float _snapDistance = 10f;
-        
+        [SerializeField] private float _snapDistance = 10f;
+
+        [SerializeField] private BodySplineIndicator _splineIndicator;
+
+        [SerializeField] private BodySettings _bodySettings;
+
         private Game _game;
         private Character _character;
         private CollectedFood _collectedFood;
         private Camera _camera;
         private FoodParticleAnimationFactory _particleAnimationFactory;
+        private SplineData _hoveredSpline;
 
         private void Awake()
         {
@@ -22,6 +26,7 @@ namespace Game
             _collectedFood = FindObjectOfType<CollectedFood>();
             _camera = FindObjectOfType<MainCamera>().Camera;
             _particleAnimationFactory = FindObjectOfType<FoodParticleAnimationFactory>();
+            _splineIndicator.gameObject.SetActive(false);
         }
 
         private void Start()
@@ -38,7 +43,7 @@ namespace Game
         private void OnDestroy()
         {
             _game.OnCurrentCharacterChanged -= OnCurrentCharacterChanged;
-            
+
             if (_character != null)
             {
                 foreach (BodyPart bodyPart in _character.Creature.Body.BodyParts)
@@ -48,15 +53,22 @@ namespace Game
                     bodyPart.OnMouseHoverStart -= OnBodyPartHover;
                     bodyPart.OnMouseHoverEnd -= OnBodyPartHoverEnd;
                 }
-            
+
                 _character.Creature.Body.OnBodyPartAdded -= OnBodyPartAdded;
                 _character.Creature.Body.OnBodyPartRemoved -= OnBodyPartRemoved;
+                _character.Creature.Body.OnPointerStay -= OnPointerInBody;
+                _character.Creature.Body.OnPointerLeft -= HideSplineIndicator;
             }
 
             foreach (BodyPartsTabContent tabContent in _tabContent)
             {
                 tabContent.OnBodyPartButtonDragExit -= OnTryCreateBodyPart;
             }
+        }
+
+        private void Update()
+        {
+            DoSplineResize();
         }
 
 
@@ -98,6 +110,7 @@ namespace Game
             {
                 _particleAnimationFactory.Create(amount, screenPos);
             }
+
             Destroy(bodyPart.gameObject);
         }
 
@@ -113,6 +126,8 @@ namespace Game
 
             _character.Creature.Body.OnBodyPartAdded += OnBodyPartAdded;
             _character.Creature.Body.OnBodyPartRemoved += OnBodyPartRemoved;
+            _character.Creature.Body.OnPointerStay += OnPointerInBody;
+            _character.Creature.Body.OnPointerLeft += HideSplineIndicator;
         }
 
         private void OnBodyPartRemoved(BodyPart bodyPart)
@@ -147,10 +162,11 @@ namespace Game
             BodyPart bodyPartInstance = Instantiate(bodyPart);
             FollowCursor followCursor = bodyPartInstance.gameObject.AddComponent<FollowCursor>();
             BodyPartPlacer placer = bodyPartInstance.gameObject.AddComponent<BodyPartPlacer>();
-            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, true, false, true);
+            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, true, false,
+                true);
             bodyPartInstance.EnableColliders(false);
         }
-        
+
         private void OnBodyPartDrag(BodyPart bodyPart)
         {
             _character.Creature.Remove(bodyPart);
@@ -169,6 +185,38 @@ namespace Game
         private void OnBodyPartHover(BodyPart bodyPart)
         {
             bodyPart.ShowOutline(true);
+        }
+
+        private void OnPointerInBody(SplineData spline)
+        {
+            _splineIndicator.gameObject.SetActive(true);
+            Transform bodyTransform = _character.Creature.Body.transform;
+            _splineIndicator.SetPosition(
+                _camera.WorldToScreenPoint((Vector3)spline.Center * bodyTransform.lossyScale.x + bodyTransform.position));
+            _hoveredSpline = spline;
+        }
+
+        private void HideSplineIndicator()
+        {
+            _hoveredSpline = null;
+            _splineIndicator.gameObject.SetActive(false);
+        }
+
+        private void DoSplineResize()
+        {
+            if (_hoveredSpline == null)
+            {
+                return;
+            }
+
+            if (Input.mouseScrollDelta.y == 0)
+            {
+                return;
+            }
+
+            int sizeDelta = Input.mouseScrollDelta.y > 0 ? 1 : -1;
+            _hoveredSpline.Size = Mathf.Clamp(_hoveredSpline.Size + sizeDelta, 1, _bodySettings.MaxSize);
+            _character.Creature.Body.UpdateMesh();
         }
     }
 }

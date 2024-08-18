@@ -92,7 +92,6 @@ namespace Game
 
         private void Place()
         {
-            _bodyPart.transform.position = _currentSlot.Position + _creature.Body.transform.position;
             _creature.Add(_bodyPart, _currentSlot);
             _bodyPart.EnableColliders(true);
             Destroy(_followCursor);

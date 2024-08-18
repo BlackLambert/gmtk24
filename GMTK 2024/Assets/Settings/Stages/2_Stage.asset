@@ -15,4 +15,5 @@ MonoBehaviour:
   <FoodToCollect>k__BackingField: 30
   <CameraSize>k__BackingField: 20
   <CharacterSizeFactor>k__BackingField: 3
-  <EditorCameraSize>k__BackingField: 10
+  <EditorCameraSize>k__BackingField: 5
+  <SpeedFactor>k__BackingField: 2

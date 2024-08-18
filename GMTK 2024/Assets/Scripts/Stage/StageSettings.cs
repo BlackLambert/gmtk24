@@ -17,5 +17,8 @@ namespace Game
 
         [field: SerializeField] 
         public float EditorCameraSize { get; private set; } = 5f;
+
+        [field: SerializeField]
+        public float SpeedFactor { get; private set; } = 1f;
     }
 }

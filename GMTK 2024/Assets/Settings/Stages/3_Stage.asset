@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <FoodToCollect>k__BackingField: 100
   <CameraSize>k__BackingField: 40
-  <CharacterSizeFactor>k__BackingField: 3
-  <EditorCameraSize>k__BackingField: 20
+  <CharacterSizeFactor>k__BackingField: 6
+  <EditorCameraSize>k__BackingField: 5
+  <SpeedFactor>k__BackingField: 3

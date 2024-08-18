@@ -24,7 +24,7 @@ namespace Game
             _movementSettings = movementSettings;
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             if (_game.State != GameState.InGame)
             {
@@ -54,7 +54,7 @@ namespace Game
             float currentZRot = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, zRot - 90);
             float angle = Quaternion.Angle(targetRotation, currentRotation);
-            float maxDeltaRot = _movementSettings.RotationSpeed * Time.deltaTime;
+            float maxDeltaRot = _movementSettings.RotationSpeed * Time.fixedDeltaTime;
             float delta = Mathf.Min(maxDeltaRot, angle);
             float absDelta = Mathf.Abs(zRot - currentZRot);
             if (zRot < currentZRot && absDelta < 180 || zRot > currentZRot && absDelta > 180)
@@ -79,7 +79,8 @@ namespace Game
             LegAnimationController legs = GetComponentInChildren<LegAnimationController>();
             legs?.Jump();
 
-            _creature.Rigidbody.AddForce(((Vector2)direction).normalized * _movementSettings.Force);
+            Vector2 force = ((Vector2)direction).normalized * (_movementSettings.Force * _game.CurrentStage.StageSettings.SpeedFactor);
+            _creature.Rigidbody.AddForce(force);
             _lastUsed = Time.realtimeSinceStartup;
         }
 
