@@ -218,14 +218,14 @@ namespace Game
             return result;
         }
 
-        public BodyPart[] RemoveSpline()
+        public RemoveSplineResult RemoveSpline()
         {
             int index = BodyData.Splines.Count - 1;
             SplineData splineData = BodyData.Splines[index];
             BodyData.Splines.Remove(splineData);
             UpdateSplinesCenters();
             UpdateMesh();
-            return Array.Empty<BodyPart>();
+            return new RemoveSplineResult(){Spline = splineData, BodyParts = Array.Empty<BodyPart>()};
         }
 
         public void AddSpline()

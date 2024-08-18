@@ -51,7 +51,20 @@ namespace Game
         {
             foreach (FoodAmount amount in costs)
             {
-                ChangeBy(amount.FoodType, amount.Amount);
+                Add(amount);
+            }
+        }
+
+        public void Add(FoodAmount amount)
+        {
+            ChangeBy(amount.FoodType, amount.Amount);
+        }
+
+        public void Remove(IEnumerable<FoodAmount> costs)
+        {
+            foreach (FoodAmount amount in costs)
+            {
+                ChangeBy(amount.FoodType, -amount.Amount);
             }
         }
 

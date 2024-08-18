@@ -227,36 +227,72 @@ namespace Game
             }
 
             int sizeDelta = Input.mouseScrollDelta.y > 0 ? 1 : -1;
-            _hoveredSpline.Size = Mathf.Clamp(_hoveredSpline.Size + sizeDelta, 1, _bodySettings.MaxSize);
+
+            if (sizeDelta > 0 && !_collectedFood.Has(_bodySettings.Costs))
+            {
+                return;
+            }
+
+            int targetSize = Mathf.Clamp(_hoveredSpline.Size + sizeDelta, 1, _bodySettings.MaxSize);
+
+            if (targetSize == _hoveredSpline.Size)
+            {
+                return;
+            }
+            
+            Transform bodyTransform = _character.Creature.Body.transform;
+            Vector2 point = _camera.WorldToScreenPoint(
+                (Vector3)_hoveredSpline.Center * bodyTransform.lossyScale.x + bodyTransform.position);
+            
+            if (sizeDelta > 0)
+            {
+                _collectedFood.Remove(_bodySettings.Costs);
+                _particleAnimationFactory.Create(_bodySettings.Costs, point, true);
+            }
+            else
+            {
+                _collectedFood.Add(_bodySettings.Costs);
+                _particleAnimationFactory.Create(_bodySettings.Costs, point);
+            }
+            
+            _hoveredSpline.Size = targetSize;
             _character.Creature.Body.UpdateMesh();
         }
 
         private void RemoveSpline()
         {
-            BodyPart[] nonFittingBodyParts = _character.Creature.RemoveSpline();
-            foreach (BodyPart bodyPart in nonFittingBodyParts)
+            RemoveSplineResult result = _character.Creature.RemoveSpline();
+            foreach (BodyPart bodyPart in result.BodyParts)
             {
                 _collectedFood.Add(bodyPart.BodyPartSettings.Costs);
-                foreach (FoodAmount foodAmount in bodyPart.BodyPartSettings.Costs)
-                {
-                    _particleAnimationFactory.Create(foodAmount,
-                        _camera.WorldToScreenPoint(bodyPart.transform.position));
-                }
+                _particleAnimationFactory.Create(bodyPart.BodyPartSettings.Costs, _camera.WorldToScreenPoint(bodyPart.transform.position));
             }
 
+            foreach (FoodAmount amount in _bodySettings.Costs)
+            {
+                FoodAmount combinedAmount = new FoodAmount
+                    { FoodType = amount.FoodType, Amount = amount.Amount * result.Spline.Size };
+                _collectedFood.Add(combinedAmount);
+                _particleAnimationFactory.Create(combinedAmount, _camera.WorldToScreenPoint(Vector3.zero));
+            }
             UpdateSplineButtons();
         }
 
         private void AddSpline()
         {
+            _collectedFood.Remove(_bodySettings.Costs);
+            _particleAnimationFactory.Create(_bodySettings.Costs, _camera.WorldToScreenPoint(Vector3.zero), true);
             _character.Creature.AddSpline();
             UpdateSplineButtons();
         }
 
         private void UpdateSplineButtons()
         {
-            _addSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count < _bodySettings.MaxSplines;
+            _addSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count < _bodySettings.MaxSplines 
+                                            && _collectedFood.Has(_bodySettings.Costs);
             _removeSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count > _bodySettings.MinSplines;
         }
+        
+        
     }
 }
