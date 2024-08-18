@@ -77,19 +77,21 @@ namespace Game
         {
             return Body.GetNextEmptySlotTo(position);
 
-  public void SufferDamage(float damage)
+        }
+
+        public void SufferDamage(float damage)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public void ApplyStatusEffect(StatusEffect status)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public int GetID()
         {
-            return 0;
-        }      }
+            return -1;
+        }
     }
 }
