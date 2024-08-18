@@ -54,6 +54,7 @@ MonoBehaviour:
   _bodyParts: []
   <BodyData>k__BackingField:
     Splines: []
+  _bodySettings: {fileID: 11400000, guid: 7768a6638371df343b6dd4283bf18c8b, type: 2}
 --- !u!60 &2458534474957275832
 PolygonCollider2D:
   m_ObjectHideFlags: 0

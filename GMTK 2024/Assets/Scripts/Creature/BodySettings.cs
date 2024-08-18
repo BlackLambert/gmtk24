@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -30,5 +28,10 @@ namespace Game
         [field: SerializeField] public int SideVertices { get; private set; } = 5;
         
         [field: SerializeField] public AnimationCurve WeightCurve { get; private set; }
+
+        [field: SerializeField]
+        public FoodAmount Costs { get; private set; } = new FoodAmount { Amount = 5, FoodType = FoodType.Purple };
+
+        [field: SerializeField] public float HealthPerSize { get; private set; } = 3f;
     }
 }

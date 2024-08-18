@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -12,6 +13,10 @@ namespace Game
         [SerializeField] private BodySplineIndicator _splineIndicator;
 
         [SerializeField] private BodySettings _bodySettings;
+
+        [SerializeField] private Button _addSplineButton;
+
+        [SerializeField] private Button _removeSplineButton;
 
         private Game _game;
         private Character _character;
@@ -38,6 +43,9 @@ namespace Game
             {
                 tabContent.OnBodyPartButtonDragExit += OnTryCreateBodyPart;
             }
+            
+            _addSplineButton.onClick.AddListener(AddSpline);
+            _removeSplineButton.onClick.AddListener(RemoveSpline);
         }
 
         private void OnDestroy()
@@ -64,6 +72,9 @@ namespace Game
             {
                 tabContent.OnBodyPartButtonDragExit -= OnTryCreateBodyPart;
             }
+            
+            _addSplineButton.onClick.RemoveListener(AddSpline);
+            _removeSplineButton.onClick.RemoveListener(RemoveSpline);
         }
 
         private void Update()
@@ -128,6 +139,7 @@ namespace Game
             _character.Creature.Body.OnBodyPartRemoved += OnBodyPartRemoved;
             _character.Creature.Body.OnPointerStay += OnPointerInBody;
             _character.Creature.Body.OnPointerLeft += HideSplineIndicator;
+            UpdateSplineButtons();
         }
 
         private void OnBodyPartRemoved(BodyPart bodyPart)
@@ -217,6 +229,34 @@ namespace Game
             int sizeDelta = Input.mouseScrollDelta.y > 0 ? 1 : -1;
             _hoveredSpline.Size = Mathf.Clamp(_hoveredSpline.Size + sizeDelta, 1, _bodySettings.MaxSize);
             _character.Creature.Body.UpdateMesh();
+        }
+
+        private void RemoveSpline()
+        {
+            BodyPart[] nonFittingBodyParts = _character.Creature.RemoveSpline();
+            foreach (BodyPart bodyPart in nonFittingBodyParts)
+            {
+                _collectedFood.Add(bodyPart.BodyPartSettings.Costs);
+                foreach (FoodAmount foodAmount in bodyPart.BodyPartSettings.Costs)
+                {
+                    _particleAnimationFactory.Create(foodAmount,
+                        _camera.WorldToScreenPoint(bodyPart.transform.position));
+                }
+            }
+
+            UpdateSplineButtons();
+        }
+
+        private void AddSpline()
+        {
+            _character.Creature.AddSpline();
+            UpdateSplineButtons();
+        }
+
+        private void UpdateSplineButtons()
+        {
+            _addSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count < _bodySettings.MaxSplines;
+            _removeSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count > _bodySettings.MinSplines;
         }
     }
 }

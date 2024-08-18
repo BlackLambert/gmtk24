@@ -91,5 +91,15 @@ namespace Game
         {
             return -1;
         }
+
+        public BodyPart[] RemoveSpline()
+        {
+            return Body.RemoveSpline();
+        }
+
+        public void AddSpline()
+        {
+            Body.AddSpline();
+        }
     }
 }

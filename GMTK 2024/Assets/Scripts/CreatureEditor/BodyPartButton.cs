@@ -53,18 +53,16 @@ namespace Game
             {
                 _dragging = false;
             }
-            Debug.Log("Drag Ended");
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             _dragging = eventData.pointerId == -1;
-            Debug.Log("Drag Begin");
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("PointerEnter");
+            
         }
 
         public void OnDrag(PointerEventData eventData)

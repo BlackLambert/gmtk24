@@ -22,8 +22,8 @@ MonoBehaviour:
     Center: {x: 0, y: 0.5}
   <MinScale>k__BackingField: 0.5
   <ScalePerSize>k__BackingField: 0.25
-  <MaxSplines>k__BackingField: 10
-  <MinSplines>k__BackingField: 1
+  <MaxSplines>k__BackingField: 7
+  <MinSplines>k__BackingField: 2
   <MaxSize>k__BackingField: 7
   <SplineSpacing>k__BackingField: 0.5
   <HalfCircleVerticesPerSize>k__BackingField: 7

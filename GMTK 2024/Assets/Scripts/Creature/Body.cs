@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -29,6 +28,9 @@ namespace Game
         
         [field: SerializeField, HideInInspector]
         public BodyData BodyData { get; set; }
+
+        [SerializeField] 
+        private BodySettings _bodySettings;
         
         private List<BodyPart> _pendingBodyParts = new List<BodyPart>();
         private SplineData _nextSpine;
@@ -151,7 +153,7 @@ namespace Game
             _bodyPartToSlot[bodyPart] = slot;
             
             Transform bodyPartTransform = bodyPart.transform;
-            bodyPartTransform.position = slot.Position * transform.lossyScale.x + transform.position;
+            bodyPartTransform.position = slot.Position * transform.lossyScale.x + transform.position + new Vector3(0, 0, 0.1f);
             bodyPartTransform.rotation = slot.Rotation;
         }
 
@@ -214,6 +216,36 @@ namespace Game
             }
 
             return result;
+        }
+
+        public BodyPart[] RemoveSpline()
+        {
+            int index = BodyData.Splines.Count - 1;
+            SplineData splineData = BodyData.Splines[index];
+            BodyData.Splines.Remove(splineData);
+            UpdateSplinesCenters();
+            UpdateMesh();
+            return Array.Empty<BodyPart>();
+        }
+
+        public void AddSpline()
+        {
+            SplineData newSplineData = new SplineData { Size = 1, Center = new Vector2(0, 0) };
+            BodyData.Splines.Add(newSplineData);
+            UpdateSplinesCenters();
+            UpdateMesh();
+        }
+
+        private void UpdateSplinesCenters()
+        {
+            float totalLength = _bodySettings.SplineSpacing * (BodyData.Splines.Count - 1);
+            float halfLength = totalLength / 2;
+
+            for (int i = 0; i < BodyData.Splines.Count; i++)
+            {
+                SplineData splineData = BodyData.Splines[i];
+                splineData.Center = new Vector2(0, -halfLength + _bodySettings.SplineSpacing * i);
+            }
         }
     }
 }
