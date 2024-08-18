@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class Enemy: MonoBehaviour
+    public class Enemy: MonoBehaviour, IDamageable
     {
         [field: SerializeField]
         public Rigidbody2D Rigidbody { get; private set; }
@@ -51,6 +51,10 @@ namespace Game
 
         }
 
+        public int GetID()
+        {
+            return Settings.speciesID;
+        }
         void Die()
         {
             List<Loot> lootList = Settings.GetLoot();

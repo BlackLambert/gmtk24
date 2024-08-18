@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace Game
 {
-    public class Creature : MonoBehaviour
+    public class Creature : MonoBehaviour, IDamageable
     {
         [field: SerializeField]
         public Rigidbody2D Rigidbody { get; private set; }
@@ -66,6 +66,21 @@ namespace Game
                 Color c = material.color;
                 material.color = new Color(c.r, c.g, c.b, alpha);
             }
+        }
+
+        public void SufferDamage(float damage)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ApplyStatusEffect(StatusEffect status)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public int GetID()
+        {
+            return 0;
         }
     }
 }

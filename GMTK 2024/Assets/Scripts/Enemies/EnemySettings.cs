@@ -9,7 +9,12 @@ namespace Game
     public class EnemySettings : ScriptableObject
     {
         [field: SerializeField]
-        SizeStage size;
+        public int speciesID { get; private set; }
+        [field: SerializeField]
+        public string speciesName { get; private set; }
+
+        [field: SerializeField]
+        public SizeStage size { get; private set; }
 
         [field: SerializeField]
         public int HitPoints { get; private set; }

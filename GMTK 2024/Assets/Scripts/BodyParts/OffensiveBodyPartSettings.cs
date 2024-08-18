@@ -8,7 +8,7 @@ namespace Game
     public class OffensiveBodyPartSettings : ScriptableObject
     {
         [field: SerializeField]
-        public TargetType TargetType { get; private set; }
+        public TargettingMode TargetType { get; private set; }
         [field: SerializeField]
         public float Cooldown { get; private set; }
         [field: SerializeField]

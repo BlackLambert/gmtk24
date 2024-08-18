@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public enum TargetType
+    public enum TargettingMode
     {
         None = 0,
         Closest = 1,

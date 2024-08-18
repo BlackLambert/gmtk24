@@ -11,14 +11,14 @@ namespace Game
 
         [SerializeField] OffensiveBodyPartSettings _settings;
         [SerializeField] Collider2D _hitBox;
-        Creature _parentCreature;
+        IDamageable _parentCreature;
         float _lastInterval = 0;
         Transform currentTargetTransform;
 
         void Start()
         {
             _hitBox = GetComponentInChildren<Collider2D>();
-            _parentCreature = GetComponentInParent<Creature>();
+            _parentCreature = GetComponentInParent<IDamageable>();
 
             if(_parentCreature == null)
             {
@@ -53,41 +53,60 @@ namespace Game
                 return;
             }
 
-            switch (_settings.TargetType)
+
+            List<IDamageable> targets = FindTargets(_settings.TargetType);
+
+
+            foreach (IDamageable damageable in targets)
             {
-                case TargetType.None:
+                ApplyDamageToTarget(_settings.Damage, damageable);
+            }
+
+            PlayAnimation();
+            PlaySound();
+            _lastInterval = Time.realtimeSinceStartup;
+        }
+
+        private List<IDamageable> FindTargets(TargettingMode targetType)
+        {
+            List<IDamageable> finalTargets = new List<IDamageable>();
+           
+            List<Collider2D> colliderInRange = new List<Collider2D>();
+            colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange));
+            List<IDamageable> allTargets = CleanUpTargetList(colliderInRange);
+
+            if (allTargets.Count == 0) return finalTargets;
+
+            switch (targetType)
+            {
+                case TargettingMode.None:
                     break;
-                case TargetType.Closest:
-                    Collider2D[] possibleTargets = Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange);
-                    if (possibleTargets.Length == 0) return;
+                case TargettingMode.Closest:
                     float shortestDistance = Mathf.Infinity;
                     int targetIndex = -1;
-                    for (int i=0; i< possibleTargets.Length;i++){ 
-                    
-                        Collider2D col = possibleTargets[i];
-                        if(col.TryGetComponent<Enemy>(out Enemy targetEnemy))
+                    for (int i = 0; i < allTargets.Count; i++)
+                    {
+                        IDamageable target = allTargets[i];
+                        float distance = Vector2.Distance(transform.position, target.Transform.position);
+                        if (distance < shortestDistance)
                         {
-                            float distance = Vector2.Distance(transform.position, col.transform.position);
-                            if (distance < shortestDistance)
-                            {
-                                targetIndex = i;
-                                shortestDistance = distance;
-                            }
+                            targetIndex = i;
+                            shortestDistance = distance;
                         }
                     }
-                    _hitBox.transform.position = possibleTargets[targetIndex].transform.position;
-                    currentTargetTransform = possibleTargets[targetIndex].transform;
+                    _hitBox.transform.position = allTargets[targetIndex].Transform.position;
+                    currentTargetTransform = allTargets[targetIndex].Transform;
                     break;
-                case TargetType.Random:
-                    Collider2D[] possibleTargetsRandom = Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange);
-                    if (possibleTargetsRandom.Length == 0) return;
-                    int randomIndex = Random.Range(0, possibleTargetsRandom.Length - 1);
-                    _hitBox.transform.position = possibleTargetsRandom[randomIndex].transform.position;
-                    currentTargetTransform = possibleTargetsRandom[randomIndex].transform;
+
+                case TargettingMode.Random:
+                    
+                    int randomIndex = Random.Range(0, allTargets.Count - 1);
+                    _hitBox.transform.position = allTargets[randomIndex].Transform.position;
+                    currentTargetTransform = allTargets[randomIndex].Transform;
                     break;
-                case TargetType.Frontal:
-                    _hitBox.transform.position = _parentCreature.transform.position + _parentCreature.transform.up;
-                    currentTargetTransform = _parentCreature.transform;
+                case TargettingMode.Frontal:
+                    _hitBox.transform.position = _parentCreature.Transform.position + _parentCreature.Transform.up;
+                    currentTargetTransform = _parentCreature.Transform;
                     break;
             }
 
@@ -95,25 +114,25 @@ namespace Game
             List<Collider2D> hitObjects = new List<Collider2D>();
             _hitBox.OverlapCollider(filter, hitObjects);
 
-            foreach(Collider2D hitObject in hitObjects)
-            {
-                if (hitObject.TryGetComponent<Enemy>(out Enemy target))
-                {
-                    if(target != _parentCreature)
-                    {
-                        ApplyDamageToTarget(_settings.Damage, target);
-                    }
+            finalTargets.AddRange(CleanUpTargetList(hitObjects));
 
-                }
-            }
-            PlayAnimation();
-            PlaySound();
-            _lastInterval = Time.realtimeSinceStartup;
+            return finalTargets;
         }
 
+        private List<IDamageable> CleanUpTargetList(List<Collider2D> colliderList)
+        {
+            List<IDamageable> cleansedList = new List<IDamageable>();
+            colliderList.RemoveAll(col => col.GetComponent<IDamageable>() == null);
+            colliderList.RemoveAll(col => col.GetComponent<IDamageable>().GetID() == _parentCreature.GetID());
+            foreach(Collider2D collider in colliderList)
+            {
+                cleansedList.Add(collider.GetComponent<IDamageable>());
+            }
 
+            return cleansedList;
+        }
 
-        private void ApplyDamageToTarget(float damage, Enemy target)
+        private void ApplyDamageToTarget(float damage, IDamageable target)
         {
             target.SufferDamage(damage);
         }
