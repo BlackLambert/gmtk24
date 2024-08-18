@@ -48,8 +48,20 @@ namespace Game
             }
             
             direction.Normalize(); 
-            float rot_z = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; 
-            _creature.transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+            Quaternion currentRotation = _creature.transform.rotation;
+            Vector3 currentDirection = currentRotation * Vector3.up;
+            float zRot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            float currentZRot = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
+            Quaternion targetRotation = Quaternion.Euler(0f, 0f, zRot - 90);
+            float angle = Quaternion.Angle(targetRotation, currentRotation);
+            float maxDeltaRot = _movementSettings.RotationSpeed * Time.deltaTime;
+            float delta = Mathf.Min(maxDeltaRot, angle);
+            float absDelta = Mathf.Abs(zRot - currentZRot);
+            if (zRot < currentZRot && absDelta < 180 || zRot > currentZRot && absDelta > 180)
+            {
+                delta *= -1;
+            }
+            _creature.transform.rotation = Quaternion.Euler(0, 0, currentRotation.eulerAngles.z + delta);
         }
 
         private void Move(Vector3 direction)

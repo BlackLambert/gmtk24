@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Game
 {
@@ -9,38 +9,43 @@ namespace Game
         [field: SerializeField]
         public Rigidbody2D Rigidbody { get; private set; }
         
-        [SerializeField] 
-        private Body _body;
+        [field: SerializeField] 
+        public Body Body { get; private set; }
 
         [SerializeField] 
         private BodyPart[] _startParts;
 
-        public IReadOnlyList<BodyPart> BodyParts => _bodyParts;
-        public Transform Transform { get; private set; }
+        [SerializeField] 
+        private Transform _hook;
 
-        [SerializeField, HideInInspector]
-        private List<BodyPart> _bodyParts = new List<BodyPart>();
+        public Transform Transform { get; private set; }
+        
+        private Dictionary<BodyPartSlot, BodyPart> _slotToBodyParts = new Dictionary<BodyPartSlot, BodyPart>();
 
         private void Awake()
         {
+            Transform = transform;
             foreach (BodyPart bodyPart in _startParts)
             {
-                if (bodyPart != null && !_bodyParts.Contains(bodyPart))
+                if (bodyPart != null && !Body.Contains(bodyPart))
                 {
-                    _bodyParts.Add(bodyPart);
+                    Body.Add(bodyPart);
                 }
             }
-            Transform = transform;
         }
 
-        public void Add(BodyPart bodyPart)
+        public void Add(BodyPart bodyPart, BodyPartSlot slot)
         {
-            _bodyParts.Add(bodyPart);
+            Body.Add(bodyPart, slot);
+            Transform trans = bodyPart.transform;
+            trans.SetParent(_hook);
+            Vector3 pos = trans.position;
+            trans.localPosition = new Vector3(pos.x, pos.y, 0.1f);
         }
 
         public void Remove(BodyPart bodyPart)
         {
-            _bodyParts.Remove(bodyPart);
+            Body.Remove(bodyPart);
         }
 
         public void DisableCollider()
@@ -68,7 +73,11 @@ namespace Game
             }
         }
 
-        public void SufferDamage(float damage)
+        public BodyPartSlot GetNextEmptySlot(Vector3 position)
+        {
+            return Body.GetNextEmptySlotTo(position);
+
+  public void SufferDamage(float damage)
         {
             throw new System.NotImplementedException();
         }
@@ -81,6 +90,6 @@ namespace Game
         public int GetID()
         {
             return 0;
-        }
+        }      }
     }
 }

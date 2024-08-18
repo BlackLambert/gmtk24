@@ -75,5 +75,5 @@ MonoBehaviour:
     m_RotationOrder: 4
   _hook: {fileID: 1384562391676168111}
   _particlePrefab: {fileID: 6496856340831959972, guid: f81d58e9b6d313144a032f28e44bfcad, type: 3}
-  _duration: 0.75
-  _pause: 0.12
+  _duration: 0.4
+  _pause: 0.07

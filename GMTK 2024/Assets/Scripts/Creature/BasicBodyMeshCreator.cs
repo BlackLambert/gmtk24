@@ -6,16 +6,18 @@ namespace Game
 {
     public class BasicBodyMeshCreator : MonoBehaviour
     {
+        [SerializeField] private Body _body;
         [SerializeField] private MeshFilter _meshFilter;
         [SerializeField] private PolygonCollider2D _meshCollider;
         [SerializeField] private float _length = 1;
         [SerializeField] private float _width = 1;
         [SerializeField] private int _numberOfRoundSideVertices = 12;
 
-        private void Start()
+        private void Awake()
         {
             _meshFilter.mesh = CreateMesh();
             _meshCollider.points = _meshFilter.mesh.vertices.Select(v => (Vector2)v).ToArray();
+            _body.UpdateSlots();
         }
 
         private Mesh CreateMesh()
@@ -28,6 +30,8 @@ namespace Game
             float angleDelta = Mathf.PI / (_numberOfRoundSideVertices - 1);
 
             int[] triangles = new int[(vertices.Length - 2) * 3];
+            Vector4[] tangents = new Vector4[vertices.Length];
+            Vector3[] normals = new Vector3[vertices.Length];
             
             for (int i = 0; i < _numberOfRoundSideVertices; i++)
             {
@@ -35,8 +39,11 @@ namespace Game
                 float sin = Mathf.Sin(angle);
                 float cos = Mathf.Cos(angle);
 
-                Vector3 circlePoint = new Vector3(cos * halfRadius, sin * halfRadius, 0);
+                Vector3 unitCirclePoint = new Vector3(cos, sin, 0);
+                Vector3 circlePoint = unitCirclePoint * halfRadius;
                 vertices[i] = circlePoint + lengthAddition;
+                tangents[i] = new Vector4(unitCirclePoint.y, unitCirclePoint.x, 0, 0);
+                normals[i] = new Vector3(unitCirclePoint.x, unitCirclePoint.y, 0);
 
                 if (i > 0 && i < _numberOfRoundSideVertices - 1)
                 {
@@ -53,8 +60,11 @@ namespace Game
                 float sin = Mathf.Sin(angle);
                 float cos = Mathf.Cos(angle);
 
-                Vector3 circlePoint = new Vector3(cos * halfRadius, sin * halfRadius, 0);
+                Vector3 unitCirclePoint = new Vector3(cos, sin, 0);
+                Vector3 circlePoint = unitCirclePoint * halfRadius;
                 vertices[i + _numberOfRoundSideVertices] = circlePoint - lengthAddition;
+                tangents[i + _numberOfRoundSideVertices] = new Vector4(unitCirclePoint.y, unitCirclePoint.x, 0, 0);
+                normals[i + _numberOfRoundSideVertices] = new Vector3(unitCirclePoint.x, unitCirclePoint.y, 0);
                 
                 if (i > 0 && i < _numberOfRoundSideVertices - 1)
                 {
@@ -77,10 +87,11 @@ namespace Game
             Mesh mesh = new Mesh()
             {
                 vertices = vertices,
-                triangles = triangles
+                triangles = triangles,
+                tangents = tangents,
+                normals = normals
             };
 
-            mesh.RecalculateNormals();
             return mesh;
         }
     }

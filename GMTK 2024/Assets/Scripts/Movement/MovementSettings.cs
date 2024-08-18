@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -18,5 +16,8 @@ namespace Game
 
         [field: SerializeField] 
         public float Cooldown { get; private set; } = 0;
+
+        [field: SerializeField] 
+        public float RotationSpeed { get; private set; } = 300;
     }
 }

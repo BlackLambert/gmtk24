@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Collections;
 using UnityEngine;
 
 namespace Game
 {
     public class FoodParticleAnimationFactory : MonoBehaviour
     {
-        [SerializeField] 
-        private FoodParticleAnimation _animationPrefab;
-        
+        [SerializeField] private FoodParticleAnimation _animationPrefab;
+
         private Dictionary<FoodType, FoodAmountDisplay> _foodAmountDisplays = new();
         private ParticlesCanvas _particlesCanvas;
 
@@ -17,7 +17,7 @@ namespace Game
             _particlesCanvas = FindObjectOfType<ParticlesCanvas>();
         }
 
-        public void Create(FoodAmount amount, Vector2 startPos)
+        public void Create(FoodAmount amount, Vector2 startPos, bool reverse = false)
         {
             if (!_foodAmountDisplays.TryGetValue(amount.FoodType, out FoodAmountDisplay display) || display == null)
             {
@@ -31,7 +31,9 @@ namespace Game
             }
 
             FoodParticleAnimation anim = Instantiate(_animationPrefab, _particlesCanvas.Hook);
-            StartCoroutine(anim.StartAnimation(startPos, display.Icon.transform.position, amount));
+            StartCoroutine(!reverse
+                ? anim.StartAnimation(startPos, display.Icon.transform.position, amount)
+                : anim.StartAnimation(display.Icon.transform.position, startPos, amount));
         }
     }
 }
