@@ -21,6 +21,14 @@ namespace Game
 
         [SerializeField] public Loot[] lootTable;
 
+        [field: SerializeField]
+        public MovementSettings MovementSettings { get; private set; }
+        [field: SerializeField]
+        public CreatureDiet CreatureDiet { get; private set; }
+        [field: SerializeField]
+        public float FleeRange { get; private set; }
+        [field: SerializeField]
+        public float FollowRange { get; private set; }
         public List<Loot> GetLoot()
         {
             List<Loot> dropList = new List<Loot>();

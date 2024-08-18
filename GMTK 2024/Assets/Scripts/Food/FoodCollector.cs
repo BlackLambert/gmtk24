@@ -1,4 +1,5 @@
 using UnityEngine;
+using static Codice.Client.Common.EventTracking.TrackFeatureUseEvent.Features.DesktopGUI.Filters;
 
 namespace Game
 {
@@ -7,9 +8,11 @@ namespace Game
         private CollectedFood _collectedFood;
         private FoodParticleAnimationFactory _particleAnimationFactory;
         private Camera _camera;
+        private bool _attachedToPlayerCreature;
         
         private void Awake()
         {
+            _attachedToPlayerCreature = TryGetComponent<Creature>(out Creature c);
             _collectedFood = FindObjectOfType<CollectedFood>();
             _particleAnimationFactory = FindObjectOfType<FoodParticleAnimationFactory>();
             _camera = FindObjectOfType<MainCamera>().Camera;
@@ -27,9 +30,12 @@ namespace Game
         private void Collect(Food food)
         {
             food.Collect();
-            _collectedFood.Collect(food.FoodType);
-            Vector2 screenPos = _camera.WorldToScreenPoint(food.transform.position);
-            _particleAnimationFactory.Create(new FoodAmount(){FoodType = food.FoodType, Amount = 1}, screenPos);
+            if (_attachedToPlayerCreature)
+            {
+                _collectedFood.Collect(food.FoodType);
+                Vector2 screenPos = _camera.WorldToScreenPoint(food.transform.position);
+                _particleAnimationFactory.Create(new FoodAmount(){FoodType = food.FoodType, Amount = 1}, screenPos);
+            }
         }
     }
 }

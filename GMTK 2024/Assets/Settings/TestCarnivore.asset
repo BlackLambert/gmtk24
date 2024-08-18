@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91367ee830d9c7d41b44fa40509230ac, type: 3}
-  m_Name: TestEnemy 2
+  m_Name: TestCarnivore
   m_EditorClassIdentifier: 
   <speciesID>k__BackingField: 2
   <speciesName>k__BackingField: TestCarnivore 2
@@ -25,3 +25,7 @@ MonoBehaviour:
     propability: 100
     minAmount: 1
     maxAmount: 1
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: fa7dded5928ca6c4b874240a121a1ae5, type: 2}
+  <CreatureDiet>k__BackingField: 1
+  <FleeRange>k__BackingField: 5
+  <FollowRange>k__BackingField: 15

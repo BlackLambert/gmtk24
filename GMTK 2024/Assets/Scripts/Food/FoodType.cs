@@ -2,9 +2,9 @@ namespace Game
 {
     public enum FoodType
     {
-        Red = 0,
-        Blue = 1,
-        Purple = 2,
-        Yellow = 3
+        Meat = 0,
+        Fruit = 1,
+        Fungi = 2,
+        Special = 3
     }
 }

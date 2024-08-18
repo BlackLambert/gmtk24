@@ -122,6 +122,7 @@ namespace Game
         private List<IDamageable> CleanUpTargetList(List<Collider2D> colliderList)
         {
             List<IDamageable> cleansedList = new List<IDamageable>();
+
             colliderList.RemoveAll(col => col.attachedRigidbody == null);
             colliderList.RemoveAll(col => col.attachedRigidbody.GetComponent<IDamageable>() == null);
             colliderList.RemoveAll(col => col.attachedRigidbody.GetComponent<IDamageable>().GetID() == _parentCreature.GetID());
@@ -151,6 +152,5 @@ namespace Game
             if(status == StatusEffect.None) return;
             target.ApplyStatusEffect(status);
         }
-
     }
 }
