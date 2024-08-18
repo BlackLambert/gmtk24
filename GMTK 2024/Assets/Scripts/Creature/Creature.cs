@@ -81,7 +81,7 @@ namespace Game
 
         public void SufferDamage(float damage)
         {
-            throw new NotImplementedException();
+            Debug.Log("Ouchie! I suffered " + damage + " damage");
         }
 
         public void ApplyStatusEffect(StatusEffect status)
