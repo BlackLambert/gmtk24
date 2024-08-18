@@ -331,3 +331,5 @@ MonoBehaviour:
   _foodTypeSettings: {fileID: 11400000, guid: e752ad22ffed9f94ca89864065ca19de, type: 2}
   _text: {fileID: 4953207871165898321}
   _icon: {fileID: 272634250822454901}
+  _defaultTextColor: {r: 1, g: 1, b: 1, a: 1}
+  _notEnoughTextColor: {r: 0.7924528, g: 0.29654676, b: 0.29654676, a: 1}
