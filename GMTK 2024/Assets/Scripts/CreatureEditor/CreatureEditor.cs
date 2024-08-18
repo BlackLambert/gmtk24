@@ -139,7 +139,7 @@ namespace Game
             BodyPart bodyPartInstance = Instantiate(bodyPart);
             FollowCursor followCursor = bodyPartInstance.gameObject.AddComponent<FollowCursor>();
             BodyPartPlacer placer = bodyPartInstance.gameObject.AddComponent<BodyPartPlacer>();
-            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, true);
+            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, true, false, true);
             bodyPartInstance.EnableColliders(false);
         }
         
@@ -148,7 +148,7 @@ namespace Game
             _character.Creature.Remove(bodyPart);
             FollowCursor followCursor = bodyPart.gameObject.AddComponent<FollowCursor>();
             BodyPartPlacer placer = bodyPart.gameObject.AddComponent<BodyPartPlacer>();
-            placer.Init(bodyPart, _game.CurrentCharacter.Creature, followCursor, _snapDistance, false);
+            placer.Init(bodyPart, _game.CurrentCharacter.Creature, followCursor, _snapDistance, false, true, false);
             bodyPart.EnableColliders(false);
         }
     }

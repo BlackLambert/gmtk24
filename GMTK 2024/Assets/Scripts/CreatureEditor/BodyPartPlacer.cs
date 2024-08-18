@@ -9,6 +9,7 @@ namespace Game
         private FollowCursor _followCursor;
         private float _snapDistance;
         private bool _payCosts;
+        private bool _getSellFood;
 
         private FoodParticleAnimationFactory _foodParticleAnimationFactory;
         private CollectedFood _collectedFood;
@@ -23,14 +24,19 @@ namespace Game
             _camera = FindObjectOfType<MainCamera>().Camera;
         }
 
-        public void Init(BodyPart bodyPart, Creature creature, FollowCursor followCursor, float snapDistance, bool payCosts)
+        public void Init(BodyPart bodyPart, Creature creature, FollowCursor followCursor, float snapDistance,
+            bool payCosts, bool getSellFood, bool applyScale)
         {
-            bodyPart.transform.localScale = creature.transform.localScale;
+            if (applyScale)
+            {
+                bodyPart.transform.localScale = creature.transform.localScale;
+            }
             _bodyPart = bodyPart;
             _creature = creature;
             _followCursor = followCursor;
             _snapDistance = snapDistance;
             _payCosts = payCosts;
+            _getSellFood = getSellFood;
         }
 
         private void Update()
@@ -51,7 +57,7 @@ namespace Game
             {
                 if (!isSnapDistance)
                 {
-                    Destroy(gameObject);
+                    Sell();
                 }
                 else
                 {
@@ -60,12 +66,27 @@ namespace Game
             }
         }
 
+        private void Sell()
+        {
+            if (_getSellFood)
+            {
+                _collectedFood.Add(_bodyPart.BodyPartSettings.Costs);
+                foreach (FoodAmount foodAmount in _bodyPart.BodyPartSettings.Costs)
+                {
+                    _foodParticleAnimationFactory.Create(foodAmount,
+                        _camera.WorldToScreenPoint(_bodyPart.transform.position));
+                }
+            }
+            Destroy(gameObject);
+        }
+
         private void Snap()
         {
             Vector2 worldMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _currentSlot = _creature.GetNextEmptySlot(worldMousePos);
             Transform bodyPartTransform = _bodyPart.transform;
-            bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x + _creature.Body.transform.position);
+            bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x +
+                                          _creature.Body.transform.position);
             bodyPartTransform.rotation = _currentSlot.Rotation;
         }
 
