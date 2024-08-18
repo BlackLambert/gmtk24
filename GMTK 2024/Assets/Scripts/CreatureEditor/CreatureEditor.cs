@@ -45,6 +45,8 @@ namespace Game
                 {
                     bodyPart.OnRightClick -= OnBodyPartRightClick;
                     bodyPart.OnDragStart -= OnBodyPartDrag;
+                    bodyPart.OnMouseHoverStart -= OnBodyPartHover;
+                    bodyPart.OnMouseHoverEnd -= OnBodyPartHoverEnd;
                 }
             
                 _character.Creature.Body.OnBodyPartAdded -= OnBodyPartAdded;
@@ -105,6 +107,8 @@ namespace Game
             {
                 bodyPart.OnRightClick += OnBodyPartRightClick;
                 bodyPart.OnDragStart += OnBodyPartDrag;
+                bodyPart.OnMouseHoverStart += OnBodyPartHover;
+                bodyPart.OnMouseHoverEnd += OnBodyPartHoverEnd;
             }
 
             _character.Creature.Body.OnBodyPartAdded += OnBodyPartAdded;
@@ -115,12 +119,16 @@ namespace Game
         {
             bodyPart.OnRightClick -= OnBodyPartRightClick;
             bodyPart.OnDragStart -= OnBodyPartDrag;
+            bodyPart.OnMouseHoverStart -= OnBodyPartHover;
+            bodyPart.OnMouseHoverEnd -= OnBodyPartHoverEnd;
         }
 
         private void OnBodyPartAdded(BodyPart bodyPart)
         {
             bodyPart.OnRightClick += OnBodyPartRightClick;
             bodyPart.OnDragStart += OnBodyPartDrag;
+            bodyPart.OnMouseHoverStart += OnBodyPartHover;
+            bodyPart.OnMouseHoverEnd += OnBodyPartHoverEnd;
         }
 
         private void OnTryCreateBodyPart(BodyPart bodyPart)
@@ -150,6 +158,17 @@ namespace Game
             BodyPartPlacer placer = bodyPart.gameObject.AddComponent<BodyPartPlacer>();
             placer.Init(bodyPart, _game.CurrentCharacter.Creature, followCursor, _snapDistance, false, true, false);
             bodyPart.EnableColliders(false);
+            bodyPart.ShowOutline(false);
+        }
+
+        private void OnBodyPartHoverEnd(BodyPart bodyPart)
+        {
+            bodyPart.ShowOutline(false);
+        }
+
+        private void OnBodyPartHover(BodyPart bodyPart)
+        {
+            bodyPart.ShowOutline(true);
         }
     }
 }

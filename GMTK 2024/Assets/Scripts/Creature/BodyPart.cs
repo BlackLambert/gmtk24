@@ -4,40 +4,61 @@ using UnityEngine.EventSystems;
 
 namespace Game
 {
-    public class BodyPart : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler
-
+    public class BodyPart : MonoBehaviour, IPointerClickHandler, IBeginDragHandler, IDragHandler, IPointerEnterHandler, IPointerExitHandler
     {
-    private const int _rightMouseButtonId = -2;
+        private const int _rightMouseButtonId = -2;
 
-    public event Action<BodyPart> OnRightClick;
-    public event Action<BodyPart> OnDragStart;
+        public event Action<BodyPart> OnRightClick;
+        public event Action<BodyPart> OnMouseHoverStart;
+        public event Action<BodyPart> OnMouseHoverEnd;
+        public event Action<BodyPart> OnDragStart;
 
-    [field: SerializeField] public BodyPartSettings BodyPartSettings { get; private set; }
+        [field: SerializeField] public BodyPartSettings BodyPartSettings { get; private set; }
+        [SerializeField] private GameObject _outline;
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        if (eventData.pointerId == _rightMouseButtonId)
+        private void Awake()
         {
-            OnRightClick?.Invoke(this);
+            ShowOutline(false);
         }
-    }
 
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        OnDragStart?.Invoke(this);
-    }
-
-    public void EnableColliders(bool enable)
-    {
-        foreach (Collider2D collider in GetComponentsInChildren<Collider2D>())
+        public void OnPointerClick(PointerEventData eventData)
         {
-            collider.enabled = enable;
+            if (eventData.pointerId == _rightMouseButtonId)
+            {
+                OnRightClick?.Invoke(this);
+            }
         }
-    }
 
-    public void OnDrag(PointerEventData eventData)
-    {
-        
-    }
+        public void OnBeginDrag(PointerEventData eventData)
+        {
+            OnDragStart?.Invoke(this);
+        }
+
+        public void EnableColliders(bool enable)
+        {
+            foreach (Collider2D collider in GetComponentsInChildren<Collider2D>())
+            {
+                collider.enabled = enable;
+            }
+        }
+
+        public void OnDrag(PointerEventData eventData)
+        {
+        }
+
+        public void ShowOutline(bool show)
+        {
+            _outline.SetActive(show);
+        }
+
+        public void OnPointerEnter(PointerEventData eventData)
+        {
+            OnMouseHoverStart?.Invoke(this);
+        }
+
+        public void OnPointerExit(PointerEventData eventData)
+        {
+            OnMouseHoverEnd?.Invoke(this);
+        }
     }
 }
