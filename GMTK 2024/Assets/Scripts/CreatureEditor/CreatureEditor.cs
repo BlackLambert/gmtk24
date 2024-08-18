@@ -44,6 +44,7 @@ namespace Game
                 foreach (BodyPart bodyPart in _character.Creature.Body.BodyParts)
                 {
                     bodyPart.OnRightClick -= OnBodyPartRightClick;
+                    bodyPart.OnDragStart -= OnBodyPartDrag;
                 }
             
                 _character.Creature.Body.OnBodyPartAdded -= OnBodyPartAdded;
@@ -55,6 +56,7 @@ namespace Game
                 tabContent.OnBodyPartButtonDragExit -= OnTryCreateBodyPart;
             }
         }
+
 
         private void TryInitEditing()
         {
@@ -102,6 +104,7 @@ namespace Game
             foreach (BodyPart bodyPart in _character.Creature.Body.BodyParts)
             {
                 bodyPart.OnRightClick += OnBodyPartRightClick;
+                bodyPart.OnDragStart += OnBodyPartDrag;
             }
 
             _character.Creature.Body.OnBodyPartAdded += OnBodyPartAdded;
@@ -111,11 +114,13 @@ namespace Game
         private void OnBodyPartRemoved(BodyPart bodyPart)
         {
             bodyPart.OnRightClick -= OnBodyPartRightClick;
+            bodyPart.OnDragStart -= OnBodyPartDrag;
         }
 
         private void OnBodyPartAdded(BodyPart bodyPart)
         {
             bodyPart.OnRightClick += OnBodyPartRightClick;
+            bodyPart.OnDragStart += OnBodyPartDrag;
         }
 
         private void OnTryCreateBodyPart(BodyPart bodyPart)
@@ -134,8 +139,17 @@ namespace Game
             BodyPart bodyPartInstance = Instantiate(bodyPart);
             FollowCursor followCursor = bodyPartInstance.gameObject.AddComponent<FollowCursor>();
             BodyPartPlacer placer = bodyPartInstance.gameObject.AddComponent<BodyPartPlacer>();
-            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance);
+            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, true);
             bodyPartInstance.EnableColliders(false);
+        }
+        
+        private void OnBodyPartDrag(BodyPart bodyPart)
+        {
+            _character.Creature.Remove(bodyPart);
+            FollowCursor followCursor = bodyPart.gameObject.AddComponent<FollowCursor>();
+            BodyPartPlacer placer = bodyPart.gameObject.AddComponent<BodyPartPlacer>();
+            placer.Init(bodyPart, _game.CurrentCharacter.Creature, followCursor, _snapDistance, false);
+            bodyPart.EnableColliders(false);
         }
     }
 }

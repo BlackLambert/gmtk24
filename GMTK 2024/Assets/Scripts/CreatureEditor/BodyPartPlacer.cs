@@ -8,6 +8,7 @@ namespace Game
         private Creature _creature;
         private FollowCursor _followCursor;
         private float _snapDistance;
+        private bool _payCosts;
 
         private FoodParticleAnimationFactory _foodParticleAnimationFactory;
         private CollectedFood _collectedFood;
@@ -22,13 +23,14 @@ namespace Game
             _camera = FindObjectOfType<MainCamera>().Camera;
         }
 
-        public void Init(BodyPart bodyPart, Creature creature, FollowCursor followCursor, float snapDistance)
+        public void Init(BodyPart bodyPart, Creature creature, FollowCursor followCursor, float snapDistance, bool payCosts)
         {
             bodyPart.transform.localScale = creature.transform.localScale;
             _bodyPart = bodyPart;
             _creature = creature;
             _followCursor = followCursor;
             _snapDistance = snapDistance;
+            _payCosts = payCosts;
         }
 
         private void Update()
@@ -74,11 +76,15 @@ namespace Game
             _bodyPart.EnableColliders(true);
             Destroy(_followCursor);
             Destroy(this);
-            _collectedFood.ChangeBy(_bodyPart.BodyPartSettings.Costs);
-            foreach (FoodAmount foodAmount in _bodyPart.BodyPartSettings.Costs)
+
+            if (_payCosts)
             {
-                _foodParticleAnimationFactory.Create(foodAmount,
-                    _camera.WorldToScreenPoint(_bodyPart.transform.position), true);
+                _collectedFood.ChangeBy(_bodyPart.BodyPartSettings.Costs);
+                foreach (FoodAmount foodAmount in _bodyPart.BodyPartSettings.Costs)
+                {
+                    _foodParticleAnimationFactory.Create(foodAmount,
+                        _camera.WorldToScreenPoint(_bodyPart.transform.position), true);
+                }
             }
         }
     }
