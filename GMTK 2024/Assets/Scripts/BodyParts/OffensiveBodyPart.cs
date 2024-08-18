@@ -122,11 +122,12 @@ namespace Game
         private List<IDamageable> CleanUpTargetList(List<Collider2D> colliderList)
         {
             List<IDamageable> cleansedList = new List<IDamageable>();
-            colliderList.RemoveAll(col => col.GetComponent<IDamageable>() == null);
-            colliderList.RemoveAll(col => col.GetComponent<IDamageable>().GetID() == _parentCreature.GetID());
+            colliderList.RemoveAll(col => col.attachedRigidbody == null);
+            colliderList.RemoveAll(col => col.attachedRigidbody.GetComponent<IDamageable>() == null);
+            colliderList.RemoveAll(col => col.attachedRigidbody.GetComponent<IDamageable>().GetID() == _parentCreature.GetID());
             foreach(Collider2D collider in colliderList)
             {
-                cleansedList.Add(collider.GetComponent<IDamageable>());
+                cleansedList.Add(collider.attachedRigidbody.GetComponent<IDamageable>());
             }
 
             return cleansedList;
