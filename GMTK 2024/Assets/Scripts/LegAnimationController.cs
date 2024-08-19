@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -12,6 +10,13 @@ namespace Game
         bool mouseDown = false;
         bool isMoving = false;
 
+        private Game _game;
+        
+        private void Awake()
+        {
+            _game = Game.Instance;
+        }
+        
         private void Start()
         {
             LeftLegAnim.SetBool("Inverse", true);
@@ -22,7 +27,7 @@ namespace Game
             if (IsFrogLegs) return;
 
             mouseDown = Input.GetMouseButton(0);
-            if (mouseDown == isMoving) return;
+            if (mouseDown == isMoving || _game.State != GameState.InGame) return;
             if (mouseDown)
             {
                 SetMove(true);

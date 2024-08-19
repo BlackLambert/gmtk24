@@ -10,11 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0cbe23a5ef9c40f4e8c87e36fdd1fc65, type: 3}
-  m_Name: HornSettings
+  m_Name: FrogLegsSettings
   m_EditorClassIdentifier: 
-  <Id>k__BackingField: Horn
-  <BodyPartType>k__BackingField: 0
+  <Id>k__BackingField: FrogLeg
+  <BodyPartType>k__BackingField: 1
   _costs:
-  - FoodType: 0
-    Amount: 10
-  <Icon>k__BackingField: {fileID: 21300000, guid: 9dcf4ce6e6255f741bce6b6544eb17f4, type: 3}
+  - FoodType: 1
+    Amount: 30
+  <Icon>k__BackingField: {fileID: 0}
+  <SlotType>k__BackingField: 16
+  <NeedsCounterPartSlot>k__BackingField: 1

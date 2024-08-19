@@ -7,6 +7,7 @@ namespace Game
     public class BodySettings : ScriptableObject
     {
         [field: SerializeField] public float SlotsPerSize { get; private set; } = 1;
+        [field: SerializeField] public bool AlwaysAddTip { get; private set; } = true;
 
         [field: SerializeField] public SplineData[] StartSplines { get; private set; }
 

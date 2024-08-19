@@ -84,7 +84,7 @@ namespace Game
         private void Snap()
         {
             Vector2 worldMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            _currentSlot = _creature.GetNextEmptySlot(worldMousePos);
+            _currentSlot = _creature.Body.GetNextEmptySlotTo(worldMousePos, _bodyPart.BodyPartSettings.SlotType);
             
             if (_currentSlot != null)
             {

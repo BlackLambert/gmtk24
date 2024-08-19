@@ -8,5 +8,7 @@ namespace Game
         public Vector3 Position;
         public Quaternion Rotation;
         public int VertexIndex;
+        public int CounterPartIndex;
+        public BodyPartSlotType Type;
     }
 }

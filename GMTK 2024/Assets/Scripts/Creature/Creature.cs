@@ -19,8 +19,6 @@ namespace Game
         private Transform _hook;
 
         public Transform Transform { get; private set; }
-        
-        private Dictionary<BodyPartSlot, BodyPart> _slotToBodyParts = new Dictionary<BodyPartSlot, BodyPart>();
 
         private void Awake()
         {
@@ -69,12 +67,6 @@ namespace Game
                 Color c = material.color;
                 material.color = new Color(c.r, c.g, c.b, alpha);
             }
-        }
-
-        public BodyPartSlot GetNextEmptySlot(Vector3 position)
-        {
-            return Body.GetNextEmptySlotTo(position);
-
         }
 
         public void SufferDamage(float damage)

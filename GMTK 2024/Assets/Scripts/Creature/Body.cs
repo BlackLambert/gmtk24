@@ -52,7 +52,7 @@ namespace Game
             }
         }
 
-        public BodyPartSlot GetNextEmptySlotTo(Vector3 point)
+        public BodyPartSlot GetNextEmptySlotTo(Vector3 point, BodyPartSlotType typeFlags)
         {
             BodyPartSlot result = null;
             float bestSqrDistance = float.MaxValue;
@@ -60,7 +60,8 @@ namespace Game
             foreach (BodyPartSlot slot in _slots)
             {
                 float sqrDistance = (point - slot.Position + transform.position).sqrMagnitude;
-                if (sqrDistance < bestSqrDistance && !_slotToBodyPart.ContainsKey(slot))
+                bool isCorrectType = (int)typeFlags == 0 || (typeFlags & slot.Type) > 0;
+                if (isCorrectType && sqrDistance < bestSqrDistance && !_slotToBodyPart.ContainsKey(slot))
                 {
                     bestSqrDistance = sqrDistance;
                     result = slot;
@@ -82,7 +83,7 @@ namespace Game
             List<BodyPart> leftOverBodyParts = new List<BodyPart>();
             foreach (BodyPart bodyPart in BodyParts.ToList())
             {
-                BodyPartSlot slot = GetNextEmptySlotTo(bodyPart.transform.position);
+                BodyPartSlot slot = GetNextEmptySlotTo(bodyPart.transform.position, bodyPart.BodyPartSettings.SlotType);
                 if (slot != null)
                 {
                     Update(bodyPart, slot);
@@ -122,7 +123,7 @@ namespace Game
 
             foreach (BodyPart bodyPart in BodyParts)
             {
-                Add(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position));
+                Add(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position, bodyPart.BodyPartSettings.SlotType));
             }
         }
 
@@ -130,7 +131,7 @@ namespace Game
         {
             if (_slots != null)
             {
-                Add(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position));
+                Add(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position, bodyPart.BodyPartSettings.SlotType));
             }
             else
             {

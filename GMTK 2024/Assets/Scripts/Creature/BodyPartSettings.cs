@@ -15,5 +15,9 @@ namespace Game
         [SerializeField] private List<FoodAmount> _costs;
 
         [field: SerializeField] public Sprite Icon { get; private set; }
+        
+        [field: SerializeField] public BodyPartSlotType SlotType { get; private set; }
+        
+        [field: SerializeField] public bool NeedsCounterPartSlot { get; private set; }
     }
 }
