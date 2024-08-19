@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Teeth
   m_EditorClassIdentifier: 
   <TargetType>k__BackingField: 0
-  <Cooldown>k__BackingField: 1
+  <Cooldown>k__BackingField: 0.5
   <StatusEffect>k__BackingField: 0
   <Damage>k__BackingField: 8
   <TargetRange>k__BackingField: 3
