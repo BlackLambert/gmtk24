@@ -72,5 +72,13 @@ namespace Game
         {
             return _formerStages.Any(s => s.StageSettings == stage);
         }
+
+        public void Restart()
+        {
+            _formerStages.Clear();
+            _currentCharacter = null;
+            _stage = null;
+            FormerStage = null;
+        }
     }
 }

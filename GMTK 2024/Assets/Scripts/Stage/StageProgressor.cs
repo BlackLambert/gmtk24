@@ -74,7 +74,7 @@ namespace Game
             }
             else
             {
-                SetStage(stage, new Stage(_currentStage, _game.CurrentStage.StageSettings, stage.EvolvedCharacter));
+                SetStage(stage, new Stage(_currentStage, _gameStages.FinalStage, stage.EvolvedCharacter));
                 _creditsLoader.Load();
             }
             PlayerPrefs.SetInt("Stage", _currentStage);

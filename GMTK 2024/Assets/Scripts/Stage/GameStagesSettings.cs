@@ -10,6 +10,9 @@ namespace Game
         [SerializeField] 
         private StageSettings[] _stages;
 
+        [field: SerializeField] 
+        public StageSettings FinalStage { get; private set; }
+
         public StageSettings Get(int index)
         {
             return _stages[index];
