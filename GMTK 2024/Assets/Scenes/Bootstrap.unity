@@ -157,10 +157,7 @@ MonoBehaviour:
     SceneName: Main
     Additive: 0
   - Load: 1
-    SceneName: Game
-    Additive: 1
-  - Load: 1
-    SceneName: Level_CritterStage
+    SceneName: MainMenu
     Additive: 1
 --- !u!4 &718736235
 Transform:

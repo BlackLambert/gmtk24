@@ -40,7 +40,7 @@ namespace Game
             }
         }
 
-        private GameState _state = GameState.InGame;
+        private GameState _state = GameState.Menu;
         public event Action OnGameStateChanged;
 
         public GameState State

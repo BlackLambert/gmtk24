@@ -10,16 +10,15 @@ namespace Game
         [SerializeField] 
         private Creature _defaultCreature;
 
-        [SerializeField] 
-        private Camera _camera;
-
         private CollectedFood _collectedFood;
         private Game _game;
         private int _currentStage = 0;
         private int _minFood = 0;
+        private Camera _camera;
 
         private void Awake()
         {
+            _camera = FindObjectOfType<MainCamera>().Camera;
             _collectedFood = FindObjectOfType<CollectedFood>();
             _game = Game.Instance;
         }

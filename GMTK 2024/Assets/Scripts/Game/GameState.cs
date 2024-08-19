@@ -7,6 +7,7 @@ namespace Game
     public enum GameState
     {
         InGame = 0,
-        CreatureEditor = 1
+        CreatureEditor = 1,
+        Menu = 2,
     }
 }

@@ -15,12 +15,12 @@ namespace Game
         private void Awake()
         {
             _game = Game.Instance;
+            _camera = FindObjectOfType<MainCamera>().Camera;
         }
 
-        public void Init(Creature creature, Camera camera, MovementSettings movementSettings)
+        public void Init(Creature creature, MovementSettings movementSettings)
         {
             _creature = creature;
-            _camera = camera;
             _movementSettings = movementSettings;
         }
 

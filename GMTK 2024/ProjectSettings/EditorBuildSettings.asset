@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Bootstrap.unity
     guid: 60f0c6a6a96287a4d8d252ad12b9b47b
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 644c17938ecaa8243b23117d23f81d27
+  - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 69a3e0a52a0d3954b974100923e2c18e
   - enabled: 1
@@ -20,4 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Level_CritterStage.unity
     guid: b5cd67c4854941e46b3330bf86fb2a0b
+  - enabled: 1
+    path: Assets/Scenes/Settings.unity
+    guid: 6388131f1d6dde0488091cedd16b1f98
+  - enabled: 1
+    path: Assets/Scenes/MainGame.unity
+    guid: 52237ab42d1b0454fa17ff2c67593736
   m_configObjects: {}
