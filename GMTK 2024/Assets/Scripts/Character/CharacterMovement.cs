@@ -61,7 +61,8 @@ namespace Game
             {
                 delta *= -1;
             }
-            Debug.Log($"Delta {delta} | Angle {angle} | Max {maxDeltaRot}");
+            
+            //Debug.Log($"Delta {delta} | Angle {angle} | Max {maxDeltaRot}");
             _creature.transform.rotation = Quaternion.Euler(0, 0, currentRotation.eulerAngles.z + delta);
         }
 

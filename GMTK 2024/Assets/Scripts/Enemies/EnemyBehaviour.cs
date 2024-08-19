@@ -101,7 +101,11 @@ namespace Game
         {
             if(_followList.Count == 0)
             {
-                currentFollowTarget = FindFirstObjectByType<Creature>().transform;
+                Creature creature = FindFirstObjectByType<Creature>();
+                if (creature != null)
+                {
+                    currentFollowTarget = creature.transform;
+                }
                 return;
             }
 
