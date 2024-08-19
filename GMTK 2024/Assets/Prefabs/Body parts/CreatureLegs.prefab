@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1729416326088288398, guid: dc4f95addfd65c841b96ee6d7ca543b2, type: 3}
       propertyPath: m_Name
-      value: Legs
+      value: CreatureLegs
       objectReference: {fileID: 0}
     - target: {fileID: 2615259416414748036, guid: dc4f95addfd65c841b96ee6d7ca543b2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -51,6 +51,18 @@ PrefabInstance:
     - target: {fileID: 2615259416414748036, guid: dc4f95addfd65c841b96ee6d7ca543b2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415234612194264218, guid: dc4f95addfd65c841b96ee6d7ca543b2, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415234612194264218, guid: dc4f95addfd65c841b96ee6d7ca543b2, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6415234612194264218, guid: dc4f95addfd65c841b96ee6d7ca543b2, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

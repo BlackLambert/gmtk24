@@ -53,6 +53,18 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4387036701364784208, guid: f96d37f93494a8a489d3c377bd875265, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387036701364784208, guid: f96d37f93494a8a489d3c377bd875265, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387036701364784208, guid: f96d37f93494a8a489d3c377bd875265, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4387036701364784208, guid: f96d37f93494a8a489d3c377bd875265, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.7071068
       objectReference: {fileID: 0}
@@ -72,6 +84,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: 8367140340820649047, guid: f96d37f93494a8a489d3c377bd875265, type: 3}
+      propertyPath: <MovementSettings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 6744e015c0e22f44395b6ad5cfc3a5a3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

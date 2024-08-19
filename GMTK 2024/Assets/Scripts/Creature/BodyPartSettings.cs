@@ -19,5 +19,7 @@ namespace Game
         [field: SerializeField] public BodyPartSlotType SlotType { get; private set; }
         
         [field: SerializeField] public bool NeedsCounterPartSlot { get; private set; }
+
+        [field: SerializeField] public float ScalePerSizeAddition { get; private set; } = 0;
     }
 }

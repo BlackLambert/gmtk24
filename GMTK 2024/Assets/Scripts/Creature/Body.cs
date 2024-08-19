@@ -18,7 +18,7 @@ namespace Game
 
         [SerializeField] private MeshFilter _meshFilter;
 
-        private BodyPartSlot[] _slots;
+        private Dictionary<SplineData, List<BodyPartSlot>> _slots;
 
         private readonly Dictionary<BodyPartSlot, BodyPart> _slotToBodyPart = new();
         private readonly Dictionary<BodyPart, BodyPartSlot[]> _bodyPartToSlot = new();
@@ -33,7 +33,6 @@ namespace Game
         [SerializeField] private BodySettings _bodySettings;
 
         private List<BodyPart> _pendingBodyParts = new List<BodyPart>();
-        private SplineData _nextSpine;
         private bool _updateNextSpine;
         private Camera _camera;
 
@@ -50,19 +49,22 @@ namespace Game
             }
         }
 
-        public BodyPartSlot GetNextEmptySlotTo(Vector3 point, BodyPartSlotType typeFlags)
+        public KeyValuePair<SplineData, BodyPartSlot> GetNextEmptySlotTo(Vector3 point, BodyPartSlotType typeFlags)
         {
-            BodyPartSlot result = null;
+            KeyValuePair<SplineData, BodyPartSlot> result = new KeyValuePair<SplineData, BodyPartSlot>();
             float bestSqrDistance = float.MaxValue;
 
-            foreach (BodyPartSlot slot in _slots)
+            foreach (KeyValuePair<SplineData,List<BodyPartSlot>> pair in _slots)
             {
-                float sqrDistance = (point - slot.Position + transform.position).sqrMagnitude;
-                bool isCorrectType = (int)typeFlags == 0 || (typeFlags & slot.Type) > 0;
-                if (isCorrectType && sqrDistance < bestSqrDistance && !_slotToBodyPart.ContainsKey(slot))
+                foreach (BodyPartSlot slot in pair.Value)
                 {
-                    bestSqrDistance = sqrDistance;
-                    result = slot;
+                    float sqrDistance = (point - slot.Position + transform.position).sqrMagnitude;
+                    bool isCorrectType = (int)typeFlags == 0 || (typeFlags & slot.Type) > 0;
+                    if (isCorrectType && sqrDistance < bestSqrDistance && !_slotToBodyPart.ContainsKey(slot))
+                    {
+                        bestSqrDistance = sqrDistance;
+                        result = new KeyValuePair<SplineData, BodyPartSlot>(pair.Key, slot);
+                    }
                 }
             }
 
@@ -74,15 +76,15 @@ namespace Game
             OnUpdateMesh?.Invoke();
         }
 
-        public void UpdateSlots(BodyPartSlot[] slots)
+        public void UpdateSlots(Dictionary<SplineData, List<BodyPartSlot>> slots)
         {
             _slots = slots;
 
             List<BodyPart> leftOverBodyParts = new List<BodyPart>();
             foreach (BodyPart bodyPart in BodyParts.ToList())
             {
-                BodyPartSlot slot = GetNextEmptySlotTo(bodyPart.transform.position, bodyPart.BodyPartSettings.SlotType);
-                if (slot != null)
+                KeyValuePair<SplineData, BodyPartSlot> slot = GetNextEmptySlotTo(bodyPart.transform.position, bodyPart.BodyPartSettings.SlotType);
+                if (slot.Value != null)
                 {
                     Update(bodyPart, slot);
                 }
@@ -99,32 +101,6 @@ namespace Game
             }
         }
 
-        public void UpdateSlots()
-        {
-            Mesh mesh = _meshFilter.mesh;
-            Vector3[] vertices = mesh.vertices;
-            Vector3[] normals = mesh.normals;
-            _slots = new BodyPartSlot[vertices.Length];
-
-            for (int i = 0; i < vertices.Length; i++)
-            {
-                float angle = Vector2.Angle(normals[i], Vector2.up);
-                float factor = vertices[i].x <= 0 ? 1 : -1;
-                Quaternion rotation = Quaternion.Euler(0, 0, angle * factor);
-                _slots[i] = new BodyPartSlot()
-                {
-                    Position = vertices[i],
-                    Rotation = rotation,
-                    VertexIndex = i
-                };
-            }
-
-            foreach (BodyPart bodyPart in BodyParts)
-            {
-                Add(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position, bodyPart.BodyPartSettings.SlotType));
-            }
-        }
-
         public void Add(BodyPart bodyPart)
         {
             if (_slots != null)
@@ -138,13 +114,13 @@ namespace Game
             }
         }
 
-        public void Add(BodyPart bodyPart, BodyPartSlot slot)
+        public void Add(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> slot)
         {
             AddInternal(bodyPart, slot);
             OnBodyPartAdded?.Invoke(bodyPart);
         }
 
-        private void Update(BodyPart bodyPart, BodyPartSlot targetSlot)
+        private void Update(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> targetSlot)
         {
             if (_bodyPartToSlot.Remove(bodyPart, out BodyPartSlot[] formerSlots))
             {
@@ -157,9 +133,9 @@ namespace Game
             AddInternal(bodyPart, targetSlot);
         }
 
-        private void AddInternal(BodyPart bodyPart, BodyPartSlot targetSlot)
+        private void AddInternal(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> targetSlot)
         {
-            if (_slotToBodyPart.ContainsKey(targetSlot))
+            if (_slotToBodyPart.ContainsKey(targetSlot.Value))
             {
                 throw new ArgumentException();
             }
@@ -171,8 +147,8 @@ namespace Game
 
             bool needsCounterPart = bodyPart.BodyPartSettings.NeedsCounterPartSlot;
             BodyPartSlot[] slots = needsCounterPart
-                ? new[] { targetSlot, _slots[targetSlot.CounterPartIndex] }
-                : new[] { targetSlot };
+                ? new[] { targetSlot.Value, _slots[targetSlot.Key][targetSlot.Value.CounterPartIndex] }
+                : new[] { targetSlot.Value };
 
             foreach (BodyPartSlot slot in slots)
             {
@@ -279,21 +255,23 @@ namespace Game
             }
         }
 
-        private Vector3 GetBodyPartPosition(BodyPart bodyPart, BodyPartSlot slot)
+        private Vector3 GetBodyPartPosition(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> splineToSlot)
         {
             bool needsCounterPart = bodyPart.BodyPartSettings.NeedsCounterPartSlot;
             Transform trans = transform;
+            BodyPartSlot slot = splineToSlot.Value;
             Vector3 slotPos = needsCounterPart
-                ? (_slots[slot.CounterPartIndex].Position - slot.Position) / 2
+                ? slot.Position + (_slots[splineToSlot.Key][slot.CounterPartIndex].Position - splineToSlot.Value.Position) / 2
                 : slot.Position;
             return slotPos * trans.lossyScale.x + trans.position + new Vector3(0, 0, 0.1f);
         }
 
-        public void SnapTo(BodyPart bodyPart, BodyPartSlot targetSlot)
+        public void SnapTo(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> targetSlot)
         {
             Transform bodyPartTransform = bodyPart.transform;
             bodyPartTransform.position = GetBodyPartPosition(bodyPart, targetSlot);
-            bodyPartTransform.rotation = targetSlot.Rotation;
+            bodyPartTransform.rotation = targetSlot.Value.Rotation;
+            bodyPartTransform.localScale = Vector3.one + Vector3.one * (targetSlot.Key.Size * bodyPart.BodyPartSettings.ScalePerSizeAddition);
         }
     }
 }
