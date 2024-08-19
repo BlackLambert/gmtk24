@@ -83,6 +83,12 @@ namespace Game
         {
             return -1;
         }
+        
+        public SizeStage GetSize()
+        {
+            //TODO: Add and Update correct size stage!
+            return SizeStage.Cell;
+        }
 
         public SplineData RemoveSpline()
         {

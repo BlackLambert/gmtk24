@@ -33,7 +33,7 @@ namespace Game
 
         [field: SerializeField]
         public List<FoodAmount> Costs { get; private set; } = new List<FoodAmount>()
-            { new FoodAmount { Amount = 5, FoodType = FoodType.Purple } };
+            { new FoodAmount { Amount = 5, FoodType = FoodType.Fungi } };
 
         [field: SerializeField] public float HealthPerSize { get; private set; } = 3f;
     }

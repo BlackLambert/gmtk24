@@ -10,5 +10,6 @@ namespace Game
         public void SufferDamage(float damage);
         public void ApplyStatusEffect(StatusEffect status);
         public int GetID();
+        public SizeStage GetSize();
     }
 }

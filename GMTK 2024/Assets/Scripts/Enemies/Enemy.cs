@@ -12,6 +12,8 @@ namespace Game
 
         [field: SerializeField]
         public EnemySettings Settings { get; private set; }
+        [field: SerializeField] 
+        public MovementSettings MovementSettings { get; private set; }
 
         [field: SerializeField]
         Animator slashAnimatorPrefab;
@@ -25,6 +27,7 @@ namespace Game
         {
             Transform = transform;
             currentHitpoints = Settings.HitPoints;
+            MovementSettings = Settings.MovementSettings;
         }
 
         public void SufferDamage(float damage)
@@ -54,6 +57,11 @@ namespace Game
         public int GetID()
         {
             return Settings.speciesID;
+        }
+
+        public SizeStage GetSize()
+        {
+            return Settings.size;
         }
         void Die()
         {
