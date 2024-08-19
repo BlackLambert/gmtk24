@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Game
 {
@@ -9,6 +10,9 @@ namespace Game
 
         [SerializeField] 
         private Creature _defaultCreature;
+
+        [SerializeField] 
+        private BasicSceneLoader _creditsLoader;
 
         private CollectedFood _collectedFood;
         private Game _game;
@@ -62,7 +66,18 @@ namespace Game
             _currentStage++;
             _minFood += _game.CurrentStage.StageSettings.FoodToCollect;
             Stage stage = _game.CurrentStage;
-            SetStage(stage, new Stage(_currentStage, _gameStages.Get(_currentStage), stage.EvolvedCharacter));
+            if (_gameStages.TryGet(_currentStage, out StageSettings stageSettings))
+            {
+                SetStage(stage, new Stage(_currentStage, stageSettings, stage.EvolvedCharacter));
+                SceneManager.LoadScene("Game", LoadSceneMode.Additive);
+                SceneManager.LoadScene(stageSettings.LevelToLoad.name, LoadSceneMode.Additive);
+            }
+            else
+            {
+                SetStage(stage, new Stage(_currentStage, _game.CurrentStage.StageSettings, stage.EvolvedCharacter));
+                _creditsLoader.Load();
+            }
+            PlayerPrefs.SetInt("Stage", _currentStage);
         }
 
         private void SetStage(Stage currentStage, Stage nextStage)

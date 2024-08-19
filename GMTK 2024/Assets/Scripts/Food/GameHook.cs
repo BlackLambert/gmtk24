@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Game
 {
-    public class FoodHook : MonoBehaviour
+    public class GameHook : MonoBehaviour
     {
         
     }

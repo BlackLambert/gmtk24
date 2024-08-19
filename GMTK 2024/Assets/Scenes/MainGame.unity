@@ -353,6 +353,7 @@ GameObject:
   - component: {fileID: 1089552670}
   - component: {fileID: 1089552669}
   - component: {fileID: 1089552668}
+  - component: {fileID: 1089552671}
   m_Layer: 0
   m_Name: StageProgressor
   m_TagString: Untagged
@@ -396,6 +397,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _gameStages: {fileID: 11400000, guid: 645a8b9bcc707b640a311cb0fcd3b6ca, type: 2}
   _defaultCreature: {fileID: 513298518562386916, guid: cbbf8995a053d874eb01ad469e467d17, type: 3}
+  _creditsLoader: {fileID: 1089552671}
 --- !u!4 &1089552670
 Transform:
   m_ObjectHideFlags: 0
@@ -411,6 +413,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1089552671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089552667}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b841272d0c1bd734f882d22ca4c5f53e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _loadSettings:
+  - Load: 1
+    SceneName: Credits
+    Additive: 1
 --- !u!1 &1916359834
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f71c2065714194fbf64be7613ffd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _camera: {fileID: 0}
   _movementSettings: {fileID: 11400000, guid: fa7dded5928ca6c4b874240a121a1ae5, type: 2}
   _scalesAlpha: 0.33
 --- !u!4 &1971540836

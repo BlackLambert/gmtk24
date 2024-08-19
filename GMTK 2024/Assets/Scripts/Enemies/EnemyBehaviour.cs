@@ -69,10 +69,13 @@ namespace Game
             }
 
             FindMovementTarget();
-            Vector3 dir = currentFollowTarget.position - _enemy.transform.position;
+            if (currentFollowTarget != null)
+            {
+                Vector3 dir = currentFollowTarget.position - _enemy.transform.position;
 
-            LookAt(dir);
-            Move(dir);
+                LookAt(dir);
+                Move(dir);
+            }
         }
 
         void LookAt(Vector3 direction)

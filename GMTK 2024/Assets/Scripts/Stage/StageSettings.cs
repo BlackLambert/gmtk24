@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Game
@@ -20,5 +21,8 @@ namespace Game
 
         [field: SerializeField]
         public float SpeedFactor { get; private set; } = 1f;
+        
+        [field: SerializeField]
+        public SceneAsset LevelToLoad { get; private set; }
     }
 }

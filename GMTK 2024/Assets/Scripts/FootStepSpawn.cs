@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,7 +11,14 @@ namespace Game
 
         [field: SerializeField] FootStep FootStep;
         [SerializeField] Transform spawnTransform;
-        
+
+        private GameHook _hook;
+
+        private void Awake()
+        {
+            _hook = FindObjectOfType<GameHook>();
+        }
+
         public void SpawnFootstep(int i)
         {
             if(i == 0)
@@ -20,7 +28,10 @@ namespace Game
             {
                 if (LegRenderer.flipY == false) return;
             }
-            FootStep footstep = GameObject.Instantiate(FootStep, spawnTransform.position, spawnTransform.rotation);
+            FootStep footstep = GameObject.Instantiate(FootStep, _hook.transform, false);
+            var trans = footstep.transform;
+            trans.position = spawnTransform.position;
+            trans.rotation = spawnTransform.rotation;
             footstep.SetFlip(LegRenderer.flipX, LegRenderer.flipY);
         }
     }

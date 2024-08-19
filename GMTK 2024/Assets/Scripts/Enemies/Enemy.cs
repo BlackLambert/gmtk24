@@ -28,14 +28,14 @@ namespace Game
         float currentHitpoints = 0;
         OffensiveBodyPart lastDamageSource = null;
         
-        private FoodHook _foodHook;
+        private GameHook _gameHook;
 
         private void Awake()
         {
             currentHitpoints = Settings.HitPoints;
             MovementSettings = Settings.MovementSettings;
             Transform = transform;
-            _foodHook = FindObjectOfType<FoodHook>();
+            _gameHook = FindObjectOfType<GameHook>();
         }
         
         private void Start()
@@ -102,7 +102,7 @@ namespace Game
                 for(int i = 0; i<loot.maxAmount; i++)
                 {
                     Vector3 positionOffset = UnityEngine.Random.insideUnitSphere * 3;
-                    GameObject drop = GameObject.Instantiate(loot.drop, _foodHook.transform, false);
+                    GameObject drop = GameObject.Instantiate(loot.drop, _gameHook.transform, false);
                     drop.transform.position = transform.position + positionOffset;
                 }
                 
