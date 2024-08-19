@@ -136,7 +136,7 @@ namespace Game
 
         private void ApplyDamageToTarget(float damage, IDamageable target)
         {
-            target.SufferDamage(damage);
+            target.SufferDamage(damage, this);
         }
 
         private void PlayAnimation()
