@@ -47,11 +47,13 @@ namespace Game
             
             _addSplineButton.onClick.AddListener(AddSpline);
             _removeSplineButton.onClick.AddListener(RemoveSpline);
+            _collectedFood.OnAmountChanged += OnAmountChanged;
         }
 
         private void OnDestroy()
         {
             _game.OnCurrentCharacterChanged -= OnCurrentCharacterChanged;
+            _collectedFood.OnAmountChanged -= OnAmountChanged;
 
             if (_character != null)
             {
@@ -298,6 +300,11 @@ namespace Game
                 _collectedFood.Add(bodyPart.BodyPartSettings.Costs);
                 Destroy(bodyPart.gameObject);
             }
+        }
+
+        private void OnAmountChanged(FoodType arg1, int arg2)
+        {
+            UpdateSplineButtons();
         }
     }
 }

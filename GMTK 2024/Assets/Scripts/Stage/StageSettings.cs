@@ -23,6 +23,6 @@ namespace Game
         public float SpeedFactor { get; private set; } = 1f;
         
         [field: SerializeField]
-        public SceneAsset LevelToLoad { get; private set; }
+        public string LevelToLoad { get; private set; }
     }
 }
