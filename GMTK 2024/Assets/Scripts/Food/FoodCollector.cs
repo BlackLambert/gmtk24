@@ -9,10 +9,19 @@ namespace Game
         private FoodParticleAnimationFactory _particleAnimationFactory;
         private Camera _camera;
         private bool _attachedToPlayerCreature;
+        private IDamageable _attachedDamageable;
         
         private void Awake()
         {
-            _attachedToPlayerCreature = TryGetComponent<Creature>(out Creature c);
+            if(TryGetComponent<Creature>(out Creature c))
+            {
+                _attachedToPlayerCreature = c;
+                _attachedDamageable = c;
+            }
+            else
+            {
+                _attachedDamageable = GetComponent<Enemy>();
+            }
             _collectedFood = FindObjectOfType<CollectedFood>();
             _particleAnimationFactory = FindObjectOfType<FoodParticleAnimationFactory>();
             _camera = FindObjectOfType<MainCamera>().Camera;
@@ -23,7 +32,10 @@ namespace Game
             Food food = other.GetComponent<Food>();
             if (food != null)
             {
-                Collect(food);
+                if(food.size == _attachedDamageable.GetSize())
+                {
+                    Collect(food);
+                }
             }
         }
 

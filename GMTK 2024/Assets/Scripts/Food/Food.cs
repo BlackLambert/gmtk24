@@ -7,6 +7,8 @@ namespace Game
     {
         [field: SerializeField]
         public FoodType FoodType { get; private set; }
+        [field:SerializeField]
+        public SizeStage size { get; private set; }
 
         [SerializeField] 
         private Animator _animator;

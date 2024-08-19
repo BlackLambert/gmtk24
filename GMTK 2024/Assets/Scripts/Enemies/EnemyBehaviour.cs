@@ -142,7 +142,7 @@ namespace Game
                     case CreatureDiet.Carnivore:
                         if(target.GetComponent<Food>() != null)
                         {
-                            if (target.GetComponent<Food>().FoodType == FoodType.Meat)
+                            if (target.GetComponent<Food>().FoodType == FoodType.Meat && target.GetComponent<Food>().size == _enemy.GetSize())
                             {
                                 isValid = true;
                             }
@@ -160,7 +160,10 @@ namespace Game
                         {
                             if (target.GetComponent<Food>().FoodType == FoodType.Fruit || target.GetComponent<Food>().FoodType == FoodType.Fungi)
                             {
-                                isValid = true;
+                                if(target.GetComponent<Food>().size == _enemy.GetSize())
+                                {
+                                    isValid = true;
+                                }
                             }
                         }
                         break;
