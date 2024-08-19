@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 namespace Game
 {
@@ -25,6 +27,7 @@ namespace Game
         float[] _speedAdjustments = new float[3];
         float _speedAdjustment = 1;
         Creature _creature;
+
         private void Start()
         {
             _speedAdjustments[0] = 0.05f;

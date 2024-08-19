@@ -27,11 +27,19 @@ namespace Game
 
         float currentHitpoints = 0;
         OffensiveBodyPart lastDamageSource = null;
-        private void Start()
+        
+        private FoodHook _foodHook;
+
+        private void Awake()
         {
-            Transform = transform;
             currentHitpoints = Settings.HitPoints;
             MovementSettings = Settings.MovementSettings;
+            Transform = transform;
+            _foodHook = FindObjectOfType<FoodHook>();
+        }
+        
+        private void Start()
+        {
             spawnedHPBar = Instantiate(hpBarPrefab, transform.position, Quaternion.identity);
             spawnedHPBar.Init(this);
         }
@@ -39,6 +47,14 @@ namespace Game
         void Update()
         {
             lastDamageSource = null;
+        }
+
+        private void OnDestroy()
+        {
+            if (spawnedHPBar != null)
+            {
+                Destroy(spawnedHPBar.gameObject);
+            }
         }
 
         public void SufferDamage(float damage, OffensiveBodyPart source)
@@ -86,7 +102,8 @@ namespace Game
                 for(int i = 0; i<loot.maxAmount; i++)
                 {
                     Vector3 positionOffset = UnityEngine.Random.insideUnitSphere * 3;
-                    GameObject.Instantiate(loot.drop, transform.position + positionOffset, transform.rotation);
+                    GameObject drop = GameObject.Instantiate(loot.drop, _foodHook.transform, false);
+                    drop.transform.position = transform.position + positionOffset;
                 }
                 
             }
