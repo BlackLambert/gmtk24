@@ -17,4 +17,4 @@ MonoBehaviour:
   <CharacterSizeFactor>k__BackingField: 3
   <EditorCameraSize>k__BackingField: 5
   <SpeedFactor>k__BackingField: 2
-  <LevelToLoad>k__BackingField: {fileID: 102900000, guid: b5cd67c4854941e46b3330bf86fb2a0b, type: 3}
+  <LevelToLoad>k__BackingField: Level_CritterStage

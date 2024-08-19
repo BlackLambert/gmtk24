@@ -70,7 +70,7 @@ namespace Game
             {
                 SetStage(stage, new Stage(_currentStage, stageSettings, stage.EvolvedCharacter));
                 SceneManager.LoadScene("Game", LoadSceneMode.Additive);
-                SceneManager.LoadScene(stageSettings.LevelToLoad.name, LoadSceneMode.Additive);
+                SceneManager.LoadScene(stageSettings.LevelToLoad, LoadSceneMode.Additive);
             }
             else
             {
