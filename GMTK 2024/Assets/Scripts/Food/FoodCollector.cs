@@ -9,6 +9,8 @@ namespace Game
         private Camera _camera;
         private bool _attachedToPlayerCreature;
         private IDamageable _attachedDamageable;
+
+        private float _foodHealAmount = 0.02f;
         
         private void Awake()
         {
@@ -43,6 +45,8 @@ namespace Game
             food.Collect();
             if (_attachedToPlayerCreature)
             {
+                Creature parent = _attachedDamageable as Creature;
+                parent.HealDamage(_foodHealAmount, true);
                 _collectedFood.Collect(food.FoodType);
                 Vector2 screenPos = _camera.WorldToScreenPoint(food.transform.position);
                 _particleAnimationFactory.Create(new FoodAmount(){FoodType = food.FoodType, Amount = 1}, screenPos);
