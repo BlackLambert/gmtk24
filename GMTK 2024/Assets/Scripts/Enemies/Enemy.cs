@@ -19,6 +19,10 @@ namespace Game
         Animator slashAnimatorPrefab;
         Animator spawnedAnimator;
 
+        [field: SerializeField]
+        HPBarCanvas hpBarPrefab;
+        HPBarCanvas spawnedHPBar;
+
         public Transform Transform { get; private set; }
 
         float currentHitpoints = 0;
@@ -28,6 +32,8 @@ namespace Game
             Transform = transform;
             currentHitpoints = Settings.HitPoints;
             MovementSettings = Settings.MovementSettings;
+            spawnedHPBar = Instantiate(hpBarPrefab, transform.position, Quaternion.identity);
+            spawnedHPBar.Init(this);
         }
 
         public void SufferDamage(float damage)
@@ -42,6 +48,7 @@ namespace Game
             }
             spawnedAnimator.SetTrigger("Hit");
             currentHitpoints -= damage;
+            spawnedHPBar.UpdateHP(currentHitpoints / Settings.HitPoints);
             if (currentHitpoints <= 0)
             {
                 currentHitpoints = 0;
@@ -75,7 +82,7 @@ namespace Game
                 }
                 
             }
-
+            Destroy(spawnedHPBar.gameObject);
             Destroy(this.gameObject);
         }
     }
