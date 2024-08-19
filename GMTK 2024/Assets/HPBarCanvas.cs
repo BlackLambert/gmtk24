@@ -13,6 +13,7 @@ namespace Game
 
         private void Update()
         {
+            if (attachedParent.Transform == null) return;
             transform.position = attachedParent.Transform.position + (Vector3.up * 2);
         }
 
