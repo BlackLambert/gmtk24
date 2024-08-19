@@ -81,6 +81,7 @@ MonoBehaviour:
   - {fileID: 526543898247515212}
   - {fileID: 6103537849083174895}
   _hook: {fileID: 5110266821741233893}
+  _defeatScreenPrefab: {fileID: 1978142599065200674, guid: c8c3b04bdf1908b409934807112ba7ba, type: 3}
 --- !u!1001 &1160614932899083700
 PrefabInstance:
   m_ObjectHideFlags: 0

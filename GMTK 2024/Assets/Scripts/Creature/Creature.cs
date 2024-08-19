@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace Game
@@ -18,14 +19,18 @@ namespace Game
         [SerializeField] 
         private Transform _hook;
 
-        [SerializeField]
         private PlayerHPBar _hpBar;
+
+        [SerializeField]
+        DefeatScreen _defeatScreenPrefab;
+        DefeatScreen _defeatScreen;
 
         public Transform Transform { get; private set; }
         OffensiveBodyPart lastDamageSource;
 
         float _maxHitpoints = 100;
         float _currentHitpoints = 100;
+        bool _isDead = false;
 
         Game _game;
 
@@ -39,10 +44,13 @@ namespace Game
                     Body.Add(bodyPart);
                 }
             }
-            _hpBar = FindObjectOfType<PlayerHPBar>();
             _game = Game.Instance;
         }
 
+        void Start()
+        {
+            _hpBar = FindObjectOfType<PlayerHPBar>();
+        }
 
         void Update()
         {
@@ -93,7 +101,15 @@ namespace Game
 
             //TODO: Add OnHit Animations and Sounds
             _currentHitpoints -= Mathf.Round(damage);
-            _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
+            if(_hpBar == null)
+            {
+                _hpBar = FindObjectOfType<PlayerHPBar>();
+                _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
+            } else
+            {
+                _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
+            }
+
             if (_currentHitpoints <= 0)
             {
                 Die();
@@ -109,6 +125,15 @@ namespace Game
             }
             _currentHitpoints += absoluteAmount;
             _currentHitpoints = Mathf.Round(_currentHitpoints);
+            if (_hpBar == null)
+            {
+                _hpBar = FindObjectOfType<PlayerHPBar>();
+                _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
+            }
+            else
+            {
+                _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
+            }
             if (_currentHitpoints>_maxHitpoints)
             {
                 _currentHitpoints = _maxHitpoints;
@@ -143,9 +168,13 @@ namespace Game
 
         void Die()
         {
-            Time.timeScale = 0.5f;
+            if(_isDead) return;
+            _isDead = true;
             //TODO: Add Animations and Sounds! 
             Destroy(gameObject, 1);
+            _defeatScreen = Instantiate(_defeatScreenPrefab);
+            _defeatScreen.Die();
+
         }
     }
 }
