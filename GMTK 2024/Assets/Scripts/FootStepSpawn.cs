@@ -14,11 +14,6 @@ namespace Game
 
         private GameHook _hook;
 
-        private void Awake()
-        {
-            _hook = FindObjectOfType<GameHook>();
-        }
-
         public void SpawnFootstep(int i)
         {
             if(i == 0)
@@ -28,6 +23,12 @@ namespace Game
             {
                 if (LegRenderer.flipY == false) return;
             }
+
+            if (_hook == null)
+            {
+                _hook = FindObjectOfType<GameHook>();
+            }
+            
             FootStep footstep = GameObject.Instantiate(FootStep, _hook.transform, false);
             var trans = footstep.transform;
             trans.position = spawnTransform.position;

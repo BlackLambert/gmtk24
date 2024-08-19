@@ -12,8 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23ff8c60b36698d409182861eb2d4cd9, type: 3}
   m_Name: ConstantMovementSettings
   m_EditorClassIdentifier: 
-  <MovementType>k__BackingField: 0
   <Force>k__BackingField: 100
   <MaxSpeed>k__BackingField: 10
   <Cooldown>k__BackingField: 0
-  <RotationSpeed>k__BackingField: 500
+  <RotationSpeed>k__BackingField: 300

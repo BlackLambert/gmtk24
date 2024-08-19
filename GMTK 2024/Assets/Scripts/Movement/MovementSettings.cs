@@ -5,9 +5,6 @@ namespace Game
     [CreateAssetMenu(fileName = "MovementSettings", menuName = "Game/MovementSettings", order = 1)]
     public class MovementSettings : ScriptableObject 
     {
-        [field: SerializeField]
-        public MovementType MovementType { get; private set; }
-
         [field: SerializeField] 
         public float Force { get; private set; } = 10;
 

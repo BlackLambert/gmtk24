@@ -1,16 +1,17 @@
 using System;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
 {
     public class CharacterMovement : MonoBehaviour
     {
-        private MovementSettings _movementSettings;
         private Camera _camera;
         private Creature _creature;
         private Game _game;
         private Vector2 _mousePoint;
-        private float _lastUsed = float.MinValue;
+        private float[] _lastUsed;
+        private MovementSettings[] _movementSettings;
 
         private void Awake()
         {
@@ -18,10 +19,12 @@ namespace Game
             _camera = FindObjectOfType<MainCamera>().Camera;
         }
 
-        public void Init(Creature creature, MovementSettings movementSettings)
+        public void Init(Creature creature)
         {
             _creature = creature;
-            _movementSettings = movementSettings;
+            _movementSettings = _creature.GetComponentsInChildren<MovementBodyPart>().Select(b => b.MovementSettings)
+                .ToArray();
+            _lastUsed = new float[_movementSettings.Length];
         }
 
         private void FixedUpdate()
@@ -30,11 +33,11 @@ namespace Game
             {
                 return;
             }
-            
+
             Vector3 mousePoint = Input.mousePosition;
             Vector3 worldPoint = _camera.ScreenToWorldPoint(mousePoint);
             Vector3 direction = worldPoint - _creature.Transform.position;
-            
+
             LookAt(worldPoint, direction);
             Move(direction);
             LimitSpeed();
@@ -46,22 +49,22 @@ namespace Game
             {
                 return;
             }
-            
-            direction.Normalize(); 
+
+            direction.Normalize();
             Quaternion currentRotation = _creature.transform.rotation;
             Vector3 currentDirection = currentRotation * Vector3.up;
             float zRot = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             float currentZRot = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, zRot - 90);
             float angle = Quaternion.Angle(targetRotation, currentRotation);
-            float maxDeltaRot = _movementSettings.RotationSpeed * Time.fixedDeltaTime;
+            float maxDeltaRot = _movementSettings.Sum(s => s.RotationSpeed) * Time.fixedDeltaTime;
             float delta = Mathf.Min(maxDeltaRot, angle);
             float absDelta = Mathf.Abs(zRot - currentZRot);
             if (zRot < currentZRot && absDelta < 180 || zRot > currentZRot && absDelta > 180)
             {
                 delta *= -1;
             }
-            
+
             //Debug.Log($"Delta {delta} | Angle {angle} | Max {maxDeltaRot}");
             _creature.transform.rotation = Quaternion.Euler(0, 0, currentRotation.eulerAngles.z + delta);
         }
@@ -73,26 +76,32 @@ namespace Game
                 return;
             }
 
-            if (Time.realtimeSinceStartup < _lastUsed + _movementSettings.Cooldown)
+            for (var index = 0; index < _movementSettings.Length; index++)
             {
-                return;
+                var settings = _movementSettings[index];
+                if (Time.realtimeSinceStartup < _lastUsed[index] + settings.Cooldown)
+                {
+                    return;
+                }
+
+                LegAnimationController legs = GetComponentInChildren<LegAnimationController>();
+                legs?.Jump();
+
+                Vector2 force = ((Vector2)direction).normalized *
+                                (settings.Force * _game.CurrentStage.StageSettings.SpeedFactor);
+                _creature.Rigidbody.AddForce(force);
+                _lastUsed[index] = Time.realtimeSinceStartup;
             }
-
-            LegAnimationController legs = GetComponentInChildren<LegAnimationController>();
-            legs?.Jump();
-
-            Vector2 force = ((Vector2)direction).normalized * (_movementSettings.Force * _game.CurrentStage.StageSettings.SpeedFactor);
-            _creature.Rigidbody.AddForce(force);
-            _lastUsed = Time.realtimeSinceStartup;
         }
 
         private void LimitSpeed()
         {
             Vector3 velocity = _creature.Rigidbody.velocity;
             float velocityMagnitude = velocity.magnitude;
-            if (velocityMagnitude > _movementSettings.MaxSpeed)
+            float maxSpeed = _movementSettings.Sum(s => s.MaxSpeed);
+            if (velocityMagnitude > maxSpeed)
             {
-                _creature.Rigidbody.velocity = velocity.normalized * _movementSettings.MaxSpeed;
+                _creature.Rigidbody.velocity = velocity.normalized * maxSpeed;
             }
         }
     }

@@ -88,10 +88,7 @@ namespace Game
             
             if (_currentSlot != null)
             {
-                Transform bodyPartTransform = _bodyPart.transform;
-                bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x +
-                                              _creature.Body.transform.position);
-                bodyPartTransform.rotation = _currentSlot.Rotation;
+                _creature.Body.SnapTo(_bodyPart, _currentSlot);
             }
         }
 

@@ -15,25 +15,23 @@ namespace Game
         public event Action OnPointerLeft;
         public event Action OnUpdateMesh;
         public event Action<List<BodyPart>> OnLeftOverBodyParts;
-        
-        [SerializeField] private MeshFilter _meshFilter;
-        
-        private BodyPartSlot[] _slots;
-        
-        private readonly Dictionary<BodyPartSlot, BodyPart> _slotToBodyPart = new();
-        private readonly Dictionary<BodyPart, BodyPartSlot> _bodyPartToSlot = new();
 
-        [SerializeField, HideInInspector] 
-        private List<BodyPart> _bodyParts = new List<BodyPart>();
+        [SerializeField] private MeshFilter _meshFilter;
+
+        private BodyPartSlot[] _slots;
+
+        private readonly Dictionary<BodyPartSlot, BodyPart> _slotToBodyPart = new();
+        private readonly Dictionary<BodyPart, BodyPartSlot[]> _bodyPartToSlot = new();
+
+        [SerializeField, HideInInspector] private List<BodyPart> _bodyParts = new List<BodyPart>();
 
         public IEnumerable<BodyPart> BodyParts => GetBodyParts();
-        
+
         [field: SerializeField, HideInInspector]
         public BodyData BodyData { get; set; }
 
-        [SerializeField] 
-        private BodySettings _bodySettings;
-        
+        [SerializeField] private BodySettings _bodySettings;
+
         private List<BodyPart> _pendingBodyParts = new List<BodyPart>();
         private SplineData _nextSpine;
         private bool _updateNextSpine;
@@ -100,7 +98,7 @@ namespace Game
                 OnLeftOverBodyParts?.Invoke(leftOverBodyParts);
             }
         }
-        
+
         public void UpdateSlots()
         {
             Mesh mesh = _meshFilter.mesh;
@@ -146,19 +144,22 @@ namespace Game
             OnBodyPartAdded?.Invoke(bodyPart);
         }
 
-        private void Update(BodyPart bodyPart, BodyPartSlot slot)
+        private void Update(BodyPart bodyPart, BodyPartSlot targetSlot)
         {
-            if (_bodyPartToSlot.Remove(bodyPart, out BodyPartSlot formerSlot))
+            if (_bodyPartToSlot.Remove(bodyPart, out BodyPartSlot[] formerSlots))
             {
-                _slotToBodyPart.Remove(formerSlot);
+                foreach (BodyPartSlot partSlot in formerSlots)
+                {
+                    _slotToBodyPart.Remove(partSlot);
+                }
             }
-            
-            AddInternal(bodyPart, slot);
+
+            AddInternal(bodyPart, targetSlot);
         }
 
-        private void AddInternal(BodyPart bodyPart, BodyPartSlot slot)
+        private void AddInternal(BodyPart bodyPart, BodyPartSlot targetSlot)
         {
-            if (_slotToBodyPart.ContainsKey(slot))
+            if (_slotToBodyPart.ContainsKey(targetSlot))
             {
                 throw new ArgumentException();
             }
@@ -167,18 +168,30 @@ namespace Game
             {
                 _bodyParts.Add(bodyPart);
             }
-            _slotToBodyPart[slot] = bodyPart;
-            _bodyPartToSlot[bodyPart] = slot;
-            
-            Transform bodyPartTransform = bodyPart.transform;
-            bodyPartTransform.position = slot.Position * transform.lossyScale.x + transform.position + new Vector3(0, 0, 0.1f);
-            bodyPartTransform.rotation = slot.Rotation;
+
+            bool needsCounterPart = bodyPart.BodyPartSettings.NeedsCounterPartSlot;
+            BodyPartSlot[] slots = needsCounterPart
+                ? new[] { targetSlot, _slots[targetSlot.CounterPartIndex] }
+                : new[] { targetSlot };
+
+            foreach (BodyPartSlot slot in slots)
+            {
+                _slotToBodyPart[slot] = bodyPart;
+            }
+
+            _bodyPartToSlot[bodyPart] = slots;
+
+            SnapTo(bodyPart, targetSlot);
         }
 
         public void Remove(BodyPart bodyPart)
         {
-            BodyPartSlot slot = _bodyPartToSlot[bodyPart];
-            _slotToBodyPart.Remove(slot);
+            BodyPartSlot[] slots = _bodyPartToSlot[bodyPart];
+            foreach (BodyPartSlot slot in slots)
+            {
+                _slotToBodyPart.Remove(slot);
+            }
+
             _bodyPartToSlot.Remove(bodyPart);
             _bodyParts.Remove(bodyPart);
             OnBodyPartRemoved?.Invoke(bodyPart);
@@ -264,6 +277,23 @@ namespace Game
                 SplineData splineData = BodyData.Splines[i];
                 splineData.Center = new Vector2(0, -halfLength + _bodySettings.SplineSpacing * i);
             }
+        }
+
+        private Vector3 GetBodyPartPosition(BodyPart bodyPart, BodyPartSlot slot)
+        {
+            bool needsCounterPart = bodyPart.BodyPartSettings.NeedsCounterPartSlot;
+            Transform trans = transform;
+            Vector3 slotPos = needsCounterPart
+                ? (_slots[slot.CounterPartIndex].Position - slot.Position) / 2
+                : slot.Position;
+            return slotPos * trans.lossyScale.x + trans.position + new Vector3(0, 0, 0.1f);
+        }
+
+        public void SnapTo(BodyPart bodyPart, BodyPartSlot targetSlot)
+        {
+            Transform bodyPartTransform = bodyPart.transform;
+            bodyPartTransform.position = GetBodyPartPosition(bodyPart, targetSlot);
+            bodyPartTransform.rotation = targetSlot.Rotation;
         }
     }
 }
