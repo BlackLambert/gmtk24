@@ -9,5 +9,6 @@ namespace Game
         InGame = 0,
         CreatureEditor = 1,
         Menu = 2,
+        Defeat = 3,
     }
 }
