@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <FoodType>k__BackingField: 0
+  <size>k__BackingField: 0
   _animator: {fileID: 5139519710654193165}
   _eatClip: {fileID: 7400000, guid: e8f8f8895124d11488c583296a3536e6, type: 2}
   _eatenBoolKey: Eaten
@@ -181,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 55378526206829446a578c5fdb41a18a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8c29c586931ad496e8131d089b4a0711, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
