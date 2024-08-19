@@ -71,7 +71,7 @@ namespace Game
                 spawnedAnimator.transform.localScale = Vector3.one*1.5f;
             }
             spawnedAnimator.SetTrigger("Hit");
-            currentHitpoints -= damage;
+            currentHitpoints -= Mathf.Round(damage);
             spawnedHPBar.UpdateHP(currentHitpoints / Settings.HitPoints);
             if (currentHitpoints <= 0)
             {

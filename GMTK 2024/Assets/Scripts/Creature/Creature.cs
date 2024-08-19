@@ -18,8 +18,16 @@ namespace Game
         [SerializeField] 
         private Transform _hook;
 
+        [SerializeField]
+        private PlayerHPBar _hpBar;
+
         public Transform Transform { get; private set; }
         OffensiveBodyPart lastDamageSource;
+
+        float _maxHitpoints = 100;
+        float _currentHitpoints = 100;
+
+        Game _game;
 
         private void Awake()
         {
@@ -31,7 +39,10 @@ namespace Game
                     Body.Add(bodyPart);
                 }
             }
+            _hpBar = FindObjectOfType<PlayerHPBar>();
+            _game = Game.Instance;
         }
+
 
         void Update()
         {
@@ -79,7 +90,29 @@ namespace Game
         {
             if (lastDamageSource == source) return;
             lastDamageSource = source;
-            Debug.Log("Ouchie! I suffered " + damage + " damage");
+
+            //TODO: Add OnHit Animations and Sounds
+            _currentHitpoints -= Mathf.Round(damage);
+            _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
+            if (_currentHitpoints <= 0)
+            {
+                Die();
+            }
+        }
+
+        public void HealDamage(float amount, bool isPercentage)
+        {
+            float absoluteAmount = amount;
+            if (isPercentage)
+            {
+                absoluteAmount = amount * _maxHitpoints;
+            }
+            _currentHitpoints += absoluteAmount;
+            _currentHitpoints = Mathf.Round(_currentHitpoints);
+            if (_currentHitpoints>_maxHitpoints)
+            {
+                _currentHitpoints = _maxHitpoints;
+            }
         }
 
         public void ApplyStatusEffect(StatusEffect status)
@@ -106,6 +139,13 @@ namespace Game
         public void AddSpline()
         {
             Body.AddSpline();
+        }
+
+        void Die()
+        {
+            Time.timeScale = 0.5f;
+            //TODO: Add Animations and Sounds! 
+            Destroy(gameObject, 1);
         }
     }
 }
