@@ -19,6 +19,7 @@ namespace Game
         private Transform _hook;
 
         public Transform Transform { get; private set; }
+        OffensiveBodyPart lastDamageSource;
 
         private void Awake()
         {
@@ -30,6 +31,11 @@ namespace Game
                     Body.Add(bodyPart);
                 }
             }
+        }
+
+        void Update()
+        {
+            lastDamageSource = null;
         }
 
         public void Add(BodyPart bodyPart, BodyPartSlot slot)
@@ -69,8 +75,10 @@ namespace Game
             }
         }
 
-        public void SufferDamage(float damage)
+        public void SufferDamage(float damage, OffensiveBodyPart source)
         {
+            if (lastDamageSource == source) return;
+            lastDamageSource = source;
             Debug.Log("Ouchie! I suffered " + damage + " damage");
         }
 

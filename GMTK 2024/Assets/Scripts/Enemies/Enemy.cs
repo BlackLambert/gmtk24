@@ -26,7 +26,7 @@ namespace Game
         public Transform Transform { get; private set; }
 
         float currentHitpoints = 0;
-        
+        OffensiveBodyPart lastDamageSource = null;
         private void Start()
         {
             Transform = transform;
@@ -36,8 +36,16 @@ namespace Game
             spawnedHPBar.Init(this);
         }
 
-        public void SufferDamage(float damage)
+        void Update()
         {
+            lastDamageSource = null;
+        }
+
+        public void SufferDamage(float damage, OffensiveBodyPart source)
+        {
+            if (lastDamageSource == source) return;
+            lastDamageSource = source;
+
             Debug.Log("I suffered " + damage + " damage! :(");
 
 

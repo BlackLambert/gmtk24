@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace Game
 {
@@ -20,6 +21,19 @@ namespace Game
         float _fleeDuration = 5;
         float _fleeTime = 0;
         Vector3 _fleeDirection;
+
+        float[] _speedAdjustments = new float[3];
+        float _speedAdjustment = 1;
+        Creature _creature;
+        private void Start()
+        {
+            _speedAdjustments[0] = 0.05f;
+            _speedAdjustments[1] = 0.1f;
+            _speedAdjustments[2] = 0.2f;
+            _speedAdjustment = _speedAdjustments[(int)_enemy.Settings.size];
+            _creature = FindFirstObjectByType<Creature>();
+
+        }
 
         // Update is called once per frame
         void Update()
@@ -45,6 +59,7 @@ namespace Game
                     _inFleeCooldown = false;
                 } else
                 {
+                    LookAt(_fleeDirection);
                     Move(_fleeDirection);
                     return;
                 }
@@ -87,7 +102,7 @@ namespace Game
             LegAnimationController legs = GetComponentInChildren<LegAnimationController>();
             legs?.Jump();
 
-            _enemy.Rigidbody.AddForce(((Vector2)direction).normalized * _enemy.MovementSettings.Force);
+            _enemy.Rigidbody.AddForce(((Vector2)direction).normalized * (_enemy.MovementSettings.Force * _speedAdjustment));
             _lastUsed = Time.realtimeSinceStartup;
         }
         void Flee()
@@ -101,10 +116,9 @@ namespace Game
         {
             if(_followList.Count == 0)
             {
-                Creature creature = FindFirstObjectByType<Creature>();
-                if (creature != null)
+                if (_creature != null)
                 {
-                    currentFollowTarget = creature.transform;
+                    currentFollowTarget = _creature.transform;
                 }
                 return;
             }
