@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c6b64e7ce2694b4fbfd007b6583fa9b, type: 3}
   m_Name: 3_Stage
   m_EditorClassIdentifier: 
-  <FoodToCollect>k__BackingField: 100
-  <CameraSize>k__BackingField: 40
-  <CharacterSizeFactor>k__BackingField: 3
-  <EditorCameraSize>k__BackingField: 20
+  <FoodToCollect>k__BackingField: 500
+  <CameraSize>k__BackingField: 60
+  <CharacterSizeFactor>k__BackingField: 6
+  <EditorCameraSize>k__BackingField: 5
+  <SpeedFactor>k__BackingField: 3

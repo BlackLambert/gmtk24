@@ -18,8 +18,22 @@ namespace Game
         [SerializeField] 
         private BodyPartCostsDisplay _costsPrefab;
 
+        [SerializeField] 
+        private GameObject _blocker;
+
         private BodyPart _bodyPart;
         private bool _dragging;
+        private CollectedFood _collectedFood;
+
+        private void Awake()
+        {
+            _collectedFood = FindObjectOfType<CollectedFood>();
+        }
+
+        private void Update()
+        {
+            _blocker.SetActive(!_collectedFood.Has(_bodyPart.BodyPartSettings.Costs));
+        }
 
         public void Init(BodyPart bodyPartPrefab)
         {
@@ -39,18 +53,16 @@ namespace Game
             {
                 _dragging = false;
             }
-            Debug.Log("Drag Ended");
         }
 
         public void OnBeginDrag(PointerEventData eventData)
         {
             _dragging = eventData.pointerId == -1;
-            Debug.Log("Drag Begin");
         }
 
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("PointerEnter");
+            
         }
 
         public void OnDrag(PointerEventData eventData)

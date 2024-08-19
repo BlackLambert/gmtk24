@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -46,11 +47,24 @@ namespace Game
             return _typeToAmount[type];
         }
 
-        public void Add(IReadOnlyList<FoodAmount> costs)
+        public void Add(IEnumerable<FoodAmount> costs)
         {
             foreach (FoodAmount amount in costs)
             {
-                ChangeBy(amount.FoodType, amount.Amount);
+                Add(amount);
+            }
+        }
+
+        public void Add(FoodAmount amount)
+        {
+            ChangeBy(amount.FoodType, amount.Amount);
+        }
+
+        public void Remove(IEnumerable<FoodAmount> costs)
+        {
+            foreach (FoodAmount amount in costs)
+            {
+                ChangeBy(amount.FoodType, -amount.Amount);
             }
         }
 
@@ -59,7 +73,12 @@ namespace Game
             return _typeToAmount[amount.FoodType] >= amount.Amount;
         }
 
-        public void ChangeBy(IReadOnlyList<FoodAmount> costs)
+        public bool Has(IEnumerable<FoodAmount> amount)
+        {
+            return amount.All(Has);
+        }
+
+        public void ChangeBy(IEnumerable<FoodAmount> costs)
         {
             foreach (FoodAmount amount in costs)
             {

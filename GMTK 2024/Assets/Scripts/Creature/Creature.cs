@@ -36,11 +36,9 @@ namespace Game
 
         public void Add(BodyPart bodyPart, BodyPartSlot slot)
         {
-            Body.Add(bodyPart, slot);
             Transform trans = bodyPart.transform;
             trans.SetParent(_hook);
-            Vector3 pos = trans.position;
-            trans.localPosition = new Vector3(pos.x, pos.y, 0.1f);
+            Body.Add(bodyPart, slot);
         }
 
         public void Remove(BodyPart bodyPart)
@@ -93,10 +91,21 @@ namespace Game
         {
             return -1;
         }
+        
         public SizeStage GetSize()
         {
             //TODO: Add and Update correct size stage!
             return SizeStage.Cell;
+        }
+
+        public SplineData RemoveSpline()
+        {
+            return Body.RemoveSpline();
+        }
+
+        public void AddSpline()
+        {
+            Body.AddSpline();
         }
     }
 }

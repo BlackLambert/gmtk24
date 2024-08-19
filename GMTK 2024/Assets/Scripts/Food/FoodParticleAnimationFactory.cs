@@ -35,5 +35,13 @@ namespace Game
                 ? anim.StartAnimation(startPos, display.Icon.transform.position, amount)
                 : anim.StartAnimation(display.Icon.transform.position, startPos, amount));
         }
+
+        public void Create(IEnumerable<FoodAmount> bodySettingsCosts, Vector2 startPos, bool reverse = false)
+        {
+            foreach (FoodAmount foodAmount in bodySettingsCosts)
+            {
+                Create(foodAmount, startPos, reverse);
+            }
+        }
     }
 }

@@ -4,6 +4,8 @@ namespace Game
 {
     public class FollowCursor : MonoBehaviour
     {
+        [SerializeField] private bool _worldSpace = true;
+        
         private Camera _camera;
         
         private void Awake()
@@ -13,7 +15,7 @@ namespace Game
 
         private void Update()
         {
-            Vector2 worldPoint = _camera.ScreenToWorldPoint(Input.mousePosition);
+            Vector2 worldPoint = _worldSpace ? _camera.ScreenToWorldPoint(Input.mousePosition) : Input.mousePosition;
             transform.position = new Vector3(worldPoint.x, worldPoint.y, 0);
         }
     }

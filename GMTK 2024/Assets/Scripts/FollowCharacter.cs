@@ -14,7 +14,7 @@ namespace Game
 
         private void Awake()
         {
-            _game = FindObjectOfType<Game>();
+            _game = Game.Instance;
         }
 
         private void Update()

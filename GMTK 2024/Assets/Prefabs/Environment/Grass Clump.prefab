@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5666180505794035679}
+  - component: {fileID: 7604187610591419971}
   m_Layer: 0
   m_Name: Grass Clump
   m_TagString: Untagged
@@ -43,6 +44,22 @@ Transform:
   - {fileID: 6495734003256342842}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7604187610591419971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145009904006803145}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834b68613dc6fdf4a820bea104ffb0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blockTillStage: 1
+  _maskToExclude:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1001 &876605180879399971
 PrefabInstance:
   m_ObjectHideFlags: 0
