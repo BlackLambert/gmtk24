@@ -10,14 +10,13 @@ namespace Game
         [SerializeField] Animator animator;
 
         [SerializeField] OffensiveBodyPartSettings _settings;
-        [SerializeField] Collider2D _hitBox;
+        [SerializeField] Transform _hitBox;
         IDamageable _parentCreature;
         float _lastInterval = 0;
         Transform currentTargetTransform;
 
         void Start()
         {
-            _hitBox = GetComponentInChildren<Collider2D>();
             _parentCreature = GetComponentInParent<IDamageable>();
 
             if(_parentCreature == null)
@@ -41,7 +40,7 @@ namespace Game
         {
             if (currentTargetTransform != null) 
             { 
-                _hitBox.transform.position = currentTargetTransform.position;
+                _hitBox.position = currentTargetTransform.position;
             }
             Activate();
         }
@@ -94,25 +93,24 @@ namespace Game
                             shortestDistance = distance;
                         }
                     }
-                    _hitBox.transform.position = allTargets[targetIndex].Transform.position;
+                    _hitBox.position = allTargets[targetIndex].Transform.position;
                     currentTargetTransform = allTargets[targetIndex].Transform;
                     break;
 
                 case TargettingMode.Random:
                     
                     int randomIndex = Random.Range(0, allTargets.Count - 1);
-                    _hitBox.transform.position = allTargets[randomIndex].Transform.position;
+                    _hitBox.position = allTargets[randomIndex].Transform.position;
                     currentTargetTransform = allTargets[randomIndex].Transform;
                     break;
                 case TargettingMode.Frontal:
-                    _hitBox.transform.position = _parentCreature.Transform.position + _parentCreature.Transform.up;
+                    _hitBox.position = _parentCreature.Transform.position + _parentCreature.Transform.up;
                     currentTargetTransform = _parentCreature.Transform;
                     break;
             }
 
-            ContactFilter2D filter = new ContactFilter2D().NoFilter();
             List<Collider2D> hitObjects = new List<Collider2D>();
-            _hitBox.OverlapCollider(filter, hitObjects);
+            hitObjects.AddRange(Physics2D.OverlapCircleAll(_hitBox.position, _settings.DamageRange));
 
             finalTargets.AddRange(CleanUpTargetList(hitObjects));
 

@@ -18,6 +18,9 @@ namespace Game
         [field: SerializeField]
         public float TargetRange { get; private set; }
 
+        [field: SerializeField]
+        public float DamageRange { get; private set; }
+
     }
 }
 
