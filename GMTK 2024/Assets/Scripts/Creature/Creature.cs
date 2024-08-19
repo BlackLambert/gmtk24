@@ -92,7 +92,7 @@ namespace Game
             return -1;
         }
 
-        public RemoveSplineResult RemoveSpline()
+        public SplineData RemoveSpline()
         {
             return Body.RemoveSpline();
         }

@@ -77,7 +77,8 @@ namespace Game
 
             float angleDelta = Mathf.PI / (startVerticesAmount - 1);
             float radius = GetRadius(startSpline);
-            int vertexSlotSpacing = startVerticesAmount / slotAmounts[0];
+            float vertexSlotSpacing = (float)startVerticesAmount / (slotAmounts[0] + 1);
+            float nextSlot = -vertexSlotSpacing;
             for (int i = 0; i < startVerticesAmount; i++)
             {
                 float angle = angleDelta * i + Mathf.PI;
@@ -98,19 +99,23 @@ namespace Game
                     triangles[j + 2] = i;
                 }
 
-                if (i % vertexSlotSpacing == 0)
+                if (nextSlot > 0)
                 {
+                    nextSlot -= vertexSlotSpacing;
                     float slotAngle = Vector2.SignedAngle(normals[i], Vector2.up);
                     Quaternion rotation = Quaternion.Euler(0, 0, slotAngle - 90);
                     slots.Add(new BodyPartSlot()
                         { Position = vertices[i], Rotation = rotation, VertexIndex = i });
                     slotIndex++;
                 }
+                
+                nextSlot++;
             }
 
             angleDelta = Mathf.PI / (endVerticesAmount - 1);
             radius = GetRadius(endSpline);
-            vertexSlotSpacing = endVerticesAmount / slotAmounts[^1];
+            vertexSlotSpacing = (float)endVerticesAmount / (slotAmounts[^1] + 1);
+            nextSlot = -vertexSlotSpacing;
             for (int i = 0; i < endVerticesAmount; i++)
             {
                 float angle = angleDelta * i;
@@ -131,8 +136,9 @@ namespace Game
                     triangles[j + 2] = i + startVerticesAmount;
                 }
                 
-                if (i % vertexSlotSpacing == 0)
+                if (nextSlot > 0)
                 {
+                    nextSlot -= vertexSlotSpacing;
                     int index = startVerticesAmount + i;
                     float slotAngle = Vector2.SignedAngle(normals[index], Vector2.up);
                     Quaternion rotation = Quaternion.Euler(0, 0, slotAngle - 90);
@@ -140,6 +146,8 @@ namespace Game
                         { Position = vertices[index], Rotation = rotation, VertexIndex = index });
                     slotIndex++;
                 }
+                
+                nextSlot++;
             }
 
             // Sides
@@ -151,7 +159,8 @@ namespace Game
                 SplineData next = orderedSplineData[i+1];
                 float currentScale = GetRadius(current);
                 float nextScale = GetRadius(next);
-                vertexSlotSpacing = _bodySettings.SideVertices / (slotAmounts[i] / 2);
+                vertexSlotSpacing = _bodySettings.SideVertices / (slotAmounts[i] / 2f);
+                nextSlot = -vertexSlotSpacing / 2;
 
                 for (int j = 0; j < _bodySettings.SideVertices; j++)
                 {
@@ -179,8 +188,9 @@ namespace Game
                         triangles[triangleIndex + 5] = v3;
                     }
                 
-                    if ((j - vertexSlotSpacing / 2) % vertexSlotSpacing == 0)
+                    if (nextSlot > 0)
                     {
+                        nextSlot -= vertexSlotSpacing;
                         float slotAngle = Vector2.Angle(normals[v1], Vector2.up);
                         float factor = vertices[i].x <= 0 ? 1 : -1;
                         Quaternion rotation = Quaternion.Euler(0, 0, slotAngle * factor);
@@ -195,7 +205,8 @@ namespace Game
                             { Position = vertices[v2], Rotation = rotation, VertexIndex = v2 });
                         slotIndex++;
                     }
-                    
+
+                    nextSlot++;
                     vertexIndex++;
                     triangleIndex += 6;
                 }

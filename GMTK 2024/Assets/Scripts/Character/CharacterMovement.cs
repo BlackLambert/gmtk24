@@ -14,7 +14,7 @@ namespace Game
 
         private void Awake()
         {
-            _game = FindObjectOfType<Game>();
+            _game = Game.Instance;
         }
 
         public void Init(Creature creature, Camera camera, MovementSettings movementSettings)
@@ -61,6 +61,7 @@ namespace Game
             {
                 delta *= -1;
             }
+            Debug.Log($"Delta {delta} | Angle {angle} | Max {maxDeltaRot}");
             _creature.transform.rotation = Quaternion.Euler(0, 0, currentRotation.eulerAngles.z + delta);
         }
 

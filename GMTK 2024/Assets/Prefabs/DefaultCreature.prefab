@@ -86,9 +86,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5110266821741233893}
     m_Modifications:
+    - target: {fileID: 1088373819366478549, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 1267339778412233654, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
       propertyPath: m_Name
       value: Teeth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1267339778412233654, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1700694915413546996, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2095440010238206123, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2783888911571848655, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -96,7 +112,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2783888911571848655, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.019
+      value: 1.288
       objectReference: {fileID: 0}
     - target: {fileID: 2783888911571848655, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
       propertyPath: m_LocalPosition.z
@@ -129,6 +145,10 @@ PrefabInstance:
     - target: {fileID: 2783888911571848655, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5355828535493577184, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -190,6 +210,10 @@ PrefabInstance:
     - target: {fileID: 2144778469725602671, guid: 3e03363c056d0e44a919fa73e4ad7a8d, type: 3}
       propertyPath: m_Name
       value: Body
+      objectReference: {fileID: 0}
+    - target: {fileID: 2144778469725602671, guid: 3e03363c056d0e44a919fa73e4ad7a8d, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5079790671532885920, guid: 3e03363c056d0e44a919fa73e4ad7a8d, type: 3}
       propertyPath: m_Enabled

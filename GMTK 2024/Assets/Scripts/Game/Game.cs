@@ -5,11 +5,22 @@ namespace Game
 {
     public class Game : MonoBehaviour
     {
-        [HideInInspector]
-        public bool Paused = false;
+        private static Game _instance;
+
+        public static Game Instance
+        {
+            get
+            {
+                _instance ??= new GameObject("Game").AddComponent<Game>();
+                return _instance;
+            }
+        }
+
+        [HideInInspector] public bool Paused = false;
 
         private Stage _stage;
         public event Action OnStageChanged;
+
         public Stage CurrentStage
         {
             get => _stage;
@@ -22,6 +33,7 @@ namespace Game
 
         private GameState _state = GameState.InGame;
         public event Action OnGameStateChanged;
+
         public GameState State
         {
             get => _state;
@@ -34,6 +46,7 @@ namespace Game
 
         private Character _currentCharacter;
         public event Action OnCurrentCharacterChanged;
+        
         public Character CurrentCharacter
         {
             get => _currentCharacter;
@@ -43,7 +56,7 @@ namespace Game
                 OnCurrentCharacterChanged?.Invoke();
             }
         }
-        
+
         public Stage FormerStage { get; set; }
     }
 }

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: _GameStagesSettings
   m_EditorClassIdentifier: 
   _stages:
+  - {fileID: 11400000, guid: 4253a5187a381b74794a04e4d3be2512, type: 2}
   - {fileID: 11400000, guid: 17383cfaf087ebe4d93eb0bc6c9eee91, type: 2}
   - {fileID: 11400000, guid: a2c699b4510e33749856f5a4ec1cd653, type: 2}
   - {fileID: 11400000, guid: e2f8df65b01da7541b842f39e95bfd71, type: 2}

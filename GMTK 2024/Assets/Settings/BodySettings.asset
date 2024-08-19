@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9e8e228ad7af24489a9fd3971fee1f2, type: 3}
   m_Name: BodySettings
   m_EditorClassIdentifier: 
-  <SlotsPerSize>k__BackingField: 2
+  <SlotsPerSize>k__BackingField: 1
   <StartSplines>k__BackingField:
   - Size: 2
     Center: {x: 0, y: -0.5}
@@ -28,7 +28,7 @@ MonoBehaviour:
   <SplineSpacing>k__BackingField: 0.5
   <HalfCircleVerticesPerSize>k__BackingField: 7
   <StartHalfCircleVertices>k__BackingField: 19
-  <SideVertices>k__BackingField: 7
+  <SideVertices>k__BackingField: 9
   <WeightCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
@@ -53,3 +53,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  <Costs>k__BackingField:
+  - FoodType: 2
+    Amount: 5
+  <HealthPerSize>k__BackingField: 3

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -13,6 +14,7 @@ namespace Game
         public event Action<SplineData> OnPointerStay;
         public event Action OnPointerLeft;
         public event Action OnUpdateMesh;
+        public event Action<List<BodyPart>> OnLeftOverBodyParts;
         
         [SerializeField] private MeshFilter _meshFilter;
         
@@ -76,10 +78,25 @@ namespace Game
         public void UpdateSlots(BodyPartSlot[] slots)
         {
             _slots = slots;
-            
-            foreach (BodyPart bodyPart in BodyParts)
+
+            List<BodyPart> leftOverBodyParts = new List<BodyPart>();
+            foreach (BodyPart bodyPart in BodyParts.ToList())
             {
-                Update(bodyPart, GetNextEmptySlotTo(bodyPart.transform.position));
+                BodyPartSlot slot = GetNextEmptySlotTo(bodyPart.transform.position);
+                if (slot != null)
+                {
+                    Update(bodyPart, slot);
+                }
+                else
+                {
+                    Remove(bodyPart);
+                    leftOverBodyParts.Add(bodyPart);
+                }
+            }
+
+            if (leftOverBodyParts.Count > 0)
+            {
+                OnLeftOverBodyParts?.Invoke(leftOverBodyParts);
             }
         }
         
@@ -218,14 +235,14 @@ namespace Game
             return result;
         }
 
-        public RemoveSplineResult RemoveSpline()
+        public SplineData RemoveSpline()
         {
             int index = BodyData.Splines.Count - 1;
             SplineData splineData = BodyData.Splines[index];
             BodyData.Splines.Remove(splineData);
             UpdateSplinesCenters();
             UpdateMesh();
-            return new RemoveSplineResult(){Spline = splineData, BodyParts = Array.Empty<BodyPart>()};
+            return splineData;
         }
 
         public void AddSpline()

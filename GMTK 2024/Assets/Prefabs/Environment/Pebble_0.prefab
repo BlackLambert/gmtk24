@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4768775315044634331}
   - component: {fileID: 5660360457047497764}
   - component: {fileID: 3184334533470224784}
+  - component: {fileID: 4681095369507955318}
   m_Layer: 0
   m_Name: Pebble_0
   m_TagString: Untagged
@@ -212,7 +213,23 @@ MonoBehaviour:
   - {x: -1.4427433, y: -1.8589237, z: 0}
   m_ShapePathHash: -1091825391
   m_Mesh: {fileID: 0}
-  m_InstanceId: -189394
+  m_InstanceId: 66066
   m_LocalBounds:
     m_Center: {x: 0.14566278, y: -0.17340732, z: 0}
     m_Extent: {x: 2.9617867, y: 2.4901261, z: 0}
+--- !u!114 &4681095369507955318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 376065231872771192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834b68613dc6fdf4a820bea104ffb0f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _blockTillStage: 1
+  _maskToExclude:
+    serializedVersion: 2
+    m_Bits: 64

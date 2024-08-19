@@ -46,16 +46,17 @@ namespace Game
             Vector2 distance = new Vector2(creatureScreenPosition.x, creatureScreenPosition.y) -
                                new Vector2(mousePosition.x, mousePosition.y);
             bool isSnapDistance = distance.magnitude <= _snapDistance;
-            _followCursor.enabled = !isSnapDistance;
 
             if (isSnapDistance)
             {
                 Snap();
             }
+            
+            _followCursor.enabled = !isSnapDistance || _currentSlot == null;
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (!isSnapDistance)
+                if (!isSnapDistance || _currentSlot == null)
                 {
                     Sell();
                 }
@@ -84,10 +85,14 @@ namespace Game
         {
             Vector2 worldMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _currentSlot = _creature.GetNextEmptySlot(worldMousePos);
-            Transform bodyPartTransform = _bodyPart.transform;
-            bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x +
-                                          _creature.Body.transform.position);
-            bodyPartTransform.rotation = _currentSlot.Rotation;
+            
+            if (_currentSlot != null)
+            {
+                Transform bodyPartTransform = _bodyPart.transform;
+                bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x +
+                                              _creature.Body.transform.position);
+                bodyPartTransform.rotation = _currentSlot.Rotation;
+            }
         }
 
         private void Place()

@@ -21,7 +21,7 @@ namespace Game
         private void Awake()
         {
             _collectedFood = FindObjectOfType<CollectedFood>();
-            _game = FindObjectOfType<Game>();
+            _game = Game.Instance;
         }
 
         private void Start()
@@ -50,7 +50,7 @@ namespace Game
         {
             Stage stage = _game.CurrentStage;
             int amountToCollect = stage.StageSettings.FoodToCollect;
-            float progress = (float)(_collectedFood.TotalCollected - _minFood) / (amountToCollect - _minFood);
+            float progress = (float)(_collectedFood.TotalCollected - _minFood) / amountToCollect;
             stage.Progress = progress;
             if (progress >= 1 && !stage.Finished)
             {
