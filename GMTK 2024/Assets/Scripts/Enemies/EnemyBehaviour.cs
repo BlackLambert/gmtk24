@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
 using Random = UnityEngine.Random;
 
 namespace Game
@@ -47,6 +48,7 @@ namespace Game
             if (_fleeList.Count > 0)
             {
                 Flee();
+                LookAt(_fleeDirection);
                 Move(_fleeDirection);
                 return;
             } else if (_fleeing)
@@ -114,7 +116,7 @@ namespace Game
         void Flee()
         {
             Transform closest = FindClosestTransform(_fleeList);
-            _fleeDirection = (closest.position - _enemy.transform.position)*-2 + Random.onUnitSphere;
+            _fleeDirection = (closest.position - _enemy.transform.position).normalized*-1.3f + Random.onUnitSphere;
             _fleeing = true;
         }
 
