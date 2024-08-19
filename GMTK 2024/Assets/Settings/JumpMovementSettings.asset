@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JumpMovementSettings
   m_EditorClassIdentifier: 
   <MovementType>k__BackingField: 0
-  <Force>k__BackingField: 2000
-  <MaxSpeed>k__BackingField: 100
+  <Force>k__BackingField: 16000
+  <MaxSpeed>k__BackingField: 130
   <Cooldown>k__BackingField: 0.7
   <RotationSpeed>k__BackingField: 500
