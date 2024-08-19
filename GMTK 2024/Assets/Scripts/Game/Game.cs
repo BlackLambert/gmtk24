@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Game
@@ -21,12 +23,19 @@ namespace Game
         private Stage _stage;
         public event Action OnStageChanged;
 
+        public List<Stage> _formerStages = new List<Stage>();
+        public IReadOnlyList<Stage> FormerStages => _formerStages;
+
         public Stage CurrentStage
         {
             get => _stage;
             set
             {
                 _stage = value;
+                if (_stage != null)
+                {
+                    _formerStages.Add(_stage);
+                }
                 OnStageChanged?.Invoke();
             }
         }
@@ -58,5 +67,10 @@ namespace Game
         }
 
         public Stage FormerStage { get; set; }
+
+        public bool IsFormerStage(StageSettings stage)
+        {
+            return _formerStages.Any(s => s.StageSettings == stage);
+        }
     }
 }

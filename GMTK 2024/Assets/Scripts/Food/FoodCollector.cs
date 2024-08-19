@@ -1,5 +1,4 @@
 using UnityEngine;
-using static Codice.Client.Common.EventTracking.TrackFeatureUseEvent.Features.DesktopGUI.Filters;
 
 namespace Game
 {
