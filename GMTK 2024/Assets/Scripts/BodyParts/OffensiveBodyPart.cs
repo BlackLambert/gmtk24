@@ -71,7 +71,7 @@ namespace Game
             List<IDamageable> finalTargets = new List<IDamageable>();
            
             List<Collider2D> colliderInRange = new List<Collider2D>();
-            colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange));
+            colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange * _parentCreature.Transform.localScale.x));
             List<IDamageable> allTargets = CleanUpTargetList(colliderInRange);
 
             if (allTargets.Count == 0) return finalTargets;
@@ -104,16 +104,15 @@ namespace Game
                     currentTargetTransform = allTargets[randomIndex].Transform;
                     break;
                 case TargettingMode.Frontal:
-                    _hitBox.position = _parentCreature.Transform.position + _parentCreature.Transform.up;
+                    _hitBox.position = _parentCreature.Transform.position + (_parentCreature.Transform.up * _parentCreature.Transform.localScale.x);
                     currentTargetTransform = _parentCreature.Transform;
                     break;
             }
 
             List<Collider2D> hitObjects = new List<Collider2D>();
-            hitObjects.AddRange(Physics2D.OverlapCircleAll(_hitBox.position, _settings.DamageRange));
+            hitObjects.AddRange(Physics2D.OverlapCircleAll(_hitBox.position, _settings.DamageRange * _parentCreature.Transform.localScale.x));
 
             finalTargets.AddRange(CleanUpTargetList(hitObjects));
-
             return finalTargets;
         }
 
