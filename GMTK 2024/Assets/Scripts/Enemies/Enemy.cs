@@ -74,7 +74,11 @@ namespace Game
 
             spawnedAnimator.SetTrigger("Hit");
             currentHitpoints -= Mathf.Round(damage);
-            spawnedHPBar.UpdateHP(currentHitpoints / Settings.HitPoints);
+            
+            if (spawnedHPBar != null)
+            {
+                spawnedHPBar.UpdateHP(currentHitpoints / Settings.HitPoints);
+            }
             if (currentHitpoints <= 0)
             {
                 currentHitpoints = 0;
