@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 1493220237137473623}
   - component: {fileID: 5191854326306194052}
   - component: {fileID: 293752064389338487}
-  - component: {fileID: 7387093796273549472}
+  - component: {fileID: 2450656264827351229}
   m_Layer: 0
   m_Name: Leg_0
   m_TagString: Untagged
@@ -62,9 +62,9 @@ Transform:
   m_GameObject: {fileID: 486784577832821759}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.479, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.89, y: 0, z: 0}
+  m_LocalScale: {x: 0.19, y: -0.19, z: 0.19}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9065214585673597234}
   m_Father: {fileID: 6415234612194264218}
@@ -110,7 +110,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baa4787489c467344a72b1c31aa088ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee2e1b387dca1475890f3185aee34870, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -154,10 +154,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477f0f3bec0be094d8cd45c8fce68589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   LegRenderer: {fileID: 1493220237137473623}
   FootStep: {fileID: 5175964646517241390, guid: 53bc00332d42af84cb84507b1a02b946, type: 3}
   spawnTransform: {fileID: 9065214585673597234}
---- !u!61 &7387093796273549472
+--- !u!61 &2450656264827351229
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -189,18 +190,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.28276598, y: 0.13553098}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.78, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 2.56}
     newSize: {x: 10.24, y: 10.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7289386, y: 0.48553628}
+  m_Size: {x: 5.12, y: 2.56}
   m_EdgeRadius: 0
 --- !u!1 &1021178069913631345
 GameObject:
@@ -258,7 +259,7 @@ Transform:
   m_GameObject: {fileID: 1226713780327228036}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.434, y: 0.251, z: -0.0008097682}
+  m_LocalPosition: {x: 0.434, y: 0.251, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -314,6 +315,7 @@ MonoBehaviour:
   IsFrogLegs: 0
   RightLegAnim: {fileID: 2522844037288468355}
   LeftLegAnim: {fileID: 5191854326306194052}
+  footSteps: []
 --- !u!114 &6047042127921287481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,8 +370,8 @@ Transform:
   m_GameObject: {fileID: 2653085716401499979}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.466, y: -0.012, z: 0}
-  m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
+  m_LocalPosition: {x: -0.886, y: 0.012, z: 0}
+  m_LocalScale: {x: 0.21000001, y: -0.21000001, z: 0.21000001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 312642284780262844}
@@ -416,7 +418,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baa4787489c467344a72b1c31aa088ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee2e1b387dca1475890f3185aee34870, type: 3}
   m_Color: {r: 0.7610062, g: 0.13640669, b: 0.13640669, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -467,8 +469,8 @@ Transform:
   m_GameObject: {fileID: 6106953302227532935}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.431, y: -0.011, z: 0}
-  m_LocalScale: {x: 1.12, y: 1.12, z: 1.12}
+  m_LocalPosition: {x: 0.851, y: 0.019, z: 0}
+  m_LocalScale: {x: 0.21000001, y: -0.21000001, z: 0.21000001}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6232574184517847861}
@@ -515,7 +517,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baa4787489c467344a72b1c31aa088ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee2e1b387dca1475890f3185aee34870, type: 3}
   m_Color: {r: 0.7610062, g: 0.13640669, b: 0.13640669, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -585,7 +587,7 @@ GameObject:
   - component: {fileID: 6931993360234899153}
   - component: {fileID: 2522844037288468355}
   - component: {fileID: 4569108694038464363}
-  - component: {fileID: 1605703246192267503}
+  - component: {fileID: 4274952055225039397}
   m_Layer: 0
   m_Name: Leg_0 (1)
   m_TagString: Untagged
@@ -602,8 +604,8 @@ Transform:
   m_GameObject: {fileID: 6790002284090703554}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.45599997, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.85, y: 0, z: 0}
+  m_LocalScale: {x: 0.19, y: -0.19, z: 0.19}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5048625244174407938}
@@ -650,7 +652,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: baa4787489c467344a72b1c31aa088ad, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ee2e1b387dca1475890f3185aee34870, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
   m_FlipY: 0
@@ -694,10 +696,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477f0f3bec0be094d8cd45c8fce68589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 0}
   LegRenderer: {fileID: 6931993360234899153}
   FootStep: {fileID: 5175964646517241390, guid: 53bc00332d42af84cb84507b1a02b946, type: 3}
   spawnTransform: {fileID: 5048625244174407938}
---- !u!61 &1605703246192267503
+--- !u!61 &4274952055225039397
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -729,18 +732,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.26, y: 0.13553098}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.78, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 5.12, y: 2.56}
     newSize: {x: 10.24, y: 10.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.7289386, y: 0.48553628}
+  m_Size: {x: 5.12, y: 2.56}
   m_EdgeRadius: 0
 --- !u!1 &9163534187552936102
 GameObject:
