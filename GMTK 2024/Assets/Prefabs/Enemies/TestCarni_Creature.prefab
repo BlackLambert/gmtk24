@@ -85,7 +85,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.44654083, g: 0.0014041222, b: 0.034341004, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -171,7 +171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 9084890159421980845}
   <Settings>k__BackingField: {fileID: 11400000, guid: 1f8893d9389938e40ac3a8df7496b38a, type: 2}
-  <MovementSettings>k__BackingField: {fileID: 11400000, guid: 09cbe6260abbed34485b4eb17c8649aa, type: 2}
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: 5931f32932c07de479660b19097b01ea, type: 2}
   slashAnimatorPrefab: {fileID: 4161003347518547878, guid: f25c8670620fb684690d3cfb4d41a26d, type: 3}
   hpBarPrefab: {fileID: 3509623230027800708, guid: a8e5a9fef7e2e754a9ea61a23ee6b898, type: 3}
 --- !u!114 &5216228553613585157
