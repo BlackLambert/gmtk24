@@ -131,10 +131,6 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 3320080986154254383, guid: 3e03363c056d0e44a919fa73e4ad7a8d, type: 3}
-      propertyPath: _settings
-      value: 
-      objectReference: {fileID: 11400000, guid: dbf063f36b705fb4ab903511483d7cda, type: 2}
     - target: {fileID: 4390911979157541275, guid: 3e03363c056d0e44a919fa73e4ad7a8d, type: 3}
       propertyPath: m_Radius
       value: 0.56

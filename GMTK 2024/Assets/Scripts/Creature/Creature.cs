@@ -133,7 +133,7 @@ namespace Game
                 absoluteAmount = amount * _maxHitpoints;
             }
             _currentHitpoints += absoluteAmount;
-            _currentHitpoints = Mathf.Round(_currentHitpoints);
+            _currentHitpoints = Mathf.Clamp(_currentHitpoints, 0, _maxHitpoints);
             
             if (_hpBar == null)
             {

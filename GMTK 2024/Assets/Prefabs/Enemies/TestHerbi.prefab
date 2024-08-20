@@ -166,7 +166,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 8321756420077673259}
   <Settings>k__BackingField: {fileID: 11400000, guid: 9752e3954198703439504365f6b06cba, type: 2}
-  <MovementSettings>k__BackingField: {fileID: 11400000, guid: 482b285079e365a44ae204727427f5d2, type: 2}
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: b79471f987a0e714eb0ab5635bf28d47, type: 2}
   slashAnimatorPrefab: {fileID: 4161003347518547878, guid: f25c8670620fb684690d3cfb4d41a26d, type: 3}
   hpBarPrefab: {fileID: 3509623230027800708, guid: a8e5a9fef7e2e754a9ea61a23ee6b898, type: 3}
 --- !u!114 &1699678169743061431

@@ -15,8 +15,11 @@ namespace Game
         float _lastInterval = 0;
         Transform currentTargetTransform;
 
+        private Game _game;
+
         void Start()
         {
+            _game = Game.Instance;
             _parentCreature = GetComponentInParent<IDamageable>();
 
             if(_parentCreature == null)
@@ -42,7 +45,11 @@ namespace Game
             { 
                 _hitBox.position = currentTargetTransform.position;
             }
-            Activate();
+
+            if (_game.State == GameState.InGame)
+            {
+                Activate();
+            }
         }
 
         private void Activate()
@@ -69,6 +76,11 @@ namespace Game
         private List<IDamageable> FindTargets(TargettingMode targetType)
         {
             List<IDamageable> finalTargets = new List<IDamageable>();
+
+            if (_parentCreature == null)
+            {
+                return finalTargets;
+            }
            
             List<Collider2D> colliderInRange = new List<Collider2D>();
             colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange * _parentCreature.Transform.localScale.x));

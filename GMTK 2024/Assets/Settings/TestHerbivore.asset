@@ -25,7 +25,7 @@ MonoBehaviour:
     propability: 50
     minAmount: 1
     maxAmount: 1
-  <MovementSettings>k__BackingField: {fileID: 11400000, guid: 482b285079e365a44ae204727427f5d2, type: 2}
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: b79471f987a0e714eb0ab5635bf28d47, type: 2}
   <CreatureDiet>k__BackingField: 0
   <FleeRange>k__BackingField: 7
   <FleeDuration>k__BackingField: 3
