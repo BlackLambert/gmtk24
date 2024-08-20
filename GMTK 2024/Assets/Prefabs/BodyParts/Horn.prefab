@@ -282,7 +282,7 @@ GameObject:
   m_Component:
   - component: {fileID: 721102379646739481}
   - component: {fileID: 8301652690606310961}
-  - component: {fileID: 4775101539804283737}
+  - component: {fileID: 1699024660291783788}
   m_Layer: 0
   m_Name: Triangle
   m_TagString: Untagged
@@ -357,8 +357,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &4775101539804283737
-PolygonCollider2D:
+--- !u!61 &1699024660291783788
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -386,7 +386,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -399,12 +399,9 @@ PolygonCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0, y: 0.5773587}
-      - {x: -0.5, y: -0.28866667}
-      - {x: 0.5, y: -0.28866667}
-  m_UseDelaunayMesh: 0
+  serializedVersion: 2
+  m_Size: {x: 2.56, y: 5.12}
+  m_EdgeRadius: 0
 --- !u!1 &9088575216552628835
 GameObject:
   m_ObjectHideFlags: 0

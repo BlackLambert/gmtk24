@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace Game
@@ -150,7 +148,10 @@ namespace Game
 
         private void PlayAnimation()
         {
-            animator?.SetTrigger("Attack");
+            if (animator != null)
+            {
+                animator.SetTrigger("Attack");
+            }
         }
         private void PlaySound()
         {
