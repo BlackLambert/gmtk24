@@ -10,13 +10,15 @@ namespace Game
         [SerializeField] TMPro.TextMeshProUGUI _callOutText;
         [SerializeField] string[] strings;
         [SerializeField] string complainString;
+
+        [SerializeField] AudioSource defeatAudio;
         float _animationDuration = 0.5f;
         bool isAnimating = false;
         float t = 0;
         // Start is called before the first frame update
         void Start()
         {
-        
+            defeatAudio.Play();
         }
 
         // Update is called once per frame
