@@ -17,4 +17,6 @@ MonoBehaviour:
   <CharacterSizeFactor>k__BackingField: 1
   <EditorCameraSize>k__BackingField: 5
   <SpeedFactor>k__BackingField: 1
+  <HealthBaseValue>k__BackingField: 3
+  <DamageBaseValue>k__BackingField: 1
   <LevelToLoad>k__BackingField: Level_CritterStage

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace Game
@@ -28,8 +27,10 @@ namespace Game
         public Transform Transform { get; private set; }
         OffensiveBodyPart lastDamageSource;
 
-        float _maxHitpoints = 100;
-        float _currentHitpoints = 100;
+        [SerializeField, HideInInspector]
+        private float _maxHitpoints;
+        [SerializeField, HideInInspector]
+        private float _currentHitpoints;
         bool _isDead = false;
 
         Game _game;
@@ -55,6 +56,12 @@ namespace Game
         void Update()
         {
             lastDamageSource = null;
+        }
+
+        public void UpdateMaxHealth(int value)
+        {
+            _maxHitpoints = value;
+            _currentHitpoints = value;
         }
 
         public void Add(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> slot)

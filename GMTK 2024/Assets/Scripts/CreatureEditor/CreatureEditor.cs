@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,6 +22,16 @@ namespace Game
 
         [SerializeField] private Button _removeSplineButton;
 
+        [SerializeField] private TextMeshProUGUI _errorText;
+
+        [SerializeField] private TextMeshProUGUI _hpText;
+
+        private const string _notEnoughFoodToIncreaseSize = "You can not afford to increase the spline size";
+        private const string _notEnoughFoodToBuyBodyPart = "You can not afford this body part";
+        private const string _noValidSlot = "No valid slot for this body part";
+        private const string _maxSizeReached = "This spline is at its max size";
+        private const string _minSizeReached = "This spline is at its min size";
+
         private Game _game;
         private Character _character;
         private CollectedFood _collectedFood;
@@ -28,6 +41,7 @@ namespace Game
 
         private void Awake()
         {
+            ClearError();
             _game = Game.Instance;
             _collectedFood = FindObjectOfType<CollectedFood>();
             _camera = FindObjectOfType<MainCamera>().Camera;
@@ -44,7 +58,7 @@ namespace Game
             {
                 tabContent.OnBodyPartButtonDragExit += OnTryCreateBodyPart;
             }
-            
+
             _addSplineButton.onClick.AddListener(AddSpline);
             _removeSplineButton.onClick.AddListener(RemoveSpline);
             _collectedFood.OnAmountChanged += OnAmountChanged;
@@ -76,7 +90,7 @@ namespace Game
             {
                 tabContent.OnBodyPartButtonDragExit -= OnTryCreateBodyPart;
             }
-            
+
             _addSplineButton.onClick.RemoveListener(AddSpline);
             _removeSplineButton.onClick.RemoveListener(RemoveSpline);
         }
@@ -127,6 +141,7 @@ namespace Game
             }
 
             Destroy(bodyPart.gameObject);
+            ClearError();
         }
 
         private void InitEditing()
@@ -145,6 +160,7 @@ namespace Game
             _character.Creature.Body.OnPointerLeft += HideSplineIndicator;
             _character.Creature.Body.OnLeftOverBodyParts += SellLeftOvers;
             UpdateSplineButtons();
+            UpdateHp();
         }
 
         private void OnBodyPartRemoved(BodyPart bodyPart)
@@ -173,25 +189,46 @@ namespace Game
 
             if (!hasFood)
             {
+                _errorText.text = _notEnoughFoodToBuyBodyPart;
                 return;
             }
 
             BodyPart bodyPartInstance = Instantiate(bodyPart);
             FollowCursor followCursor = bodyPartInstance.gameObject.AddComponent<FollowCursor>();
-            BodyPartPlacer placer = bodyPartInstance.gameObject.AddComponent<BodyPartPlacer>();
-            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, true, false,
-                true);
+            AddBodyPlacerOn(bodyPartInstance, followCursor, true, false, true);
             bodyPartInstance.EnableColliders(false);
+            ClearError();
+        }
+
+        private void AddBodyPlacerOn(BodyPart bodyPartInstance, FollowCursor followCursor, bool payCosts,
+            bool getSellFood, bool applyScale)
+        {
+            BodyPartPlacer placer = bodyPartInstance.gameObject.AddComponent<BodyPartPlacer>();
+            placer.Init(bodyPartInstance, _game.CurrentCharacter.Creature, followCursor, _snapDistance, payCosts, getSellFood,
+                applyScale);
+            placer.OnDestruct += CleanBodyPlacer;
+            placer.OnNoValidSlot += SetNoValidSlotText;
+        }
+
+        private void CleanBodyPlacer(BodyPartPlacer bodyPlacer)
+        {
+            bodyPlacer.OnDestruct -= CleanBodyPlacer;
+            bodyPlacer.OnNoValidSlot -= SetNoValidSlotText;
+        }
+
+        private void SetNoValidSlotText()
+        {
+            _errorText.text = _noValidSlot;
         }
 
         private void OnBodyPartDrag(BodyPart bodyPart)
         {
             _character.Creature.Remove(bodyPart);
             FollowCursor followCursor = bodyPart.gameObject.AddComponent<FollowCursor>();
-            BodyPartPlacer placer = bodyPart.gameObject.AddComponent<BodyPartPlacer>();
-            placer.Init(bodyPart, _game.CurrentCharacter.Creature, followCursor, _snapDistance, false, true, false);
+            AddBodyPlacerOn(bodyPart, followCursor, false, true, false);
             bodyPart.EnableColliders(false);
             bodyPart.ShowOutline(false);
+            ClearError();
         }
 
         private void OnBodyPartHoverEnd(BodyPart bodyPart)
@@ -209,7 +246,8 @@ namespace Game
             _splineIndicator.gameObject.SetActive(true);
             Transform bodyTransform = _character.Creature.Body.transform;
             _splineIndicator.SetPosition(
-                _camera.WorldToScreenPoint((Vector3)spline.Center * bodyTransform.lossyScale.x + bodyTransform.position));
+                _camera.WorldToScreenPoint((Vector3)spline.Center * bodyTransform.lossyScale.x +
+                                           bodyTransform.position));
             _hoveredSpline = spline;
         }
 
@@ -235,6 +273,7 @@ namespace Game
 
             if (sizeDelta > 0 && !_collectedFood.Has(_bodySettings.Costs))
             {
+                _errorText.text = _notEnoughFoodToIncreaseSize;
                 return;
             }
 
@@ -242,13 +281,22 @@ namespace Game
 
             if (targetSize == _hoveredSpline.Size)
             {
+                if (targetSize == 1)
+                {
+                    _errorText.text = _minSizeReached;
+                }
+
+                if (targetSize == _bodySettings.MaxSize)
+                {
+                    _errorText.text = _maxSizeReached;
+                }
                 return;
             }
-            
+
             Transform bodyTransform = _character.Creature.Body.transform;
             Vector2 point = _camera.WorldToScreenPoint(
                 (Vector3)_hoveredSpline.Center * bodyTransform.lossyScale.x + bodyTransform.position);
-            
+
             if (sizeDelta > 0)
             {
                 _collectedFood.Remove(_bodySettings.Costs);
@@ -259,9 +307,11 @@ namespace Game
                 _collectedFood.Add(_bodySettings.Costs);
                 _particleAnimationFactory.Create(_bodySettings.Costs, point);
             }
-            
+
             _hoveredSpline.Size = targetSize;
             _character.Creature.Body.UpdateMesh();
+            UpdateHp();
+            ClearError();
         }
 
         private void RemoveSpline()
@@ -274,7 +324,10 @@ namespace Game
                 _collectedFood.Add(combinedAmount);
                 _particleAnimationFactory.Create(combinedAmount, _camera.WorldToScreenPoint(Vector3.zero));
             }
+
             UpdateSplineButtons();
+            UpdateHp();
+            ClearError();
         }
 
         private void AddSpline()
@@ -283,20 +336,24 @@ namespace Game
             _particleAnimationFactory.Create(_bodySettings.Costs, _camera.WorldToScreenPoint(Vector3.zero), true);
             _character.Creature.AddSpline();
             UpdateSplineButtons();
+            UpdateHp();
+            ClearError();
         }
 
         private void UpdateSplineButtons()
         {
-            _addSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count < _bodySettings.MaxSplines 
+            _addSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count < _bodySettings.MaxSplines
                                             && _collectedFood.Has(_bodySettings.Costs);
-            _removeSplineButton.interactable = _character.Creature.Body.BodyData.Splines.Count > _bodySettings.MinSplines;
+            _removeSplineButton.interactable =
+                _character.Creature.Body.BodyData.Splines.Count > _bodySettings.MinSplines;
         }
 
         private void SellLeftOvers(List<BodyPart> leftOverBodyParts)
         {
             foreach (BodyPart bodyPart in leftOverBodyParts)
             {
-                _particleAnimationFactory.Create(bodyPart.BodyPartSettings.Costs, _camera.WorldToScreenPoint(bodyPart.transform.position));
+                _particleAnimationFactory.Create(bodyPart.BodyPartSettings.Costs,
+                    _camera.WorldToScreenPoint(bodyPart.transform.position));
                 _collectedFood.Add(bodyPart.BodyPartSettings.Costs);
                 Destroy(bodyPart.gameObject);
             }
@@ -305,6 +362,20 @@ namespace Game
         private void OnAmountChanged(FoodType arg1, int arg2)
         {
             UpdateSplineButtons();
+            ClearError();
+        }
+
+        private void UpdateHp()
+        {
+            int health = (int)(_game.CurrentStage.StageSettings.HealthBaseValue *
+                               _character.Creature.Body.BodyData.Splines.Sum(s => s.Size));
+            _character.Creature.UpdateMaxHealth(health); 
+            _hpText.text = health.ToString(CultureInfo.InvariantCulture);
+        }
+
+        private void ClearError()
+        {
+            _errorText.text = string.Empty;
         }
     }
 }
