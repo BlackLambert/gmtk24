@@ -4787,7 +4787,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_text
-      value: Eat, Eat, Grow
+      value: Eat, Eat, Grow!
       objectReference: {fileID: 0}
     - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_fontSize

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Thank you for playing\nEat, Eat, Grow\n\n
+  m_text: Thank you for playing\nEat, Eat, Grow!\n\n
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
   m_sharedMaterial: {fileID: -4925947334905563200, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}

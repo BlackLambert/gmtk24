@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -21,6 +22,9 @@ namespace Game
         [SerializeField] 
         private GameObject _blocker;
 
+        [SerializeField] 
+        private TextMeshProUGUI _bodyPartNameText;
+
         private BodyPart _bodyPart;
         private bool _dragging;
         private CollectedFood _collectedFood;
@@ -40,6 +44,7 @@ namespace Game
             _bodyPart = bodyPartPrefab;
             BodyPartSettings settings = bodyPartPrefab.BodyPartSettings;
             _icon.sprite = bodyPartPrefab.BodyPartSettings.Icon;
+            _bodyPartNameText.text = bodyPartPrefab.BodyPartSettings.DisplayName;
             foreach (FoodAmount amount in settings.Costs)
             {
                 BodyPartCostsDisplay costsDisplay = Instantiate(_costsPrefab, _costsHook);
