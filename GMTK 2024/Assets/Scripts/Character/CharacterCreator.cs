@@ -36,7 +36,7 @@ namespace Game
         {
             if (_game.CurrentStage != null)
             {
-                Vector3 pos = new Vector3(0, 0, -_game.CurrentStage.StageIndex - 3.1f);
+                Vector3 pos = new Vector3(0, 0, -_game.CurrentStage.StageIndex * 0.5f - 3.1f);
                 Character character = Instantiate(_game.CurrentStage.Character, pos, Quaternion.identity);
                 character.transform.localScale *= _game.CurrentStage.StageSettings.CharacterSizeFactor;
                 character.name = $"Character{_game.CurrentStage.StageIndex}";
@@ -49,7 +49,7 @@ namespace Game
 
             if (_game.FormerStage != null)
             {
-                Vector3 pos = new Vector3(0, 0, -_game.FormerStage.StageIndex - 3);
+                Vector3 pos = new Vector3(0, 0, -_game.FormerStage.StageIndex * 0.5f - 3);
                 Character formerCharacter = Instantiate(_game.FormerStage.Character, pos, Quaternion.identity);
                 FormerCharacterHook hook = FindObjectOfType<FormerCharacterHook>();
                 formerCharacter.transform.localScale *= _game.FormerStage.StageSettings.CharacterSizeFactor;
