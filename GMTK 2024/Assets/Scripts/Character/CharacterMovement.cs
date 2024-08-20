@@ -11,7 +11,7 @@ namespace Game
         private Game _game;
         private Vector2 _mousePoint;
         private float[] _lastUsed;
-        private MovementSettings[] _movementSettings;
+        private MovementBodyPart[] _movementSettings;
 
         private void Awake()
         {
@@ -22,8 +22,7 @@ namespace Game
         public void Init(Creature creature)
         {
             _creature = creature;
-            _movementSettings = _creature.GetComponentsInChildren<MovementBodyPart>().Select(b => b.MovementSettings)
-                .ToArray();
+            _movementSettings = _creature.GetComponentsInChildren<MovementBodyPart>().ToArray();
             _lastUsed = new float[_movementSettings.Length];
         }
 
@@ -57,7 +56,7 @@ namespace Game
             float currentZRot = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, zRot - 90);
             float angle = Quaternion.Angle(targetRotation, currentRotation);
-            float maxDeltaRot = _movementSettings.Sum(s => s.RotationSpeed) * Time.fixedDeltaTime;
+            float maxDeltaRot = _movementSettings.Sum(s => s.MovementSettings.RotationSpeed) * Time.fixedDeltaTime;
             float delta = Mathf.Min(maxDeltaRot, angle);
             float absDelta = Mathf.Abs(zRot - currentZRot);
             if (zRot < currentZRot && absDelta < 180 || zRot > currentZRot && absDelta > 180)
@@ -78,17 +77,17 @@ namespace Game
 
             for (var index = 0; index < _movementSettings.Length; index++)
             {
-                var settings = _movementSettings[index];
-                if (Time.realtimeSinceStartup < _lastUsed[index] + settings.Cooldown)
+                MovementBodyPart part = _movementSettings[index];
+                if (Time.realtimeSinceStartup < _lastUsed[index] + part.MovementSettings.Cooldown)
                 {
                     return;
                 }
 
-                LegAnimationController legs = GetComponentInChildren<LegAnimationController>();
+                LegAnimationController legs = part.GetComponentInChildren<LegAnimationController>();
                 legs?.Jump();
 
                 Vector2 force = ((Vector2)direction).normalized *
-                                (settings.Force * _game.CurrentStage.StageSettings.SpeedFactor);
+                                (part.MovementSettings.Force * _game.CurrentStage.StageSettings.SpeedFactor);
                 _creature.Rigidbody.AddForce(force);
                 _lastUsed[index] = Time.realtimeSinceStartup;
             }
@@ -98,7 +97,7 @@ namespace Game
         {
             Vector3 velocity = _creature.Rigidbody.velocity;
             float velocityMagnitude = velocity.magnitude;
-            float maxSpeed = _movementSettings.Sum(s => s.MaxSpeed);
+            float maxSpeed = _movementSettings.Sum(s => s.MovementSettings.MaxSpeed);
             if (velocityMagnitude > maxSpeed)
             {
                 _creature.Rigidbody.velocity = velocity.normalized * maxSpeed;
