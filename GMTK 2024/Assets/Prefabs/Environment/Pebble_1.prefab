@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834b68613dc6fdf4a820bea104ffb0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blockTillStage: 1
+  _blockTillStage: {fileID: 11400000, guid: a9136d0380aff67478b8c2bad268c290, type: 2}
   _maskToExclude:
     serializedVersion: 2
     m_Bits: 64
