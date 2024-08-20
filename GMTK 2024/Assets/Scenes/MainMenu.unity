@@ -4632,6 +4632,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainMenuCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 449873438493009420, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 449873438493009420, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 449873438493009420, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 449873438493009420, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 449873438493009420, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.6901961
+      objectReference: {fileID: 0}
     - target: {fileID: 1270997321282654696, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_fontSize
       value: 42.7
@@ -4688,6 +4708,18 @@ PrefabInstance:
       propertyPath: m_Colors.m_NormalColor.r
       value: 0.8867924
       objectReference: {fileID: 0}
+    - target: {fileID: 1676695077304949836, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.13270822
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676695077304949836, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.4838601
+      objectReference: {fileID: 0}
+    - target: {fileID: 1676695077304949836, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.69182384
+      objectReference: {fileID: 0}
     - target: {fileID: 1698532285651998221, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_fontSize
       value: 19.2
@@ -4733,8 +4765,12 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_text
+      value: Eat, Eat, Grow
+      objectReference: {fileID: 0}
+    - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_fontSize
-      value: 90.5
+      value: 92
       objectReference: {fileID: 0}
     - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_margin.x
@@ -4762,7 +4798,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_fontSizeBase
-      value: 90.5
+      value: 92
       objectReference: {fileID: 0}
     - target: {fileID: 5529387314035091319, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_sharedMaterial
@@ -4895,6 +4931,26 @@ PrefabInstance:
     - target: {fileID: 7759686822662540119, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365329265201497431, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365329265201497431, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365329265201497431, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.b
+      value: 0.13333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365329265201497431, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.g
+      value: 0.48235294
+      objectReference: {fileID: 0}
+    - target: {fileID: 8365329265201497431, guid: bb868b066066fc245878f66d7da1a615, type: 3}
+      propertyPath: m_Colors.m_PressedColor.r
+      value: 0.6901961
       objectReference: {fileID: 0}
     - target: {fileID: 8405467621857377105, guid: bb868b066066fc245878f66d7da1a615, type: 3}
       propertyPath: m_AnchoredPosition.y

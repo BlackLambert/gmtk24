@@ -131,6 +131,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 230504390141660732, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.b
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 230504390141660732, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_Colors.m_NormalColor.g
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017475405333236, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_fontSize
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017475405333236, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_fontColor.b
+      value: 0.7490196
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017475405333236, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_fontColor.g
+      value: 0.88235295
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017475405333236, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_fontColor.r
+      value: 0.8862745
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017475405333236, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 92
+      objectReference: {fileID: 0}
+    - target: {fileID: 2600017475405333236, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
+      propertyPath: m_fontColor32.rgba
+      value: 4290765282
+      objectReference: {fileID: 0}
     - target: {fileID: 7538347501637564523, guid: 17539351e4334384aa482448f62b3a0c, type: 3}
       propertyPath: m_Name
       value: SettingsCanvas

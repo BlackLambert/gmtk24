@@ -204,6 +204,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1086507907478512611}
     m_Modifications:
+    - target: {fileID: 258020747636996935, guid: 2abd5ccc4b9c4de468cf483dfa1ce88b, type: 3}
+      propertyPath: _settings
+      value: 
+      objectReference: {fileID: 11400000, guid: c71bb35dd1f1ddf42a98e34b676bcf00, type: 2}
     - target: {fileID: 4700689667475093942, guid: 2abd5ccc4b9c4de468cf483dfa1ce88b, type: 3}
       propertyPath: m_Name
       value: TailClub
