@@ -26,7 +26,7 @@ RectTransform:
   m_GameObject: {fileID: 6859310341212619767}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6888110110447974340}
@@ -166,6 +166,22 @@ PrefabInstance:
       propertyPath: _foodType
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4925947334905563200, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -202,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_AnchorMin.x
@@ -210,15 +226,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 159.05247
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 859
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_LocalPosition.x
@@ -250,11 +266,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 556.68365
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -429.5
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3352285249258370530, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -387,9 +403,21 @@ PrefabInstance:
       value: MeatFoodAmountPanel
       objectReference: {fileID: 0}
     - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
-      propertyPath: m_fontSizeBase
-      value: 0
+      propertyPath: m_fontSize
+      value: 30
       objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4925947334905563200, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -500,6 +528,22 @@ PrefabInstance:
       propertyPath: _foodType
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontSize
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 9209180914703732145, guid: 3c9e7e080b5a83444bf9e1e8222ce642, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -4925947334905563200, guid: 013cdfc2d7d544d439436fba7251a19f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

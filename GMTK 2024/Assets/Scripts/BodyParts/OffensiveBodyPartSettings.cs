@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -17,6 +15,14 @@ namespace Game
         public float Damage { get; private set; }
         [field: SerializeField]
         public float TargetRange { get; private set; }
+
+        [field: SerializeField]
+        public float DamageRange { get; private set; }
+
+        [field: SerializeField] 
+        public AudioClip[] sounds { get; private set; }
+        [field: SerializeField]
+        public float Volume { get; private set; }
 
     }
 }

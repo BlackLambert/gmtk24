@@ -7,17 +7,14 @@ namespace Game
 {
     public class FootStepSpawn : MonoBehaviour
     {
+        [field: SerializeField] LegAnimationController controller;
+
         [field: SerializeField] SpriteRenderer LegRenderer;
 
         [field: SerializeField] FootStep FootStep;
         [SerializeField] Transform spawnTransform;
 
         private GameHook _hook;
-
-        private void Awake()
-        {
-            _hook = FindObjectOfType<GameHook>();
-        }
 
         public void SpawnFootstep(int i)
         {
@@ -27,6 +24,15 @@ namespace Game
             } else
             {
                 if (LegRenderer.flipY == false) return;
+            }
+
+            if (_hook == null)
+            {
+                _hook = FindObjectOfType<GameHook>();
+            }
+            if(controller != null)
+            {
+                controller.PlayFootstep(0.3f);
             }
             FootStep footstep = GameObject.Instantiate(FootStep, _hook.transform, false);
             var trans = footstep.transform;

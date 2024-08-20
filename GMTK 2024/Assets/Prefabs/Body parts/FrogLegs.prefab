@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9065214585673597234}
-  m_Father: {fileID: 2615259416414748036}
+  m_Father: {fileID: 4387036701364784208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1493220237137473623
 SpriteRenderer:
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477f0f3bec0be094d8cd45c8fce68589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 2741130155611188109}
   LegRenderer: {fileID: 1493220237137473623}
   FootStep: {fileID: 5175964646517241390, guid: 53bc00332d42af84cb84507b1a02b946, type: 3}
   spawnTransform: {fileID: 9065214585673597234}
@@ -193,14 +194,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 837374003444900304}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7162722888208404742}
   - {fileID: 8484288242423619558}
-  m_Father: {fileID: 2615259416414748036}
+  m_Father: {fileID: 4387036701364784208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1021178069913631345
 GameObject:
@@ -306,6 +307,7 @@ GameObject:
   - component: {fileID: 2615259416414748036}
   - component: {fileID: 2741130155611188109}
   - component: {fileID: 4826001266429380834}
+  - component: {fileID: 8367140340820649047}
   m_Layer: 0
   m_Name: FrogLegs
   m_TagString: Untagged
@@ -326,9 +328,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7365639926891385268}
-  - {fileID: 1629591700034294577}
-  - {fileID: 6456094040452286224}
+  - {fileID: 4387036701364784208}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2741130155611188109
@@ -346,6 +346,10 @@ MonoBehaviour:
   IsFrogLegs: 1
   RightLegAnim: {fileID: 2522844037288468355}
   LeftLegAnim: {fileID: 5191854326306194052}
+  footSteps:
+  - {fileID: 8300000, guid: dbe00d2c8b4208e49918e5cad5a5ec8e, type: 3}
+  - {fileID: 8300000, guid: 445d24264dd26844eb39799213f893b0, type: 3}
+  - {fileID: 8300000, guid: bf94af8f5d202f549bb1e790d796d5a4, type: 3}
 --- !u!114 &4826001266429380834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -360,6 +364,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BodyPartSettings>k__BackingField: {fileID: 11400000, guid: f10e26d68ca919d4d99621f6fb3a3f25, type: 2}
   _outline: {fileID: 837374003444900304}
+--- !u!114 &8367140340820649047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729416326088288398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a063dbf95f20a614a9e88d6f363cea9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: 482b285079e365a44ae204727427f5d2, type: 2}
 --- !u!1 &3065547334831624032
 GameObject:
   m_ObjectHideFlags: 0
@@ -623,7 +640,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5048625244174407938}
-  m_Father: {fileID: 2615259416414748036}
+  m_Father: {fileID: 4387036701364784208}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6931993360234899153
 SpriteRenderer:
@@ -710,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477f0f3bec0be094d8cd45c8fce68589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 2741130155611188109}
   LegRenderer: {fileID: 6931993360234899153}
   FootStep: {fileID: 5175964646517241390, guid: 53bc00332d42af84cb84507b1a02b946, type: 3}
   spawnTransform: {fileID: 5048625244174407938}
@@ -758,3 +776,37 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7289386, y: 0.48553628}
   m_EdgeRadius: 0
+--- !u!1 &7718060662301848035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4387036701364784208}
+  m_Layer: 0
+  m_Name: Hook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4387036701364784208
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7718060662301848035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7365639926891385268}
+  - {fileID: 1629591700034294577}
+  - {fileID: 6456094040452286224}
+  m_Father: {fileID: 2615259416414748036}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

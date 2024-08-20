@@ -17,7 +17,6 @@ namespace Game
         {
             _meshFilter.mesh = CreateMesh();
             _meshCollider.points = _meshFilter.mesh.vertices.Select(v => (Vector2)v).ToArray();
-            _body.UpdateSlots();
         }
 
         private Mesh CreateMesh()

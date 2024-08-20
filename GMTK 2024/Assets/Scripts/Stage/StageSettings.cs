@@ -21,6 +21,12 @@ namespace Game
 
         [field: SerializeField]
         public float SpeedFactor { get; private set; } = 1f;
+
+        [field: SerializeField]
+        public float HealthBaseValue { get; private set; } = 1f;
+
+        [field: SerializeField]
+        public float DamageBaseValue { get; private set; } = 1f;
         
         [field: SerializeField]
         public string LevelToLoad { get; private set; }

@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b93fb5250d72f2943b52ffd80b96b036, type: 3}
-  m_Name: Teeth
+  m_Script: {fileID: 11500000, guid: 23ff8c60b36698d409182861eb2d4cd9, type: 3}
+  m_Name: LegsConstantMovementSettings
   m_EditorClassIdentifier: 
-  <TargetType>k__BackingField: 0
-  <Cooldown>k__BackingField: 1
-  <StatusEffect>k__BackingField: 0
-  <Damage>k__BackingField: 8
-  <TargetRange>k__BackingField: 3
+  <Force>k__BackingField: 200
+  <MaxSpeed>k__BackingField: 100
+  <Cooldown>k__BackingField: 0.1
+  <RotationSpeed>k__BackingField: 500

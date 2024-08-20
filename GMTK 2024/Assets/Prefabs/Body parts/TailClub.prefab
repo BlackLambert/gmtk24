@@ -155,7 +155,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4653876988502805467}
   _settings: {fileID: 11400000, guid: ba5a1b539b35d454e94fef11a6d965f7, type: 2}
-  _hitBox: {fileID: 8547911876299561320}
+  _hitBox: {fileID: 6230528591481556596}
 --- !u!1 &5786156404484147862
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5786156404484147862}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:

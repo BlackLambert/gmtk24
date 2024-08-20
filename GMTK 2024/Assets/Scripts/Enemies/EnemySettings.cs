@@ -28,7 +28,12 @@ namespace Game
         [field: SerializeField]
         public float FleeRange { get; private set; }
         [field: SerializeField]
+        public float FleeDuration { get; private set; }
+        [field: SerializeField]
         public float FollowRange { get; private set; }
+
+        [field:SerializeField]
+        public AudioClip[] onHitSounds { get; private set; }
         public List<Loot> GetLoot()
         {
             List<Loot> dropList = new List<Loot>();

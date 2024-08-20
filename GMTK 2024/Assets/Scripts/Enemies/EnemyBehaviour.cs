@@ -1,10 +1,5 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
-using UnityEngine.UIElements;
-using static Codice.Client.Commands.WkTree.WorkspaceTreeNode;
 using Random = UnityEngine.Random;
 
 namespace Game
@@ -36,7 +31,7 @@ namespace Game
             _speedAdjustments[2] = 0.2f;
             _speedAdjustment = _speedAdjustments[(int)_enemy.Settings.size];
             _creature = FindFirstObjectByType<Creature>();
-
+            _fleeDuration = _enemy.Settings.FleeDuration;
         }
 
         // Update is called once per frame
@@ -153,7 +148,7 @@ namespace Game
         public void UpdateFollowList(float followRange)
         {
             _followList.Clear();
-            Collider2D[] possibleFollowTargets = Physics2D.OverlapCircleAll(transform.position, followRange);
+            Collider2D[] possibleFollowTargets = Physics2D.OverlapCircleAll(transform.position, followRange*transform.localScale.x);
             foreach(Collider2D target in possibleFollowTargets)
             {
                 //Check if target is valid (food or creature)
@@ -234,7 +229,7 @@ namespace Game
         public void UpdateFleeList(float fleeRange)
         {
             _fleeList.Clear();
-            Collider2D[] possibleFleeTargets = Physics2D.OverlapCircleAll(transform.position, fleeRange);
+            Collider2D[] possibleFleeTargets = Physics2D.OverlapCircleAll(transform.position, fleeRange * transform.localScale.x);
             foreach (Collider2D target in possibleFleeTargets)
             {
                 bool isValid = false;

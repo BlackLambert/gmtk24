@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -31,6 +32,8 @@ namespace Game
         {
             StageSettings settings = _gameStages.Get(_currentStage);
             Creature creature = Instantiate(_defaultCreature, Vector3.zero, Quaternion.identity);
+            int health = (int)(settings.HealthBaseValue * creature.Body.BodyData.Splines.Sum(s => s.Size));
+            creature.UpdateMaxHealth(health);
             Character character = creature.gameObject.AddComponent<Character>();
             character.Init(creature);
             character.gameObject.SetActive(false);

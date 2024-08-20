@@ -7,6 +7,7 @@ namespace Game
         [SerializeField] bool IsFrogLegs;
         [SerializeField] Animator RightLegAnim;
         [SerializeField] Animator LeftLegAnim;
+        [SerializeField] AudioClip[] footSteps;
         bool mouseDown = false;
         bool isMoving = false;
 
@@ -57,10 +58,16 @@ namespace Game
         public void Jump()
         {
             if(!IsFrogLegs) return;
+            PlayFootstep(1f);
             LeftLegAnim.SetBool("Inverse", false);
             RightLegAnim.SetTrigger("Jump");
             LeftLegAnim.SetTrigger("Jump");
 
+        }
+
+        public void PlayFootstep(float volume)
+        {
+            SoundFXManager.Instance.PlayRandomSoundClip(footSteps, transform, volume);
         }
     }
 }

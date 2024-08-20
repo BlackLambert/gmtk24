@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Runtime.Remoting.Messaging;
 using UnityEngine;
 
 namespace Game
@@ -18,6 +17,7 @@ namespace Game
 
         [SerializeField] 
         private Transform _hook;
+        [field:SerializeField] public AudioClip[] onHitSounds { get; private set; }
 
         private PlayerHPBar _hpBar;
 
@@ -28,8 +28,10 @@ namespace Game
         public Transform Transform { get; private set; }
         OffensiveBodyPart lastDamageSource;
 
-        float _maxHitpoints = 100;
-        float _currentHitpoints = 100;
+        [SerializeField, HideInInspector]
+        private float _maxHitpoints;
+        [SerializeField, HideInInspector]
+        private float _currentHitpoints;
         bool _isDead = false;
 
         Game _game;
@@ -57,7 +59,13 @@ namespace Game
             lastDamageSource = null;
         }
 
-        public void Add(BodyPart bodyPart, BodyPartSlot slot)
+        public void UpdateMaxHealth(int value)
+        {
+            _maxHitpoints = value;
+            _currentHitpoints = value;
+        }
+
+        public void Add(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> slot)
         {
             Transform trans = bodyPart.transform;
             trans.SetParent(_hook);
@@ -109,6 +117,7 @@ namespace Game
             {
                 _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
             }
+            SoundFXManager.Instance.PlayRandomSoundClip(onHitSounds, transform, 1.5f);
 
             if (_currentHitpoints <= 0)
             {
@@ -125,15 +134,17 @@ namespace Game
             }
             _currentHitpoints += absoluteAmount;
             _currentHitpoints = Mathf.Round(_currentHitpoints);
+            
             if (_hpBar == null)
             {
                 _hpBar = FindObjectOfType<PlayerHPBar>();
-                _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
             }
-            else
+            
+            if(_hpBar != null)
             {
                 _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
             }
+            
             if (_currentHitpoints>_maxHitpoints)
             {
                 _currentHitpoints = _maxHitpoints;
@@ -174,7 +185,7 @@ namespace Game
             Destroy(gameObject, 1);
             _defeatScreen = Instantiate(_defeatScreenPrefab);
             _defeatScreen.Die();
-
+            _game.State = GameState.Defeat;
         }
     }
 }

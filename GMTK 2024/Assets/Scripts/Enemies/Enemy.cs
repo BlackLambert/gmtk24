@@ -70,6 +70,8 @@ namespace Game
                 spawnedAnimator = Instantiate(slashAnimatorPrefab, transform);
                 spawnedAnimator.transform.localScale = Vector3.one*1.5f;
             }
+            SoundFXManager.Instance.PlayRandomSoundClip(Settings.onHitSounds, transform, 1);
+
             spawnedAnimator.SetTrigger("Hit");
             currentHitpoints -= Mathf.Round(damage);
             spawnedHPBar.UpdateHP(currentHitpoints / Settings.HitPoints);

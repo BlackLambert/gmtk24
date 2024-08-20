@@ -72,6 +72,18 @@ PrefabInstance:
       propertyPath: <FoodType>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <_eatSounds>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <_eatSounds>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: f3aa10b2b87fcdd4eac6dff35acb5f92, type: 3}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <_eatSounds>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: dcb5d676de59c4f489b2dcff36475825, type: 3}
     - target: {fileID: 8375888090574712179, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: m_Name
       value: FruitFood

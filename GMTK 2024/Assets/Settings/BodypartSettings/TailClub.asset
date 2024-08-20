@@ -17,3 +17,7 @@ MonoBehaviour:
   <StatusEffect>k__BackingField: 0
   <Damage>k__BackingField: 10
   <TargetRange>k__BackingField: 2
+  <DamageRange>k__BackingField: 2
+  <sounds>k__BackingField:
+  - {fileID: 8300000, guid: 05cd18c5419c68740aa2a57d18bc3417, type: 3}
+  <Volume>k__BackingField: 1.5

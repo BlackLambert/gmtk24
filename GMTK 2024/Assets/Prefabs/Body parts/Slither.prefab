@@ -338,6 +338,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4673769359990630935}
   - component: {fileID: 7796722303747930372}
+  - component: {fileID: 3302622410733204121}
   m_Layer: 6
   m_Name: Slither
   m_TagString: Untagged
@@ -345,14 +346,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4673769359990630935
-Transform:
+--- !u!224 &4673769359990630935
+RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8000012781663346593}
-  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -361,6 +361,11 @@ Transform:
   - {fileID: 6642740378231674793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &7796722303747930372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -375,3 +380,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BodyPartSettings>k__BackingField: {fileID: 11400000, guid: 2a548e5fcd1e7e0419d88b98a5a53d33, type: 2}
   _outline: {fileID: 2385847989120619305}
+--- !u!114 &3302622410733204121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8000012781663346593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a063dbf95f20a614a9e88d6f363cea9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: fa7dded5928ca6c4b874240a121a1ae5, type: 2}

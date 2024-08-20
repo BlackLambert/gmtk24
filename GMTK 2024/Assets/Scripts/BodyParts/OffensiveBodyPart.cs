@@ -10,14 +10,13 @@ namespace Game
         [SerializeField] Animator animator;
 
         [SerializeField] OffensiveBodyPartSettings _settings;
-        [SerializeField] Collider2D _hitBox;
+        [SerializeField] Transform _hitBox;
         IDamageable _parentCreature;
         float _lastInterval = 0;
         Transform currentTargetTransform;
 
         void Start()
         {
-            _hitBox = GetComponentInChildren<Collider2D>();
             _parentCreature = GetComponentInParent<IDamageable>();
 
             if(_parentCreature == null)
@@ -41,7 +40,7 @@ namespace Game
         {
             if (currentTargetTransform != null) 
             { 
-                _hitBox.transform.position = currentTargetTransform.position;
+                _hitBox.position = currentTargetTransform.position;
             }
             Activate();
         }
@@ -72,7 +71,7 @@ namespace Game
             List<IDamageable> finalTargets = new List<IDamageable>();
            
             List<Collider2D> colliderInRange = new List<Collider2D>();
-            colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange));
+            colliderInRange.AddRange(Physics2D.OverlapCircleAll(transform.position, _settings.TargetRange * _parentCreature.Transform.localScale.x));
             List<IDamageable> allTargets = CleanUpTargetList(colliderInRange);
 
             if (allTargets.Count == 0) return finalTargets;
@@ -94,28 +93,26 @@ namespace Game
                             shortestDistance = distance;
                         }
                     }
-                    _hitBox.transform.position = allTargets[targetIndex].Transform.position;
+                    _hitBox.position = allTargets[targetIndex].Transform.position;
                     currentTargetTransform = allTargets[targetIndex].Transform;
                     break;
 
                 case TargettingMode.Random:
                     
                     int randomIndex = Random.Range(0, allTargets.Count - 1);
-                    _hitBox.transform.position = allTargets[randomIndex].Transform.position;
+                    _hitBox.position = allTargets[randomIndex].Transform.position;
                     currentTargetTransform = allTargets[randomIndex].Transform;
                     break;
                 case TargettingMode.Frontal:
-                    _hitBox.transform.position = _parentCreature.Transform.position + _parentCreature.Transform.up;
+                    _hitBox.position = _parentCreature.Transform.position + (_parentCreature.Transform.up * _parentCreature.Transform.localScale.x);
                     currentTargetTransform = _parentCreature.Transform;
                     break;
             }
 
-            ContactFilter2D filter = new ContactFilter2D().NoFilter();
             List<Collider2D> hitObjects = new List<Collider2D>();
-            _hitBox.OverlapCollider(filter, hitObjects);
+            hitObjects.AddRange(Physics2D.OverlapCircleAll(_hitBox.position, _settings.DamageRange * _parentCreature.Transform.localScale.x));
 
             finalTargets.AddRange(CleanUpTargetList(hitObjects));
-
             return finalTargets;
         }
 
@@ -145,7 +142,9 @@ namespace Game
         }
         private void PlaySound()
         {
-
+            SoundFXManager manager = SoundFXManager.Instance;
+            if (manager == null) return;
+            manager.PlayRandomSoundClip(_settings.sounds, transform, _settings.Volume);
         }
         private void ApplyStatusToTarget(StatusEffect status, Enemy target)
         {
