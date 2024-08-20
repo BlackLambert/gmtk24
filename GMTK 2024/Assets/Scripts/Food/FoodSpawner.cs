@@ -40,7 +40,7 @@ namespace Game
 
         private void Spawn()
         {
-            _food = Instantiate(_foodPrefab, _hook, false);
+            _food = Instantiate(_foodPrefab, _hook.position, _hook.rotation);
             _food.transform.localScale = new Vector3(_scale, _scale, _scale);
             _spawned = true;
         }

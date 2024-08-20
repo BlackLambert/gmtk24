@@ -33,7 +33,7 @@ namespace Game
             Food food = other.GetComponent<Food>();
             if (food != null)
             {
-                if(food.size == _attachedDamageable.GetSize())
+                if((int)food.size <= (int) _attachedDamageable.GetSize())
                 {
                     Collect(food);
                 }

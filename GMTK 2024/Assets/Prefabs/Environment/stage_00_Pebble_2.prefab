@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7512719560636093001}
   - component: {fileID: 7286026515125453214}
   m_Layer: 0
-  m_Name: Pebble_2
+  m_Name: stage_00_Pebble_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 427819941579525533}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -3.128868, y: 58.654545, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -210,7 +210,7 @@ MonoBehaviour:
   - {x: -1.6618241, y: -1.388137, z: 0}
   m_ShapePathHash: -1698639982
   m_Mesh: {fileID: 0}
-  m_InstanceId: 66094
+  m_InstanceId: -257580
   m_LocalBounds:
     m_Center: {x: 0.1512425, y: 0.1668278, z: 0}
     m_Extent: {x: 2.695323, y: 2.1381454, z: 0}
@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 834b68613dc6fdf4a820bea104ffb0f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _blockTillStage: 1
+  _blockTillStage: {fileID: 11400000, guid: a9136d0380aff67478b8c2bad268c290, type: 2}
   _maskToExclude:
     serializedVersion: 2
     m_Bits: 64

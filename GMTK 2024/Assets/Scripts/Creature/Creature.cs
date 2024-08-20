@@ -36,6 +36,8 @@ namespace Game
 
         Game _game;
 
+        SizeStage _stage;
+
         private void Awake()
         {
             Transform = transform;
@@ -52,6 +54,7 @@ namespace Game
         void Start()
         {
             _hpBar = FindObjectOfType<PlayerHPBar>();
+            _stage = _game.CurrentStage.StageSettings.sizeStage;
         }
 
         void Update()
@@ -163,8 +166,7 @@ namespace Game
         
         public SizeStage GetSize()
         {
-            //TODO: Add and Update correct size stage!
-            return SizeStage.Cell;
+            return _stage;
         }
 
         public SplineData RemoveSpline()
