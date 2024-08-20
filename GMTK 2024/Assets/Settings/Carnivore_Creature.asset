@@ -20,11 +20,7 @@ MonoBehaviour:
   - drop: {fileID: 9089221092398506941, guid: 6386c6bf56ad14f499054945160f11a8, type: 3}
     propability: 100
     minAmount: 1
-    maxAmount: 3
-  - drop: {fileID: 9089221092398506941, guid: 1ca09a5cbced75240866ebbea9e77fd9, type: 3}
-    propability: 50
-    minAmount: 0
-    maxAmount: 1
+    maxAmount: 10
   <MovementSettings>k__BackingField: {fileID: 11400000, guid: 09cbe6260abbed34485b4eb17c8649aa, type: 2}
   <CreatureDiet>k__BackingField: 1
   <FleeRange>k__BackingField: 5

@@ -15,16 +15,16 @@ MonoBehaviour:
   <speciesID>k__BackingField: 1
   <speciesName>k__BackingField: Test Herbivore
   <size>k__BackingField: 2
-  <HitPoints>k__BackingField: 80
+  <HitPoints>k__BackingField: 40
   lootTable:
   - drop: {fileID: 9089221092398506941, guid: 6386c6bf56ad14f499054945160f11a8, type: 3}
     propability: 100
     minAmount: 1
-    maxAmount: 3
+    maxAmount: 5
   - drop: {fileID: 9089221092398506941, guid: 1ca09a5cbced75240866ebbea9e77fd9, type: 3}
     propability: 50
     minAmount: 1
-    maxAmount: 1
+    maxAmount: 3
   <MovementSettings>k__BackingField: {fileID: 11400000, guid: b79471f987a0e714eb0ab5635bf28d47, type: 2}
   <CreatureDiet>k__BackingField: 0
   <FleeRange>k__BackingField: 7

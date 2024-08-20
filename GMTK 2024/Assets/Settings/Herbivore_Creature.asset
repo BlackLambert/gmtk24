@@ -15,7 +15,7 @@ MonoBehaviour:
   <speciesID>k__BackingField: 1
   <speciesName>k__BackingField: Test Herbivore
   <size>k__BackingField: 1
-  <HitPoints>k__BackingField: 50
+  <HitPoints>k__BackingField: 120
   lootTable:
   - drop: {fileID: 9089221092398506941, guid: 6386c6bf56ad14f499054945160f11a8, type: 3}
     propability: 100
