@@ -15,7 +15,7 @@ MonoBehaviour:
   <TargetType>k__BackingField: 0
   <Cooldown>k__BackingField: 2
   <StatusEffect>k__BackingField: 0
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 3
   <TargetRange>k__BackingField: 2
   <DamageRange>k__BackingField: 2
   <sounds>k__BackingField:

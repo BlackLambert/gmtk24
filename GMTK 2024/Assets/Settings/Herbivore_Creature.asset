@@ -40,4 +40,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: efbe9b0be206ce34c8b1b22cde1ac71c, type: 3}
   - {fileID: 8300000, guid: 1345f1d4d3d68f8439917af0d3b33cd2, type: 3}
   - {fileID: 8300000, guid: 95388d8319da5d94bba3be2f822098e5, type: 3}
-  <DamageFactor>k__BackingField: 5
+  <DamageFactor>k__BackingField: 2

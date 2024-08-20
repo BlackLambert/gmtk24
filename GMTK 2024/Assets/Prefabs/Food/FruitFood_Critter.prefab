@@ -90,7 +90,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: <FoodType>k__BackingField
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: <_eatSounds>k__BackingField.Array.size
