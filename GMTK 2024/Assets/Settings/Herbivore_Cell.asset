@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91367ee830d9c7d41b44fa40509230ac, type: 3}
-  m_Name: TestCarnivore
+  m_Name: Herbivore_Cell
   m_EditorClassIdentifier: 
-  <speciesID>k__BackingField: 2
-  <speciesName>k__BackingField: TestCarnivore 2
+  <speciesID>k__BackingField: 1
+  <speciesName>k__BackingField: Test Herbivore
   <size>k__BackingField: 0
   <HitPoints>k__BackingField: 30
   lootTable:
@@ -23,13 +23,16 @@ MonoBehaviour:
     maxAmount: 3
   - drop: {fileID: 9089221092398506941, guid: 1ca09a5cbced75240866ebbea9e77fd9, type: 3}
     propability: 50
-    minAmount: 0
+    minAmount: 1
     maxAmount: 1
-  <MovementSettings>k__BackingField: {fileID: 11400000, guid: 09cbe6260abbed34485b4eb17c8649aa, type: 2}
-  <CreatureDiet>k__BackingField: 1
-  <FleeRange>k__BackingField: 5
-  <FleeDuration>k__BackingField: 2
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: b79471f987a0e714eb0ab5635bf28d47, type: 2}
+  <CreatureDiet>k__BackingField: 0
+  <FleeRange>k__BackingField: 7
+  <FleeDuration>k__BackingField: 3
   <FollowRange>k__BackingField: 15
   <onHitSounds>k__BackingField:
-  - {fileID: 8300000, guid: 1598b1124627f9647831d2ae749a5c54, type: 3}
-  - {fileID: 8300000, guid: 5820c571c8c48bd418fe91f4c0fa4a43, type: 3}
+  - {fileID: 8300000, guid: 4f4bbfde5f82d4146ab5a65ab528a34f, type: 3}
+  - {fileID: 8300000, guid: dd942adee7d677241aba5a3d546782e1, type: 3}
+  - {fileID: 8300000, guid: efbe9b0be206ce34c8b1b22cde1ac71c, type: 3}
+  - {fileID: 8300000, guid: 1345f1d4d3d68f8439917af0d3b33cd2, type: 3}
+  - {fileID: 8300000, guid: 95388d8319da5d94bba3be2f822098e5, type: 3}

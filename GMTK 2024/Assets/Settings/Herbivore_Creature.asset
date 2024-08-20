@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 91367ee830d9c7d41b44fa40509230ac, type: 3}
-  m_Name: TestHerbivore
+  m_Name: Herbivore_Creature
   m_EditorClassIdentifier: 
   <speciesID>k__BackingField: 1
   <speciesName>k__BackingField: Test Herbivore
-  <size>k__BackingField: 0
-  <HitPoints>k__BackingField: 30
+  <size>k__BackingField: 1
+  <HitPoints>k__BackingField: 50
   lootTable:
   - drop: {fileID: 9089221092398506941, guid: 6386c6bf56ad14f499054945160f11a8, type: 3}
     propability: 100
