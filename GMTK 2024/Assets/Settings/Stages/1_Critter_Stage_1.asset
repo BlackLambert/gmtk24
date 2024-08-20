@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c6b64e7ce2694b4fbfd007b6583fa9b, type: 3}
-  m_Name: 1_Stage
+  m_Name: 1_Critter_Stage_1
   m_EditorClassIdentifier: 
-  <FoodToCollect>k__BackingField: 35
-  <CameraSize>k__BackingField: 10
-  <CharacterSizeFactor>k__BackingField: 1.5
+  <FoodToCollect>k__BackingField: 15
+  <CameraSize>k__BackingField: 14
+  <CharacterSizeFactor>k__BackingField: 3
   <EditorCameraSize>k__BackingField: 5
-  <SpeedFactor>k__BackingField: 1
-  <HealthBaseValue>k__BackingField: 3
-  <DamageBaseValue>k__BackingField: 1
+  <SpeedFactor>k__BackingField: 1.5
+  <HealthBaseValue>k__BackingField: 6
+  <DamageBaseValue>k__BackingField: 2
   <LevelToLoad>k__BackingField: Level_CritterStage
+  <sizeStage>k__BackingField: 1

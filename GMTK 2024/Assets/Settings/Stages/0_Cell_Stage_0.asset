@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c6b64e7ce2694b4fbfd007b6583fa9b, type: 3}
-  m_Name: 0_Stage
+  m_Name: 0_Cell_Stage_0
   m_EditorClassIdentifier: 
-  <FoodToCollect>k__BackingField: 10
+  <FoodToCollect>k__BackingField: 5
   <CameraSize>k__BackingField: 8
   <CharacterSizeFactor>k__BackingField: 1
   <EditorCameraSize>k__BackingField: 5
@@ -20,3 +20,4 @@ MonoBehaviour:
   <HealthBaseValue>k__BackingField: 3
   <DamageBaseValue>k__BackingField: 1
   <LevelToLoad>k__BackingField: Level_CritterStage
+  <sizeStage>k__BackingField: 0
