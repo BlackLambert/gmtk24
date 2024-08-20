@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477f0f3bec0be094d8cd45c8fce68589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 2741130155611188109}
   LegRenderer: {fileID: 1493220237137473623}
   FootStep: {fileID: 5175964646517241390, guid: 53bc00332d42af84cb84507b1a02b946, type: 3}
   spawnTransform: {fileID: 9065214585673597234}
@@ -345,6 +346,10 @@ MonoBehaviour:
   IsFrogLegs: 1
   RightLegAnim: {fileID: 2522844037288468355}
   LeftLegAnim: {fileID: 5191854326306194052}
+  footSteps:
+  - {fileID: 8300000, guid: dbe00d2c8b4208e49918e5cad5a5ec8e, type: 3}
+  - {fileID: 8300000, guid: 445d24264dd26844eb39799213f893b0, type: 3}
+  - {fileID: 8300000, guid: bf94af8f5d202f549bb1e790d796d5a4, type: 3}
 --- !u!114 &4826001266429380834
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,6 +727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 477f0f3bec0be094d8cd45c8fce68589, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controller: {fileID: 2741130155611188109}
   LegRenderer: {fileID: 6931993360234899153}
   FootStep: {fileID: 5175964646517241390, guid: 53bc00332d42af84cb84507b1a02b946, type: 3}
   spawnTransform: {fileID: 5048625244174407938}

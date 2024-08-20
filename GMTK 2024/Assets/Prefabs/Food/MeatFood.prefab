@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: f67044d1e61914eddb3c0a5d0d4dee87, type: 3}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <_eatSounds>k__BackingField.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <_eatSounds>k__BackingField.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 69d6efc2ce0a29a44b5704ad3d70f2f7, type: 3}
+    - target: {fileID: 3807934919516428574, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
+      propertyPath: <_eatSounds>k__BackingField.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: 578d2e392101b4c4389cb22f6389457b, type: 3}
     - target: {fileID: 8375888090574712179, guid: de7c276b9994b294dbba5f220012fa1c, type: 3}
       propertyPath: m_Name
       value: MeatFood

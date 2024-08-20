@@ -17,6 +17,7 @@ namespace Game
 
         [SerializeField] 
         private Transform _hook;
+        [field:SerializeField] public AudioClip[] onHitSounds { get; private set; }
 
         private PlayerHPBar _hpBar;
 
@@ -116,6 +117,7 @@ namespace Game
             {
                 _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
             }
+            SoundFXManager.Instance.PlayRandomSoundClip(onHitSounds, transform, 1.5f);
 
             if (_currentHitpoints <= 0)
             {

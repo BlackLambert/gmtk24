@@ -42,14 +42,18 @@ namespace Game
 
         private void Collect(Food food)
         {
-            food.Collect();
             if (_attachedToPlayerCreature)
             {
+                food.Collect(true);
+
                 Creature parent = _attachedDamageable as Creature;
                 parent.HealDamage(_foodHealAmount, true);
                 _collectedFood.Collect(food.FoodType);
                 Vector2 screenPos = _camera.WorldToScreenPoint(food.transform.position);
                 _particleAnimationFactory.Create(new FoodAmount(){FoodType = food.FoodType, Amount = 1}, screenPos);
+            } else
+            {
+                food.Collect(false);
             }
         }
     }

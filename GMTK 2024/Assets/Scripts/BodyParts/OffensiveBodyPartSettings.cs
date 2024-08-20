@@ -21,6 +21,11 @@ namespace Game
         [field: SerializeField]
         public float DamageRange { get; private set; }
 
+        [field: SerializeField] 
+        public AudioClip[] sounds { get; private set; }
+        [field: SerializeField]
+        public float Volume { get; private set; }
+
     }
 }
 

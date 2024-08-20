@@ -142,7 +142,9 @@ namespace Game
         }
         private void PlaySound()
         {
-
+            SoundFXManager manager = SoundFXManager.Instance;
+            if (manager == null) return;
+            manager.PlayRandomSoundClip(_settings.sounds, transform, _settings.Volume);
         }
         private void ApplyStatusToTarget(StatusEffect status, Enemy target)
         {
