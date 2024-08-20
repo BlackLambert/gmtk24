@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,6 +6,9 @@ namespace Game
 {
     public class BodyPartPlacer : MonoBehaviour
     {
+        public event Action OnNoValidSlot;
+        public event Action<BodyPartPlacer> OnDestruct;
+        
         private BodyPart _bodyPart;
         private Creature _creature;
         private FollowCursor _followCursor;
@@ -23,6 +27,11 @@ namespace Game
             _foodParticleAnimationFactory = FindObjectOfType<FoodParticleAnimationFactory>();
             _collectedFood = FindObjectOfType<CollectedFood>();
             _camera = FindObjectOfType<MainCamera>().Camera;
+        }
+
+        private void OnDestroy()
+        {
+            OnDestruct?.Invoke(this);
         }
 
         public void Init(BodyPart bodyPart, Creature creature, FollowCursor followCursor, float snapDistance,
@@ -57,7 +66,12 @@ namespace Game
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (!isSnapDistance || _currentSlot.Value == null)
+                if (_currentSlot.Value == null)
+                {
+                    OnNoValidSlot?.Invoke();
+                    Sell();
+                }
+                else if (!isSnapDistance)
                 {
                     Sell();
                 }
@@ -88,7 +102,7 @@ namespace Game
             _currentSlot = _creature.Body.GetNextEmptySlotTo(worldMousePos, _bodyPart.BodyPartSettings.SlotType);
             
             if (_currentSlot.Value != null)
-            {
+            { 
                 _creature.Body.SnapTo(_bodyPart, _currentSlot);
             }
         }
