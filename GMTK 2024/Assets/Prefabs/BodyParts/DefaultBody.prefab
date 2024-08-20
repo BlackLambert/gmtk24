@@ -126,7 +126,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c2c1572617abd4042830bcec6ef48fe2, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 136add2ba6c8778419249d01f44292f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _color: {r: 0.17331186, g: 0.5473987, b: 0.7987421, a: 1}
+  _color: {r: 1, g: 1, b: 1, a: 1}
   _meshRenderer: {fileID: 9169239765250061960}
 --- !u!114 &7036459467299547988
 MonoBehaviour:
@@ -282,7 +282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4673769359990630935, guid: e1be40609d5ed3544ac2902584e15b7b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.687
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4673769359990630935, guid: e1be40609d5ed3544ac2902584e15b7b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -325,8 +325,8 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e1be40609d5ed3544ac2902584e15b7b, type: 3}
---- !u!4 &7512109371139930440 stripped
-Transform:
+--- !u!224 &7512109371139930440 stripped
+RectTransform:
   m_CorrespondingSourceObject: {fileID: 4673769359990630935, guid: e1be40609d5ed3544ac2902584e15b7b, type: 3}
   m_PrefabInstance: {fileID: 2926442369286214495}
   m_PrefabAsset: {fileID: 0}

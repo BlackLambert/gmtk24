@@ -63,6 +63,10 @@ namespace Game
             int[] triangles = new int[(vertices.Length - 6) * 3];
             Vector4[] tangents = new Vector4[vertices.Length];
             Vector3[] normals = new Vector3[vertices.Length];
+            Vector2[] uvs = new Vector2[vertices.Length];
+            float maxLength = GetRadius(startSpline) +
+                GetRadius(endSpline) + _bodySettings.SplineSpacing * (orderedSplineData.Length - 1);
+            float maxWidth = _bodySettings.MaxSize * _bodySettings.ScalePerSize + _bodySettings.MinScale;
 
             int[] slotAmounts = new int[orderedSplineData.Length];
             slotAmounts[0] = Mathf.RoundToInt(startSpline.Size * _bodySettings.SlotsPerSize);
@@ -88,7 +92,9 @@ namespace Game
 
                 Vector3 unitCirclePoint = new Vector3(cos, sin, 0);
                 Vector3 circlePoint = unitCirclePoint * radius;
-                vertices[i] = circlePoint + (Vector3)startSpline.Center;
+                Vector3 vertex = circlePoint + (Vector3)startSpline.Center;
+                vertices[i] = vertex;
+                uvs[i] = GetUV(vertex, maxWidth, maxLength);
                 tangents[i] = new Vector4(unitCirclePoint.x, unitCirclePoint.y, 0, 0);
                 normals[i] = new Vector3(unitCirclePoint.y, unitCirclePoint.x, 0);
 
@@ -116,7 +122,9 @@ namespace Game
 
                 Vector3 unitCirclePoint = new Vector3(cos, sin, 0);
                 Vector3 circlePoint = unitCirclePoint * radius;
-                vertices[i + startVerticesAmount] = circlePoint + (Vector3)endSpline.Center;
+                Vector3 vertex = circlePoint + (Vector3)endSpline.Center;
+                vertices[i + startVerticesAmount] = vertex;
+                uvs[i + startVerticesAmount] = GetUV(vertex, maxWidth, maxLength);
                 tangents[i + startVerticesAmount] = new Vector4(unitCirclePoint.x, unitCirclePoint.y, 0, 0);
                 normals[i + startVerticesAmount] = new Vector3(unitCirclePoint.y, unitCirclePoint.x, 0);
 
@@ -161,10 +169,15 @@ namespace Game
                     float y = portion * _bodySettings.SplineSpacing + current.Center.y;
                     float x = Mathf.Lerp(currentScale, nextScale, _bodySettings.WeightCurve.Evaluate(portion));
 
-                    vertices[v1] = new Vector3(-x, y, 0);
+                    Vector3 vertex = new Vector3(-x, y, 0);
                     normals[v1] = new Vector3(-1, 0, 0);
-                    vertices[v2] = new Vector3(x, y, 0);
+                    vertices[v1] = vertex;
+                    uvs[v1] = GetUV(vertex, maxWidth, maxLength);
+                    
+                    vertex = new Vector3(x, y, 0);
                     normals[v2] = new Vector3(1, 0, 0);
+                    vertices[v2] = vertex;
+                    uvs[v2] = GetUV(vertex, maxWidth, maxLength);
 
                     if (j < _bodySettings.SideVertices - 1)
                     {
@@ -211,7 +224,8 @@ namespace Game
                 vertices = vertices,
                 triangles = triangles,
                 tangents = tangents,
-                normals = normals
+                normals = normals,
+                uv = uvs
             };
 
             return new CreateResult
@@ -268,6 +282,11 @@ namespace Game
         private float GetRadius(SplineData spline)
         {
             return (spline.Size * _bodySettings.ScalePerSize + _bodySettings.MinScale) / 2;
+        }
+
+        private Vector2 GetUV(Vector3 vertex, float maxWidth, float maxLength)
+        {
+            return new Vector2((vertex.x + maxWidth / 2) / maxWidth, (vertex.y + maxLength / 2) / maxLength);
         }
 
         private class CreateResult

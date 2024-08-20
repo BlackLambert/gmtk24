@@ -58,6 +58,10 @@ namespace Game
                 formerCharacter.Creature.DisableCollider();
                 formerCharacter.Creature.SetAlphaTo(_scalesAlpha);
                 formerCharacter.gameObject.SetActive(true);
+                foreach (Animator animator in formerCharacter.GetComponentsInChildren<Animator>())
+                {
+                    animator.enabled = false;
+                }
             }
         }
     }
