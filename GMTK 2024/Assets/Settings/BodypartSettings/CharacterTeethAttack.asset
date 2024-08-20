@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b93fb5250d72f2943b52ffd80b96b036, type: 3}
-  m_Name: Carni1TeethAttack
+  m_Name: CharacterTeethAttack
   m_EditorClassIdentifier: 
   <TargetType>k__BackingField: 0
   <Cooldown>k__BackingField: 1
   <StatusEffect>k__BackingField: 0
-  <Damage>k__BackingField: 3
+  <Damage>k__BackingField: 10
   <TargetRange>k__BackingField: 3
   <DamageRange>k__BackingField: 0.4
   <sounds>k__BackingField:

@@ -1269,7 +1269,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "??? \nMo Biederbick (jabajabajau)\n"
+  m_text: 'Mo Biederbick (jabajabajau)
+
+'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 449e705f40d19864a984eaf859ca50a7, type: 2}
   m_sharedMaterial: {fileID: -2692250415613500406, guid: 449e705f40d19864a984eaf859ca50a7, type: 2}
