@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CharacterTeethAttack
   m_EditorClassIdentifier: 
   <TargetType>k__BackingField: 0
-  <Cooldown>k__BackingField: 1
+  <Cooldown>k__BackingField: 0.1
   <StatusEffect>k__BackingField: 0
-  <Damage>k__BackingField: 10
+  <Damage>k__BackingField: 1
   <TargetRange>k__BackingField: 3
   <DamageRange>k__BackingField: 0.4
   <sounds>k__BackingField:
@@ -23,4 +23,4 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 0870d649e4bbf5e498f2edec51a8edaa, type: 3}
   - {fileID: 8300000, guid: 8adc99864113393498f494f045f87180, type: 3}
   - {fileID: 8300000, guid: c7aba516d10e59d42ba82e5d248c0d78, type: 3}
-  <Volume>k__BackingField: 1
+  <Volume>k__BackingField: 0.3

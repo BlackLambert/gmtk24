@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BodyPartCollectionSettings
   m_EditorClassIdentifier: 
   _bodyParts:
-  - {fileID: 5177766572892822679, guid: 9281da6981c1a514bbc24a732306cf14, type: 3}
+  - {fileID: 71360252897522380, guid: 3af37c9ebf787054996036bb8207327a, type: 3}
   - {fileID: 6809293778448047944, guid: 7ff805be69b3dc143a9f145e5183e49a, type: 3}
-  - {fileID: 8055552337536485003, guid: 9e3ff2aad63cd3e4c9dbc03141514848, type: 3}
+  - {fileID: 9049824764474421232, guid: 2abd5ccc4b9c4de468cf483dfa1ce88b, type: 3}
   - {fileID: 6372384332532355252, guid: 5bdbc3867dc40254b8137eba3d339295, type: 3}
   - {fileID: 1510487483828701572, guid: d30e714eda5fa50408fb8bfa291d626a, type: 3}
   - {fileID: 7796722303747930372, guid: e1be40609d5ed3544ac2902584e15b7b, type: 3}

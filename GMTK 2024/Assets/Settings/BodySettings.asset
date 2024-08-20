@@ -16,20 +16,20 @@ MonoBehaviour:
   <AlwaysAddTip>k__BackingField: 1
   <StartSplines>k__BackingField:
   - Size: 2
-    Center: {x: 0, y: -0.5}
+    Center: {x: 0, y: -0.7}
   - Size: 3
     Center: {x: 0, y: 0}
   - Size: 2
-    Center: {x: 0, y: 0.5}
+    Center: {x: 0, y: 0.7}
   <MinScale>k__BackingField: 0.5
   <ScalePerSize>k__BackingField: 0.25
-  <MaxSplines>k__BackingField: 7
+  <MaxSplines>k__BackingField: 6
   <MinSplines>k__BackingField: 2
   <MaxSize>k__BackingField: 7
-  <SplineSpacing>k__BackingField: 0.5
+  <SplineSpacing>k__BackingField: 0.7
   <HalfCircleVerticesPerSize>k__BackingField: 7
   <StartHalfCircleVertices>k__BackingField: 19
-  <SideVertices>k__BackingField: 9
+  <SideVertices>k__BackingField: 13
   <WeightCurve>k__BackingField:
     serializedVersion: 2
     m_Curve:
