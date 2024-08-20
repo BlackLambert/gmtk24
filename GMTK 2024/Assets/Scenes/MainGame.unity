@@ -546,8 +546,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4f71c2065714194fbf64be7613ffd22, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _movementSettings: {fileID: 11400000, guid: fa7dded5928ca6c4b874240a121a1ae5, type: 2}
   _scalesAlpha: 0.33
+  _baseMovement: {fileID: 11400000, guid: 57ffa3aad624f9643bc950132fe378eb, type: 2}
 --- !u!4 &1971540836
 Transform:
   m_ObjectHideFlags: 0

@@ -6,6 +6,8 @@ namespace Game
     {
         [SerializeField] 
         private float _scalesAlpha = 0.2f;
+        [SerializeField] 
+        private MovementSettings _baseMovement;
 
         private Game _game;
 
@@ -41,7 +43,7 @@ namespace Game
                 character.gameObject.SetActive(true);
                 CharacterMovement characterMovement = character.gameObject.AddComponent<CharacterMovement>();
                 character.gameObject.AddComponent<FoodCollector>();
-                characterMovement.Init(character.GetComponent<Creature>());
+                characterMovement.Init(character.GetComponent<Creature>(), _baseMovement);
                 _game.CurrentCharacter = character;
             }
 

@@ -16,7 +16,7 @@ MonoBehaviour:
   <BodyPartType>k__BackingField: 0
   _costs:
   - FoodType: 0
-    Amount: 1
+    Amount: 30
   <Icon>k__BackingField: {fileID: 21300000, guid: 6800024dcd0e86f44bc98fa097b11ae1, type: 3}
   <SlotType>k__BackingField: -1
   <NeedsCounterPartSlot>k__BackingField: 0

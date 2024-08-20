@@ -12,6 +12,7 @@ namespace Game
         private Vector2 _mousePoint;
         private float[] _lastUsed;
         private MovementBodyPart[] _movementSettings;
+        private MovementSettings _baseMovement;
 
         private void Awake()
         {
@@ -19,10 +20,11 @@ namespace Game
             _camera = FindObjectOfType<MainCamera>().Camera;
         }
 
-        public void Init(Creature creature)
+        public void Init(Creature creature, MovementSettings baseMovement)
         {
             _creature = creature;
             _movementSettings = _creature.GetComponentsInChildren<MovementBodyPart>().ToArray();
+            _baseMovement = baseMovement;
             _lastUsed = new float[_movementSettings.Length];
         }
 
@@ -56,7 +58,7 @@ namespace Game
             float currentZRot = Mathf.Atan2(currentDirection.y, currentDirection.x) * Mathf.Rad2Deg;
             Quaternion targetRotation = Quaternion.Euler(0f, 0f, zRot - 90);
             float angle = Quaternion.Angle(targetRotation, currentRotation);
-            float maxDeltaRot = _movementSettings.Sum(s => s.MovementSettings.RotationSpeed) * Time.fixedDeltaTime;
+            float maxDeltaRot = (_movementSettings.Sum(s => s.MovementSettings.RotationSpeed) + _baseMovement.RotationSpeed) * Time.fixedDeltaTime;
             float delta = Mathf.Min(maxDeltaRot, angle);
             float absDelta = Mathf.Abs(zRot - currentZRot);
             if (zRot < currentZRot && absDelta < 180 || zRot > currentZRot && absDelta > 180)
@@ -75,7 +77,11 @@ namespace Game
                 return;
             }
 
-            for (var index = 0; index < _movementSettings.Length; index++)
+            Vector2 baseForce = ((Vector2)direction).normalized *
+                            (_baseMovement.Force * _game.CurrentStage.StageSettings.SpeedFactor);
+            _creature.Rigidbody.AddForce(baseForce);
+            
+            for (int index = 0; index < _movementSettings.Length; index++)
             {
                 MovementBodyPart part = _movementSettings[index];
                 if (Time.realtimeSinceStartup < _lastUsed[index] + part.MovementSettings.Cooldown)
@@ -97,7 +103,7 @@ namespace Game
         {
             Vector3 velocity = _creature.Rigidbody.velocity;
             float velocityMagnitude = velocity.magnitude;
-            float maxSpeed = _movementSettings.Sum(s => s.MovementSettings.MaxSpeed);
+            float maxSpeed = _movementSettings.Sum(s => s.MovementSettings.MaxSpeed) + _baseMovement.MaxSpeed;
             if (velocityMagnitude > maxSpeed)
             {
                 _creature.Rigidbody.velocity = velocity.normalized * maxSpeed;
