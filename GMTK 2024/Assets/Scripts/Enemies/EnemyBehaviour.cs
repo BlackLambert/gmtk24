@@ -31,7 +31,7 @@ namespace Game
             _speedAdjustments[2] = 0.2f;
             _speedAdjustment = _speedAdjustments[(int)_enemy.Settings.size];
             _creature = FindFirstObjectByType<Creature>();
-
+            _fleeDuration = _enemy.Settings.FleeDuration;
         }
 
         // Update is called once per frame
