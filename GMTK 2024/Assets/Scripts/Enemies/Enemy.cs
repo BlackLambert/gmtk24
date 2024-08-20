@@ -100,6 +100,12 @@ namespace Game
         {
             return Settings.size;
         }
+
+        public float GetDamageFactor()
+        {
+            return Settings.DamageFactor;
+        }
+
         void Die()
         {
             List<Loot> lootList = Settings.GetLoot();

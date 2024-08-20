@@ -18,6 +18,6 @@ MonoBehaviour:
   <EditorCameraSize>k__BackingField: 5
   <SpeedFactor>k__BackingField: 2.25
   <HealthBaseValue>k__BackingField: 20
-  <DamageBaseValue>k__BackingField: 8
+  <DamageBaseValue>k__BackingField: 6
   <LevelToLoad>k__BackingField: Level_CritterStage
   <sizeStage>k__BackingField: 2

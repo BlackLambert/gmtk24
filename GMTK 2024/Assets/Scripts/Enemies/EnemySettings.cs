@@ -34,6 +34,10 @@ namespace Game
 
         [field:SerializeField]
         public AudioClip[] onHitSounds { get; private set; }
+        
+        [field:SerializeField]
+        public float DamageFactor { get; private set; }
+        
         public List<Loot> GetLoot()
         {
             List<Loot> dropList = new List<Loot>();

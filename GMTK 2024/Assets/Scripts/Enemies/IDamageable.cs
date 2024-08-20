@@ -11,5 +11,6 @@ namespace Game
         public void ApplyStatusEffect(StatusEffect status);
         public int GetID();
         public SizeStage GetSize();
+        public float GetDamageFactor();
     }
 }

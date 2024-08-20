@@ -169,6 +169,11 @@ namespace Game
             return _stage;
         }
 
+        public float GetDamageFactor()
+        {
+            return _game.CurrentStage.StageSettings.DamageBaseValue;
+        }
+
         public SplineData RemoveSpline()
         {
             return Body.RemoveSpline();

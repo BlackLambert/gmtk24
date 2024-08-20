@@ -46,7 +46,7 @@ namespace Game
                 _hitBox.position = currentTargetTransform.position;
             }
 
-            if (_game.State == GameState.InGame)
+            if (_game.State == GameState.InGame && _parentCreature != null)
             {
                 Activate();
             }
@@ -145,7 +145,7 @@ namespace Game
 
         private void ApplyDamageToTarget(float damage, IDamageable target)
         {
-            target.SufferDamage(damage, this);
+            target.SufferDamage(damage * _parentCreature.GetDamageFactor(), this);
         }
 
         private void PlayAnimation()

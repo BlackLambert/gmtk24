@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <speciesID>k__BackingField: 2
   <speciesName>k__BackingField: TestCarnivore 2
-  <size>k__BackingField: 2
+  <size>k__BackingField: 0
   <HitPoints>k__BackingField: 100
   lootTable:
   - drop: {fileID: 9089221092398506941, guid: 6386c6bf56ad14f499054945160f11a8, type: 3}
@@ -29,3 +29,4 @@ MonoBehaviour:
   <onHitSounds>k__BackingField:
   - {fileID: 8300000, guid: 1598b1124627f9647831d2ae749a5c54, type: 3}
   - {fileID: 8300000, guid: 5820c571c8c48bd418fe91f4c0fa4a43, type: 3}
+  <DamageFactor>k__BackingField: 5
