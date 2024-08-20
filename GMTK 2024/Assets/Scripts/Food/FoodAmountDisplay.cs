@@ -15,7 +15,9 @@ namespace Game
 
         [field: SerializeField]
         public Image Icon { get; private set; }
-        
+        [field: SerializeField]
+        public AudioClip Sound{ get; private set; }
+
         public FoodType FoodType => _foodType;
         
         
@@ -42,6 +44,7 @@ namespace Game
             if (foodType == _foodType)
             {
                 UpdateText(amount);
+                SoundFXManager.Instance.PlaySoundClip(Sound, transform, 1);
             }
         }
 

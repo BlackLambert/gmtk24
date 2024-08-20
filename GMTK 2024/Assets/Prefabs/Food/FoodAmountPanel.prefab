@@ -54,6 +54,7 @@ MonoBehaviour:
   _text: {fileID: 9209180914703732145}
   _foodType: 0
   <Icon>k__BackingField: {fileID: 1143339630286791276}
+  <Sound>k__BackingField: {fileID: 8300000, guid: 78a54366d00567649a6eba624e78daf7, type: 3}
 --- !u!114 &1414894498916218920
 MonoBehaviour:
   m_ObjectHideFlags: 0
