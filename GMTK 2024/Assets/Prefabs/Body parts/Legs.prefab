@@ -31,7 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3481601391414069285}
   - {fileID: 3321553537347605202}
-  m_Father: {fileID: 2615259416414748036}
+  m_Father: {fileID: 6415234612194264218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &486784577832821759
 GameObject:
@@ -67,7 +67,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9065214585673597234}
-  m_Father: {fileID: 2615259416414748036}
+  m_Father: {fileID: 6415234612194264218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1493220237137473623
 SpriteRenderer:
@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 2615259416414748036}
   - component: {fileID: 2741130155611188109}
   - component: {fileID: 6047042127921287481}
+  - component: {fileID: 7264266009274539148}
   m_Layer: 0
   m_Name: Legs
   m_TagString: Untagged
@@ -295,9 +296,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7365639926891385268}
-  - {fileID: 1629591700034294577}
-  - {fileID: 1374977747171364963}
+  - {fileID: 6415234612194264218}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2741130155611188109
@@ -329,6 +328,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BodyPartSettings>k__BackingField: {fileID: 11400000, guid: 202284541dd21c948aabff2f684b1ff9, type: 2}
   _outline: {fileID: 484140301404586909}
+--- !u!114 &7264266009274539148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729416326088288398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a063dbf95f20a614a9e88d6f363cea9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <MovementSettings>k__BackingField: {fileID: 11400000, guid: efb2893acac36064bb95b7b866d2554a, type: 2}
 --- !u!1 &2653085716401499979
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +539,40 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _outlineColorSettings: {fileID: 11400000, guid: 4a9a417af750d414cac22ec531c80a7f, type: 2}
+--- !u!1 &6711556682868394092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6415234612194264218}
+  m_Layer: 0
+  m_Name: Hook
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6415234612194264218
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6711556682868394092}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 7365639926891385268}
+  - {fileID: 1629591700034294577}
+  - {fileID: 1374977747171364963}
+  m_Father: {fileID: 2615259416414748036}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!1 &6790002284090703554
 GameObject:
   m_ObjectHideFlags: 0
@@ -561,7 +607,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5048625244174407938}
-  m_Father: {fileID: 2615259416414748036}
+  m_Father: {fileID: 6415234612194264218}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6931993360234899153
 SpriteRenderer:

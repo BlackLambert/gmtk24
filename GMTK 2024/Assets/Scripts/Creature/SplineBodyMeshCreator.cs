@@ -33,7 +33,7 @@ namespace Game
             _meshFilter.mesh = result.Mesh;
             Vector2[] colliderVertices = _meshFilter.mesh.vertices.Select(v => (Vector2)v).ToArray();
             _meshCollider.points = colliderVertices.Distinct().ToArray();
-            _body.UpdateSlots(result.Slots);
+            _body.UpdateSlots(result.SlotsPerSpline);
         }
 
         private CreateResult CreateMesh()
@@ -64,7 +64,6 @@ namespace Game
             Vector4[] tangents = new Vector4[vertices.Length];
             Vector3[] normals = new Vector3[vertices.Length];
 
-            int slotIndex = 0;
             int[] slotAmounts = new int[orderedSplineData.Length];
             slotAmounts[0] = Mathf.RoundToInt(startSpline.Size * _bodySettings.SlotsPerSize);
             slotAmounts[^1] = Mathf.RoundToInt(endSpline.Size * _bodySettings.SlotsPerSize);
@@ -74,9 +73,11 @@ namespace Game
                 slotAmounts[i] = Mathf.CeilToInt(orderedSplineData[i].Size / 2f * _bodySettings.SlotsPerSize) * 2;
             }
 
-            List<BodyPartSlot> slots = new List<BodyPartSlot>();
+            Dictionary<SplineData, List<BodyPartSlot>> slots = new Dictionary<SplineData, List<BodyPartSlot>>();
 
             // Bottom
+            List<BodyPartSlot> bottomSlots = new List<BodyPartSlot>();
+            slots.Add(startSpline, bottomSlots);
             float angleDelta = Mathf.PI / (startVerticesAmount - 1);
             float radius = GetRadius(startSpline);
             for (int i = 0; i < startVerticesAmount; i++)
@@ -99,12 +100,14 @@ namespace Game
                     triangles[j + 2] = i;
                 }
             }
-            AddCurvedSlots(ref slots, startVerticesAmount, 0, normals, vertices, slotAmounts[0], BodyPartSlotType.Back);
+            AddCurvedSlots(ref bottomSlots, startVerticesAmount, 0, normals, vertices, slotAmounts[0], BodyPartSlotType.Back);
 
             
             // Front
             angleDelta = Mathf.PI / (endVerticesAmount - 1);
             radius = GetRadius(endSpline);
+            List<BodyPartSlot> frontSlots = new List<BodyPartSlot>();
+            slots.Add(endSpline, frontSlots);
             for (int i = 0; i < endVerticesAmount; i++)
             {
                 float angle = angleDelta * i;
@@ -126,7 +129,7 @@ namespace Game
                 }
             }
             
-            AddCurvedSlots(ref slots, endVerticesAmount, startVerticesAmount, normals, vertices, slotAmounts[^1], BodyPartSlotType.Front);
+            AddCurvedSlots(ref frontSlots, endVerticesAmount, startVerticesAmount, normals, vertices, slotAmounts[^1], BodyPartSlotType.Front);
 
             
             // Sides
@@ -138,8 +141,14 @@ namespace Game
                 SplineData next = orderedSplineData[i + 1];
                 float currentScale = GetRadius(current);
                 float nextScale = GetRadius(next);
-                float vertexSlotSpacing = _bodySettings.SideVertices / (slotAmounts[i] / 2f);
+                float vertexSlotSpacing = _bodySettings.SideVertices / (slotAmounts[i] / 2f) / 2;
                 float nextSlot = -vertexSlotSpacing / 2;
+                
+                if (!slots.TryGetValue(current, out List<BodyPartSlot> sideSlots))
+                {
+                    sideSlots = new List<BodyPartSlot>();
+                    slots.Add(current, sideSlots);
+                }
 
                 for (int j = 0; j < _bodySettings.SideVertices; j++)
                 {
@@ -173,22 +182,20 @@ namespace Game
                         float slotAngle = Vector2.Angle(normals[v1], Vector2.up);
                         float factor = vertices[i].x <= 0 ? 1 : -1;
                         Quaternion rotation = Quaternion.Euler(0, 0, slotAngle * factor);
-                        slots.Add(new BodyPartSlot()
+                        sideSlots.Add(new BodyPartSlot()
                         {
                             Position = vertices[v1], Rotation = rotation, VertexIndex = v1, Type = BodyPartSlotType.Side,
-                            CounterPartIndex = slotIndex + 1
+                            CounterPartIndex = sideSlots.Count + 1
                         });
-                        slotIndex++;
 
                         slotAngle = Vector2.Angle(normals[v2], Vector2.up);
                         factor = vertices[i].x <= 0 ? 1 : -1;
                         rotation = Quaternion.Euler(0, 0, slotAngle * factor + 180);
-                        slots.Add(new BodyPartSlot()
+                        sideSlots.Add(new BodyPartSlot()
                         {
                             Position = vertices[v2], Rotation = rotation, VertexIndex = v2,
-                            CounterPartIndex = slotIndex - 1, Type = BodyPartSlotType.Side
+                            CounterPartIndex = sideSlots.Count - 1, Type = BodyPartSlotType.Side
                         });
-                        slotIndex++;
                     }
 
                     nextSlot++;
@@ -210,7 +217,7 @@ namespace Game
             return new CreateResult
             {
                 Mesh = mesh,
-                Slots = slots.ToArray()
+                SlotsPerSpline = slots
             };
         }
 
@@ -266,7 +273,7 @@ namespace Game
         private class CreateResult
         {
             public Mesh Mesh;
-            public BodyPartSlot[] Slots;
+            public Dictionary<SplineData, List<BodyPartSlot>> SlotsPerSpline;
         }
     }
 }

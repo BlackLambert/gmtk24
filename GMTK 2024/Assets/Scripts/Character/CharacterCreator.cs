@@ -4,8 +4,6 @@ namespace Game
 {
     public class CharacterCreator : MonoBehaviour
     {
-        [SerializeField] private MovementSettings _movementSettings;
-
         [SerializeField] 
         private float _scalesAlpha = 0.2f;
 
@@ -43,7 +41,7 @@ namespace Game
                 character.gameObject.SetActive(true);
                 CharacterMovement characterMovement = character.gameObject.AddComponent<CharacterMovement>();
                 character.gameObject.AddComponent<FoodCollector>();
-                characterMovement.Init(character.GetComponent<Creature>(), _movementSettings);
+                characterMovement.Init(character.GetComponent<Creature>());
                 _game.CurrentCharacter = character;
             }
 

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game
@@ -15,7 +16,7 @@ namespace Game
         private CollectedFood _collectedFood;
         private Camera _camera;
 
-        private BodyPartSlot _currentSlot = null;
+        private KeyValuePair<SplineData, BodyPartSlot> _currentSlot;
 
         private void Awake()
         {
@@ -52,11 +53,11 @@ namespace Game
                 Snap();
             }
             
-            _followCursor.enabled = !isSnapDistance || _currentSlot == null;
+            _followCursor.enabled = !isSnapDistance || _currentSlot.Value == null;
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (!isSnapDistance || _currentSlot == null)
+                if (!isSnapDistance || _currentSlot.Value == null)
                 {
                     Sell();
                 }
@@ -86,12 +87,9 @@ namespace Game
             Vector2 worldMousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
             _currentSlot = _creature.Body.GetNextEmptySlotTo(worldMousePos, _bodyPart.BodyPartSettings.SlotType);
             
-            if (_currentSlot != null)
+            if (_currentSlot.Value != null)
             {
-                Transform bodyPartTransform = _bodyPart.transform;
-                bodyPartTransform.position = (_currentSlot.Position * _creature.transform.localScale.x +
-                                              _creature.Body.transform.position);
-                bodyPartTransform.rotation = _currentSlot.Rotation;
+                _creature.Body.SnapTo(_bodyPart, _currentSlot);
             }
         }
 

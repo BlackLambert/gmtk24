@@ -57,7 +57,7 @@ namespace Game
             lastDamageSource = null;
         }
 
-        public void Add(BodyPart bodyPart, BodyPartSlot slot)
+        public void Add(BodyPart bodyPart, KeyValuePair<SplineData, BodyPartSlot> slot)
         {
             Transform trans = bodyPart.transform;
             trans.SetParent(_hook);
@@ -125,15 +125,17 @@ namespace Game
             }
             _currentHitpoints += absoluteAmount;
             _currentHitpoints = Mathf.Round(_currentHitpoints);
+            
             if (_hpBar == null)
             {
                 _hpBar = FindObjectOfType<PlayerHPBar>();
-                _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
             }
-            else
+            
+            if(_hpBar != null)
             {
                 _hpBar.UpdateHP(_currentHitpoints / _maxHitpoints);
             }
+            
             if (_currentHitpoints>_maxHitpoints)
             {
                 _currentHitpoints = _maxHitpoints;
@@ -174,7 +176,7 @@ namespace Game
             Destroy(gameObject, 1);
             _defeatScreen = Instantiate(_defeatScreenPrefab);
             _defeatScreen.Die();
-
+            _game.State = GameState.Defeat;
         }
     }
 }
