@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1699678169743061431}
   - component: {fileID: 2026951053586246478}
   m_Layer: 0
-  m_Name: TestHerbi
+  m_Name: Herbi_Critter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,8 +32,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 8.47, y: -10.45, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3759299900289386486}
   m_Father: {fileID: 0}
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Rigidbody>k__BackingField: {fileID: 8321756420077673259}
-  <Settings>k__BackingField: {fileID: 11400000, guid: 9752e3954198703439504365f6b06cba, type: 2}
+  <Settings>k__BackingField: {fileID: 11400000, guid: 726949c03ca38aa49b28bd19a47553fb, type: 2}
   <MovementSettings>k__BackingField: {fileID: 11400000, guid: b79471f987a0e714eb0ab5635bf28d47, type: 2}
   slashAnimatorPrefab: {fileID: 4161003347518547878, guid: f25c8670620fb684690d3cfb4d41a26d, type: 3}
   hpBarPrefab: {fileID: 3509623230027800708, guid: a8e5a9fef7e2e754a9ea61a23ee6b898, type: 3}
