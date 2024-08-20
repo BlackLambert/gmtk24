@@ -28,4 +28,5 @@ MonoBehaviour:
   <MovementSettings>k__BackingField: {fileID: 11400000, guid: fa7dded5928ca6c4b874240a121a1ae5, type: 2}
   <CreatureDiet>k__BackingField: 1
   <FleeRange>k__BackingField: 5
+  <FleeDuration>k__BackingField: 2
   <FollowRange>k__BackingField: 15
