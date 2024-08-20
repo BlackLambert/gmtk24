@@ -145,6 +145,11 @@ namespace Game
                 _bodyParts.Add(bodyPart);
             }
 
+            foreach (Transform child in GetComponentsInChildren<Transform>())
+            {
+                child.gameObject.layer = 6;
+            }
+
             bool needsCounterPart = bodyPart.BodyPartSettings.NeedsCounterPartSlot;
             BodyPartSlot[] slots = needsCounterPart
                 ? new[] { targetSlot.Value, _slots[targetSlot.Key][targetSlot.Value.CounterPartIndex] }
