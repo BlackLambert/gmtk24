@@ -30,5 +30,8 @@ namespace Game
         
         [field: SerializeField]
         public string LevelToLoad { get; private set; }
+
+        [field: SerializeField]
+        public SizeStage sizeStage { get; private set; }
     }
 }
